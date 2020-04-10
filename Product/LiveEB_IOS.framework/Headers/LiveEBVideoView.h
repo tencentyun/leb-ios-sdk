@@ -28,7 +28,7 @@ NS_ASSUME_NONNULL_BEGIN
     -(void)setStat;
 @end
 
-@protocol LiveEBVideoViewDelegate
+@protocol LiveEBVideoViewDelegate <NSObject>
 
 @required
 
