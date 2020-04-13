@@ -1,0 +1,538 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 51;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		51801B0A243D820100B6D7A5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 51801B09243D820100B6D7A5 /* AppDelegate.m */; };
+		51801B0D243D820100B6D7A5 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 51801B0C243D820100B6D7A5 /* SceneDelegate.m */; };
+		51801B10243D820100B6D7A5 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51801B0F243D820100B6D7A5 /* ViewController.m */; };
+		51801B13243D820100B6D7A5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 51801B11243D820100B6D7A5 /* Main.storyboard */; };
+		51801B15243D820200B6D7A5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 51801B14243D820200B6D7A5 /* Assets.xcassets */; };
+		51801B18243D820200B6D7A5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 51801B16243D820200B6D7A5 /* LaunchScreen.storyboard */; };
+		51801B1B243D820200B6D7A5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 51801B1A243D820200B6D7A5 /* main.m */; };
+		51A25CFB243E0018008DD31C /* ic_call_end_black_24dp@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 51A25CE8243E0018008DD31C /* ic_call_end_black_24dp@2x.png */; };
+		51A25CFC243E0018008DD31C /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 51A25CE9243E0018008DD31C /* Icon.png */; };
+		51A25CFD243E0018008DD31C /* ic_settings_black_24dp@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 51A25CEA243E0018008DD31C /* ic_settings_black_24dp@2x.png */; };
+		51A25CFE243E0018008DD31C /* Icon-120.png in Resources */ = {isa = PBXBuildFile; fileRef = 51A25CEB243E0018008DD31C /* Icon-120.png */; };
+		51A25CFF243E0018008DD31C /* ic_surround_sound_black_24dp@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 51A25CEC243E0018008DD31C /* ic_surround_sound_black_24dp@2x.png */; };
+		51A25D00243E0018008DD31C /* ic_clear_black_24dp@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 51A25CED243E0018008DD31C /* ic_clear_black_24dp@2x.png */; };
+		51A25D01243E0018008DD31C /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 51A25CEE243E0018008DD31C /* Roboto-Regular.ttf */; };
+		51A25D02243E0018008DD31C /* iPhone5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 51A25CEF243E0018008DD31C /* iPhone5@2x.png */; };
+		51A25D03243E0018008DD31C /* ic_switch_video_black_24dp@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 51A25CF0243E0018008DD31C /* ic_switch_video_black_24dp@2x.png */; };
+		51A25D04243E0018008DD31C /* ic_call_end_black_24dp.png in Resources */ = {isa = PBXBuildFile; fileRef = 51A25CF1243E0018008DD31C /* ic_call_end_black_24dp.png */; };
+		51A25D05243E0018008DD31C /* Icon-180.png in Resources */ = {isa = PBXBuildFile; fileRef = 51A25CF2243E0018008DD31C /* Icon-180.png */; };
+		51A25D07243E0018008DD31C /* ic_clear_black_24dp.png in Resources */ = {isa = PBXBuildFile; fileRef = 51A25CF4243E0018008DD31C /* ic_clear_black_24dp.png */; };
+		51A25D08243E0018008DD31C /* iPhone6p@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 51A25CF5243E0018008DD31C /* iPhone6p@3x.png */; };
+		51A25D09243E0018008DD31C /* ic_surround_sound_black_24dp.png in Resources */ = {isa = PBXBuildFile; fileRef = 51A25CF6243E0018008DD31C /* ic_surround_sound_black_24dp.png */; };
+		51A25D0A243E0018008DD31C /* ic_switch_video_black_24dp.png in Resources */ = {isa = PBXBuildFile; fileRef = 51A25CF7243E0018008DD31C /* ic_switch_video_black_24dp.png */; };
+		51A25D0B243E0018008DD31C /* ic_settings_black_24dp.png in Resources */ = {isa = PBXBuildFile; fileRef = 51A25CF8243E0018008DD31C /* ic_settings_black_24dp.png */; };
+		51A25D0D243E0018008DD31C /* iPhone6@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 51A25CFA243E0018008DD31C /* iPhone6@2x.png */; };
+		51A25F32244018B6008DD31C /* LiveEBDemoDropDownTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 51A25F1E244018B5008DD31C /* LiveEBDemoDropDownTextView.m */; };
+		51A25F34244018B6008DD31C /* LiveEBDemoVideoCallView.m in Sources */ = {isa = PBXBuildFile; fileRef = 51A25F23244018B5008DD31C /* LiveEBDemoVideoCallView.m */; };
+		51A25F35244018B6008DD31C /* UIImage+LiveEBUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 51A25F26244018B5008DD31C /* UIImage+LiveEBUtilities.m */; };
+		51A25F36244018B6008DD31C /* LiveEBDemoMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51A25F27244018B5008DD31C /* LiveEBDemoMainViewController.m */; };
+		51A25F37244018B6008DD31C /* LiveEBDemoMainView.m in Sources */ = {isa = PBXBuildFile; fileRef = 51A25F29244018B5008DD31C /* LiveEBDemoMainView.m */; };
+		51A25F39244018B6008DD31C /* LiveEBDemoVideoCallViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51A25F2E244018B6008DD31C /* LiveEBDemoVideoCallViewController.m */; };
+		A5B8C14D708BFDE5A706C943 /* libPods-LiveEB_Demo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B747334FBF8D3D5E77000B4B /* libPods-LiveEB_Demo.a */; settings = {ATTRIBUTES = (Required, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		51801B05243D820100B6D7A5 /* LiveEB_Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LiveEB_Demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		51801B08243D820100B6D7A5 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		51801B09243D820100B6D7A5 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		51801B0B243D820100B6D7A5 /* SceneDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneDelegate.h; sourceTree = "<group>"; };
+		51801B0C243D820100B6D7A5 /* SceneDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SceneDelegate.m; sourceTree = "<group>"; };
+		51801B0E243D820100B6D7A5 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		51801B0F243D820100B6D7A5 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		51801B12243D820100B6D7A5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		51801B14243D820200B6D7A5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		51801B17243D820200B6D7A5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		51801B1A243D820200B6D7A5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		51A25CE8243E0018008DD31C /* ic_call_end_black_24dp@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_call_end_black_24dp@2x.png"; sourceTree = "<group>"; };
+		51A25CE9243E0018008DD31C /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		51A25CEA243E0018008DD31C /* ic_settings_black_24dp@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_settings_black_24dp@2x.png"; sourceTree = "<group>"; };
+		51A25CEB243E0018008DD31C /* Icon-120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-120.png"; sourceTree = "<group>"; };
+		51A25CEC243E0018008DD31C /* ic_surround_sound_black_24dp@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_surround_sound_black_24dp@2x.png"; sourceTree = "<group>"; };
+		51A25CED243E0018008DD31C /* ic_clear_black_24dp@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_clear_black_24dp@2x.png"; sourceTree = "<group>"; };
+		51A25CEE243E0018008DD31C /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.ttf"; sourceTree = "<group>"; };
+		51A25CEF243E0018008DD31C /* iPhone5@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iPhone5@2x.png"; sourceTree = "<group>"; };
+		51A25CF0243E0018008DD31C /* ic_switch_video_black_24dp@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_switch_video_black_24dp@2x.png"; sourceTree = "<group>"; };
+		51A25CF1243E0018008DD31C /* ic_call_end_black_24dp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_call_end_black_24dp.png; sourceTree = "<group>"; };
+		51A25CF2243E0018008DD31C /* Icon-180.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-180.png"; sourceTree = "<group>"; };
+		51A25CF4243E0018008DD31C /* ic_clear_black_24dp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_clear_black_24dp.png; sourceTree = "<group>"; };
+		51A25CF5243E0018008DD31C /* iPhone6p@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iPhone6p@3x.png"; sourceTree = "<group>"; };
+		51A25CF6243E0018008DD31C /* ic_surround_sound_black_24dp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_surround_sound_black_24dp.png; sourceTree = "<group>"; };
+		51A25CF7243E0018008DD31C /* ic_switch_video_black_24dp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_switch_video_black_24dp.png; sourceTree = "<group>"; };
+		51A25CF8243E0018008DD31C /* ic_settings_black_24dp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_settings_black_24dp.png; sourceTree = "<group>"; };
+		51A25CFA243E0018008DD31C /* iPhone6@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iPhone6@2x.png"; sourceTree = "<group>"; };
+		51A25F1D244018B5008DD31C /* LiveEBDemoVideoCallViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LiveEBDemoVideoCallViewController.h; sourceTree = "<group>"; };
+		51A25F1E244018B5008DD31C /* LiveEBDemoDropDownTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LiveEBDemoDropDownTextView.m; sourceTree = "<group>"; };
+		51A25F1F244018B5008DD31C /* LiveEBDemoMainView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LiveEBDemoMainView.h; sourceTree = "<group>"; };
+		51A25F22244018B5008DD31C /* LiveEBDemoVideoCallView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LiveEBDemoVideoCallView.h; sourceTree = "<group>"; };
+		51A25F23244018B5008DD31C /* LiveEBDemoVideoCallView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LiveEBDemoVideoCallView.m; sourceTree = "<group>"; };
+		51A25F24244018B5008DD31C /* LiveEBDemoDropDownTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LiveEBDemoDropDownTextView.h; sourceTree = "<group>"; };
+		51A25F25244018B5008DD31C /* LiveEBDemoMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LiveEBDemoMainViewController.h; sourceTree = "<group>"; };
+		51A25F26244018B5008DD31C /* UIImage+LiveEBUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+LiveEBUtilities.m"; sourceTree = "<group>"; };
+		51A25F27244018B5008DD31C /* LiveEBDemoMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LiveEBDemoMainViewController.m; sourceTree = "<group>"; };
+		51A25F28244018B5008DD31C /* UIImage+LiveEBUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+LiveEBUtilities.h"; sourceTree = "<group>"; };
+		51A25F29244018B5008DD31C /* LiveEBDemoMainView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LiveEBDemoMainView.m; sourceTree = "<group>"; };
+		51A25F2E244018B6008DD31C /* LiveEBDemoVideoCallViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LiveEBDemoVideoCallViewController.m; sourceTree = "<group>"; };
+		B2BD63F89B7A70F68628D140 /* Pods-LiveEB_Demo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LiveEB_Demo.release.xcconfig"; path = "Target Support Files/Pods-LiveEB_Demo/Pods-LiveEB_Demo.release.xcconfig"; sourceTree = "<group>"; };
+		B747334FBF8D3D5E77000B4B /* libPods-LiveEB_Demo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LiveEB_Demo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B94DA6B1EF14A22F380BF853 /* Pods-LiveEB_Demo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LiveEB_Demo.debug.xcconfig"; path = "Target Support Files/Pods-LiveEB_Demo/Pods-LiveEB_Demo.debug.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		51801B02243D820100B6D7A5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A5B8C14D708BFDE5A706C943 /* libPods-LiveEB_Demo.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		134E8520DBEECE56868BB376 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				B94DA6B1EF14A22F380BF853 /* Pods-LiveEB_Demo.debug.xcconfig */,
+				B2BD63F89B7A70F68628D140 /* Pods-LiveEB_Demo.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		51801AFC243D820000B6D7A5 = {
+			isa = PBXGroup;
+			children = (
+				51801B07243D820100B6D7A5 /* LiveEB_Demo */,
+				51801B06243D820100B6D7A5 /* Products */,
+				134E8520DBEECE56868BB376 /* Pods */,
+				DA7178CF2DE7984DA7AE4FEA /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		51801B06243D820100B6D7A5 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				51801B05243D820100B6D7A5 /* LiveEB_Demo.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		51801B07243D820100B6D7A5 /* LiveEB_Demo */ = {
+			isa = PBXGroup;
+			children = (
+				51A25EF72440189D008DD31C /* ios */,
+				51A25CE7243E0018008DD31C /* resources */,
+				51801B08243D820100B6D7A5 /* AppDelegate.h */,
+				51801B09243D820100B6D7A5 /* AppDelegate.m */,
+				51801B0B243D820100B6D7A5 /* SceneDelegate.h */,
+				51801B0C243D820100B6D7A5 /* SceneDelegate.m */,
+				51801B0E243D820100B6D7A5 /* ViewController.h */,
+				51801B0F243D820100B6D7A5 /* ViewController.m */,
+				51801B11243D820100B6D7A5 /* Main.storyboard */,
+				51801B14243D820200B6D7A5 /* Assets.xcassets */,
+				51801B16243D820200B6D7A5 /* LaunchScreen.storyboard */,
+				51801B1A243D820200B6D7A5 /* main.m */,
+			);
+			path = LiveEB_Demo;
+			sourceTree = "<group>";
+		};
+		51A25CE7243E0018008DD31C /* resources */ = {
+			isa = PBXGroup;
+			children = (
+				51A25CE8243E0018008DD31C /* ic_call_end_black_24dp@2x.png */,
+				51A25CE9243E0018008DD31C /* Icon.png */,
+				51A25CEA243E0018008DD31C /* ic_settings_black_24dp@2x.png */,
+				51A25CEB243E0018008DD31C /* Icon-120.png */,
+				51A25CEC243E0018008DD31C /* ic_surround_sound_black_24dp@2x.png */,
+				51A25CED243E0018008DD31C /* ic_clear_black_24dp@2x.png */,
+				51A25CEE243E0018008DD31C /* Roboto-Regular.ttf */,
+				51A25CEF243E0018008DD31C /* iPhone5@2x.png */,
+				51A25CF0243E0018008DD31C /* ic_switch_video_black_24dp@2x.png */,
+				51A25CF1243E0018008DD31C /* ic_call_end_black_24dp.png */,
+				51A25CF2243E0018008DD31C /* Icon-180.png */,
+				51A25CF4243E0018008DD31C /* ic_clear_black_24dp.png */,
+				51A25CF5243E0018008DD31C /* iPhone6p@3x.png */,
+				51A25CF6243E0018008DD31C /* ic_surround_sound_black_24dp.png */,
+				51A25CF7243E0018008DD31C /* ic_switch_video_black_24dp.png */,
+				51A25CF8243E0018008DD31C /* ic_settings_black_24dp.png */,
+				51A25CFA243E0018008DD31C /* iPhone6@2x.png */,
+			);
+			path = resources;
+			sourceTree = "<group>";
+		};
+		51A25EF72440189D008DD31C /* ios */ = {
+			isa = PBXGroup;
+			children = (
+				51A25F1F244018B5008DD31C /* LiveEBDemoMainView.h */,
+				51A25F29244018B5008DD31C /* LiveEBDemoMainView.m */,
+				51A25F25244018B5008DD31C /* LiveEBDemoMainViewController.h */,
+				51A25F27244018B5008DD31C /* LiveEBDemoMainViewController.m */,
+				51A25F22244018B5008DD31C /* LiveEBDemoVideoCallView.h */,
+				51A25F23244018B5008DD31C /* LiveEBDemoVideoCallView.m */,
+				51A25F1D244018B5008DD31C /* LiveEBDemoVideoCallViewController.h */,
+				51A25F2E244018B6008DD31C /* LiveEBDemoVideoCallViewController.m */,
+				51A25F24244018B5008DD31C /* LiveEBDemoDropDownTextView.h */,
+				51A25F1E244018B5008DD31C /* LiveEBDemoDropDownTextView.m */,
+				51A25F28244018B5008DD31C /* UIImage+LiveEBUtilities.h */,
+				51A25F26244018B5008DD31C /* UIImage+LiveEBUtilities.m */,
+			);
+			path = ios;
+			sourceTree = "<group>";
+		};
+		DA7178CF2DE7984DA7AE4FEA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B747334FBF8D3D5E77000B4B /* libPods-LiveEB_Demo.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		51801B04243D820100B6D7A5 /* LiveEB_Demo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 51801B1E243D820200B6D7A5 /* Build configuration list for PBXNativeTarget "LiveEB_Demo" */;
+			buildPhases = (
+				05B27140494C3C0636D10ADD /* [CP] Check Pods Manifest.lock */,
+				51801B01243D820100B6D7A5 /* Sources */,
+				51801B02243D820100B6D7A5 /* Frameworks */,
+				51801B03243D820100B6D7A5 /* Resources */,
+				D817528D194D5F1146153D9A /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = LiveEB_Demo;
+			productName = LiveEB_Demo;
+			productReference = 51801B05243D820100B6D7A5 /* LiveEB_Demo.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		51801AFD243D820000B6D7A5 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 1140;
+				ORGANIZATIONNAME = ts;
+				TargetAttributes = {
+					51801B04243D820100B6D7A5 = {
+						CreatedOnToolsVersion = 11.4;
+					};
+				};
+			};
+			buildConfigurationList = 51801B00243D820000B6D7A5 /* Build configuration list for PBXProject "LiveEB_Demo" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 51801AFC243D820000B6D7A5;
+			productRefGroup = 51801B06243D820100B6D7A5 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				51801B04243D820100B6D7A5 /* LiveEB_Demo */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		51801B03243D820100B6D7A5 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				51A25D0D243E0018008DD31C /* iPhone6@2x.png in Resources */,
+				51A25CFE243E0018008DD31C /* Icon-120.png in Resources */,
+				51A25D0A243E0018008DD31C /* ic_switch_video_black_24dp.png in Resources */,
+				51A25D04243E0018008DD31C /* ic_call_end_black_24dp.png in Resources */,
+				51A25D08243E0018008DD31C /* iPhone6p@3x.png in Resources */,
+				51A25D0B243E0018008DD31C /* ic_settings_black_24dp.png in Resources */,
+				51A25D03243E0018008DD31C /* ic_switch_video_black_24dp@2x.png in Resources */,
+				51A25D01243E0018008DD31C /* Roboto-Regular.ttf in Resources */,
+				51A25CFC243E0018008DD31C /* Icon.png in Resources */,
+				51A25D02243E0018008DD31C /* iPhone5@2x.png in Resources */,
+				51A25D07243E0018008DD31C /* ic_clear_black_24dp.png in Resources */,
+				51A25D09243E0018008DD31C /* ic_surround_sound_black_24dp.png in Resources */,
+				51A25CFB243E0018008DD31C /* ic_call_end_black_24dp@2x.png in Resources */,
+				51801B18243D820200B6D7A5 /* LaunchScreen.storyboard in Resources */,
+				51801B15243D820200B6D7A5 /* Assets.xcassets in Resources */,
+				51A25CFF243E0018008DD31C /* ic_surround_sound_black_24dp@2x.png in Resources */,
+				51A25D00243E0018008DD31C /* ic_clear_black_24dp@2x.png in Resources */,
+				51A25CFD243E0018008DD31C /* ic_settings_black_24dp@2x.png in Resources */,
+				51A25D05243E0018008DD31C /* Icon-180.png in Resources */,
+				51801B13243D820100B6D7A5 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		05B27140494C3C0636D10ADD /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-LiveEB_Demo-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D817528D194D5F1146153D9A /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-LiveEB_Demo/Pods-LiveEB_Demo-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-LiveEB_Demo/Pods-LiveEB_Demo-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-LiveEB_Demo/Pods-LiveEB_Demo-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		51801B01243D820100B6D7A5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				51A25F36244018B6008DD31C /* LiveEBDemoMainViewController.m in Sources */,
+				51A25F39244018B6008DD31C /* LiveEBDemoVideoCallViewController.m in Sources */,
+				51801B10243D820100B6D7A5 /* ViewController.m in Sources */,
+				51A25F34244018B6008DD31C /* LiveEBDemoVideoCallView.m in Sources */,
+				51A25F37244018B6008DD31C /* LiveEBDemoMainView.m in Sources */,
+				51801B0A243D820100B6D7A5 /* AppDelegate.m in Sources */,
+				51A25F32244018B6008DD31C /* LiveEBDemoDropDownTextView.m in Sources */,
+				51801B1B243D820200B6D7A5 /* main.m in Sources */,
+				51A25F35244018B6008DD31C /* UIImage+LiveEBUtilities.m in Sources */,
+				51801B0D243D820100B6D7A5 /* SceneDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		51801B11243D820100B6D7A5 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				51801B12243D820100B6D7A5 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		51801B16243D820200B6D7A5 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				51801B17243D820200B6D7A5 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		51801B1C243D820200B6D7A5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		51801B1D243D820200B6D7A5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		51801B1F243D820200B6D7A5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B94DA6B1EF14A22F380BF853 /* Pods-LiveEB_Demo.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = LD82A66XF7;
+				ENABLE_BITCODE = NO;
+				INFOPLIST_FILE = LiveEB_Demo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = ts.ts.ts.ts;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		51801B20243D820200B6D7A5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B2BD63F89B7A70F68628D140 /* Pods-LiveEB_Demo.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = LD82A66XF7;
+				ENABLE_BITCODE = NO;
+				INFOPLIST_FILE = LiveEB_Demo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = ts.ts.ts.ts;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		51801B00243D820000B6D7A5 /* Build configuration list for PBXProject "LiveEB_Demo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				51801B1C243D820200B6D7A5 /* Debug */,
+				51801B1D243D820200B6D7A5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		51801B1E243D820200B6D7A5 /* Build configuration list for PBXNativeTarget "LiveEB_Demo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				51801B1F243D820200B6D7A5 /* Debug */,
+				51801B20243D820200B6D7A5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 51801AFD243D820000B6D7A5 /* Project object */;
+}
