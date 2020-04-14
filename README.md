@@ -39,18 +39,19 @@ __weak typeof(self) weakSelf = self;
 
 
 ### 2> 创建LiveEBVideoView 用于渲染播放，设置播放url
- _remoteVideoView = [LiveEBVideoView new];
-[self addSubview:_remoteVideoView];
-     
-_remoteVideoView2.liveEBURL = liveEBURL;
-eg: webrtc://6721.liveplay.now.qq.com/live/6721_c21f14dc5c3ce1b2513f5810f359ea15?txSecret=c96521895c01742114c033f3cb585339&txTime=5DDE5CBC
+ _remoteVideoView = [LiveEBVideoView new];  
+[self addSubview:_remoteVideoView];  
+
+_remoteVideoView2.liveEBURL = liveEBURL;  
+eg: webrtc://6721.liveplay.now.qq.com/live/6721_c21f14dc5c3ce1b2513f5810f359ea15? txSecret=c96521895c01742114c033f3cb585339&txTime=5DDE5CBC
 
 
 ### 3> 获取LiveEBVideoViewControllerDelegate 进行播放控制
 _controlDelegate = _remoteVideoView;
 
-   -(void)start;  //开始播放
-    -(void)stop;  //结束播放
+   -(void)start;  //开始播放  
+    -(void)stop;  //结束播放  
+ 
 ### 4 释放sdk.
 -(void)finitSDK;
 
