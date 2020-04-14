@@ -28,10 +28,13 @@ target 'LiveEB_Demo' do
 end
 
 
-添加头文件
-#import <LiveEB_IOS/LiveEB_IOS.h>
+
 
 ## API使用说明
+
+### 添加头文件
+#import <LiveEB_IOS/LiveEB_IOS.h>
+
 ### 1>  初始化sdk
 __weak typeof(self) weakSelf = self;
  [[LiveEBManager sharedManager] initSDK:weakSelf];
