@@ -18,14 +18,9 @@ xcode10及以上环境
 ## Xcode工程设置
 ### 1> pod依赖framework。后续会把sdk代码提交，也可以依赖code。设置bitcode为false.
 
-eg:
+eg:  
 
-source 'https://github.com/CocoaPods/Specs.git'
-target 'LiveEB_Demo' do
- platform :ios, '9.0'
- pod 'LiveEB_IOS', :git=>'https://github.com/tencentyun/leb-ios-sdk.git' , :tag => '1.0.1'
- 
-end
+pod 'LiveEB_IOS', :git=>'https://github.com/tencentyun/leb-ios-sdk.git' , :tag => '1.0.1'
 
 
 
