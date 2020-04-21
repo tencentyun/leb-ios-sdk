@@ -9,6 +9,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+
+
+
 typedef enum {
     LiveEBLogLevelVerbose,
     LiveEBLogLevelDebug,
@@ -53,6 +56,8 @@ typedef enum {
 
 
 + (instancetype)sharedManager;
+
+@property (nonatomic, copy) NSString *clientInfo;
 
 -(void)initSDK:(id<LiveEBLogDelegate>) logDelegate;
 
