@@ -8,7 +8,6 @@
 
 #import <Foundation/Foundation.h>
 #import <LiveEB_IOS/LiveEBManager.h>
-#import <LiveEB_IOS/LiveEBAudioPlayer.h>
 #import <LiveEB_IOS/LiveEBVideoView.h>
 
 //! Project version number for LiveEB_IOS.
