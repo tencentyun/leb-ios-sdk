@@ -47,7 +47,11 @@ __weak typeof(self) weakSelf = self;
 [self addSubview:_remoteVideoView];  
 
 _remoteVideoView2.liveEBURL = liveEBURL;  
-eg: webrtc://6721.liveplay.now.qq.com/live/6721_c21f14dc5c3ce1b2513f5810f359ea15? txSecret=c96521895c01742114c033f3cb585339&txTime=5DDE5CBC
+_remoteVideoView2.rtcHost = rtcHost;
+
+eg:
+rtcHost = @"live.rtc.qq.com";
+ liveEBURL= webrtc://6721.liveplay.now.qq.com/live/6721_c21f14dc5c3ce1b2513f5810f359ea15? txSecret=c96521895c01742114c033f3cb585339&txTime=5DDE5CBC
 
 
 ### 3> 获取LiveEBVideoViewControllerDelegate 进行播放控制
