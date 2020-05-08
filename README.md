@@ -4,9 +4,15 @@
 下载Demo体验请前点击 [IOS demo下载地址](https://github.com/tencentyun/leb-ios-sdk/tree/master/DEMO/LiveEB_Demo)
 
 ## pod 接入
+
 使用Cocoapods的方式来进行集成。在您的podfile中加入需要集成的库即可
 
-pod 'LiveEB_IOS', :git=>'https://github.com/tencentyun/leb-ios-sdk.git' , :tag => '1.0.1'
+pod 'LiveEB_IOS', :git=>'https://github.com/tencentyun/leb-ios-sdk.git' , :tag => '1.0.7'
+
+
+cd LiveEB_Demo
+pod install
+
 
 ## 支持平台
 SDK支持IOS 9.0以上系统
