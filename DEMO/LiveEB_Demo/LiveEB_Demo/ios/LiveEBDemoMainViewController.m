@@ -56,12 +56,23 @@ static NSString *const loopbackLaunchProcessArgument = @"loopback";
 
 - (void)mainView:(LiveEBDemoMainView *)mainView didInputRoom:(NSString *)liveUrl isLoopback:(BOOL)isLoopback {
     BOOL useLiveEventBroadcasting = YES;
-    
+    NSString *rtcHost = NULL;
   if (!liveUrl.length) {
     liveUrl = @"webrtc://6721.liveplay.now.qq.com/live/6721_c21f14dc5c3ce1b2513f5810f359ea15?txSecret=c96521895c01742114c033f3cb585339&txTime=5DDE5CBC";
+      
+      
+      //liveUrl=@"webrtc://6721.liveplay.myqcloud.com/live/6721_d71956d9cc93e4a467b11e06fdaf039a";
+      
+      
     useLiveEventBroadcasting = YES;
   }
     
+    
+    if ([liveUrl rangeOfString:@"liveplay.now.qq.com" ].location != NSNotFound) {
+        rtcHost = @"live.rtc.qq.com";
+    } else if ([liveUrl rangeOfString:@"webrtc.liveplay.myqcloud.com" ].location != NSNotFound) {
+        rtcHost = @"webrtc.liveplay.myqcloud.com";
+    }
   // Trim whitespaces.
   NSCharacterSet *whitespaceSet = [NSCharacterSet whitespaceCharacterSet];
   NSString *trimmedRoom = [liveUrl stringByTrimmingCharactersInSet:whitespaceSet];
@@ -91,6 +102,7 @@ static NSString *const loopbackLaunchProcessArgument = @"loopback";
   
   LiveEBDemoVideoCallViewController *videoCallViewController =
       [[LiveEBDemoVideoCallViewController alloc] initForRoom:trimmedRoom
+                                            rtcHost:rtcHost
                                            isLoopback:isLoopback
                                            useLiveEventBroadcasting:useLiveEventBroadcasting
                                              delegate:self];
@@ -100,14 +112,6 @@ static NSString *const loopbackLaunchProcessArgument = @"loopback";
                      animated:YES
                    completion:nil];
 }
-
-//- (void)mainViewDidToggleAudioLoop:(LiveEBDemoMainView *)mainView {
-//    _audioPlayer.isAudioLoopPlaying = mainView.isAudioLoopPlaying;
-//
-//    [_audioPlayer audioLoop];
-//
-//    mainView.isAudioLoopPlaying = _audioPlayer.isAudioLoopPlaying;
-//}
 
 #pragma mark - LiveEBDemoVideoCallViewControllerDelegate
 

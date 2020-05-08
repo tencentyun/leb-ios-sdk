@@ -36,18 +36,6 @@ static CGFloat const kStatusBarHeight = 20;
       [self addSubview:_remoteVideoView2];
       _controlDelegate = _remoteVideoView2;
       UIImage *image;
-      if (false) {
-            _routeChangeButton = [UIButton buttonWithType:UIButtonTypeCustom];
-            _routeChangeButton.backgroundColor = [UIColor whiteColor];
-            _routeChangeButton.layer.cornerRadius = kButtonSize / 2;
-            _routeChangeButton.layer.masksToBounds = YES;
-            UIImage *image = [UIImage imageNamed:@"ic_surround_sound_black_24dp.png"];
-            [_routeChangeButton setImage:image forState:UIControlStateNormal];
-            [_routeChangeButton addTarget:self
-                                   action:@selector(onRouteChange:)
-                         forControlEvents:UIControlEventTouchUpInside];
-            [self addSubview:_routeChangeButton];
-      }
       
      
       
@@ -81,8 +69,15 @@ static CGFloat const kStatusBarHeight = 20;
   return self;
 }
 
+
+- (void)setRtcHost:(NSString *)rtcHost {
+    _remoteVideoView2.rtcHost = rtcHost;
+}
+
+
 - (void)setLiveEBURL:(NSString *)liveEBURL {
     _remoteVideoView2.liveEBURL = liveEBURL;
+    //_remoteVideoView2.sessionid = @"";
 }
 
 - (void)layoutSubviews {

@@ -13,12 +13,14 @@
 
     BOOL _useLiveEventBroadcasting;
     NSString *_liveUrl;
+    NSString *_rtcHost;
 }
 
 @synthesize videoCallView = _videoCallView;
 @synthesize delegate = _delegate;
 
 - (instancetype)initForRoom:(NSString *)liveUrl
+                    rtcHost:(NSString *)rtcHost
                  isLoopback:(BOOL)isLoopback
                  useLiveEventBroadcasting:(BOOL)useLiveEventBroadcasting
                    delegate:(id<LiveEBDemoVideoCallViewControllerDelegate>)delegate {
@@ -26,6 +28,7 @@
    
     _delegate = delegate;
       _liveUrl = liveUrl;
+      _rtcHost = rtcHost;
 
   }
   return self;
@@ -35,6 +38,7 @@
   _videoCallView = [[LiveEBDemoVideoCallView alloc] initWithFrame:CGRectZero];
   _videoCallView.delegate = self;
     _videoCallView.liveEBURL =_liveUrl;
+    _videoCallView.rtcHost = _rtcHost;
     _controlDelegate = _videoCallView.controlDelegate;
   self.view = _videoCallView;
     

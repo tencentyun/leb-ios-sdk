@@ -42,6 +42,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface LiveEBVideoView : UIView <LiveEBVideoViewControllerDelegate>
 
+@property (nonatomic, copy) NSString *rtcHost;
 @property (nonatomic, copy) NSString *liveEBURL; //播放流地址 webrtc://
 @property (nonatomic, copy) NSString *sessionid; //业务生成的唯一key，标识本次播放会话
 

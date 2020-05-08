@@ -29,5 +29,6 @@
 
 @property(nonatomic, weak) id<LiveEBVideoViewControllerDelegate> controlDelegate;
 @property (nonatomic, copy) NSString *liveEBURL;
+@property (nonatomic, copy) NSString *rtcHost;
 
 @end
