@@ -1,7 +1,6 @@
 build/build_output/
 LiveEB_Demo/Podfile.lock
 LiveEB_Demo/Pods/
-LiveEB_IOS
 xcuserdata/
 
 ## compatibility with Xcode 8 and earlier (ignoring not required starting Xcode 9)
