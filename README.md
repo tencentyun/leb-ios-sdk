@@ -9,7 +9,7 @@
 
  LiveEB_IOS 封装了webrtc接口  
  
- a> LiveEB_IOS内部使用的是 TWebRTC:参考 https://github.com/tencentyun/webrtc-client-native.git编译   
+ a> LiveEB_IOS内部使用的是 TWebRTC:参考 https://github.com/tencentyun/webrtc-client-native.git 编译   
     
     pod 'TWebRTC', :git=>'https://github.com/tencentyun/TWebRTC-IOS-SDK.git' , :tag => '1.0.0'  
     pod 'LiveEB_IOS', :git=>'https://github.com/tencentyun/leb-ios-sdk.git' , :tag => '1.0.1'  
