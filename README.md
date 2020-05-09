@@ -8,16 +8,18 @@
 使用Cocoapods的方式来进行集成。在您的podfile中加入需要集成的库即可  
 
  LiveEB_IOS 封装了webrtc接口  
- 两种使用方式。
  
- a> LiveEB_IOS内部使用的是官方webrtc  
-    pod 'LiveEB_IOS', :git=>'https://github.com/tencentyun/leb-ios-sdk.git' , :tag => '1.0.7'  
-
- b> LiveEB_IOS内部使用定制版webrtc TWebRTC 参考 https://github.com/tencentyun/webrtc-client-native.git编译  
+ a> LiveEB_IOS内部使用的是 TWebRTC:参考 https://github.com/tencentyun/TWebRTC.git 编译   
+    
+    pod 'TWebRTC', :git=>'https://github.com/tencentyun/TWebRTC-IOS-SDK.git' , :tag => '1.0.0'  
+    pod 'LiveEB_IOS', :git=>'https://github.com/tencentyun/leb-ios-sdk.git' , :tag => '1.0.1'  
  
-    pod  "TWebRTC" , :path=>'./../../TWebRTC'  
-    pod 'LiveEB_IOS', :path=>'./../../SRC/LiveEB_IOS'  
-
+说明：  
+   https://github.com/tencentyun/TWebRTC.git 是TWebRTC源码  
+   https://github.com/tencentyun/TWebRTC-IOS-SDK.git 是ios TWebRTC的源码编译后pod私有仓库  
+   https://github.com/tencentyun/leb-ios-sdk.git  是封装webrtc接口的封装层。包括源码和私有仓库。  
+   
+demo使用：  
 
 cd LiveEB_Demo  
 pod install  
@@ -31,11 +33,8 @@ xcode10及以上环境
 
 
 ## Xcode工程设置
-### 1> pod依赖framework。后续会把sdk代码提交，也可以依赖code。设置bitcode为false.
+### 1> pod依赖framework。也可以调试依赖代码。
 
-eg:  
-
-pod 'LiveEB_IOS', :git=>'https://github.com/tencentyun/leb-ios-sdk.git' , :tag => '1.0.1'
 
 
 
