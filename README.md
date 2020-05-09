@@ -1,12 +1,18 @@
 ## LiveEB_IOS SDK (live event Broadcasting)
 快直播 LEB （超低延迟直播） IOS SDK https://cloud.tencent.com/product/leb  
 
-下载Demo体验请前点击 [IOS demo下载地址](https://github.com/tencentyun/leb-ios-demo.git)
+下载Demo体验请前点击 [IOS demo下载地址](https://github.com/tencentyun/leb-ios-sdk/tree/master/DEMO/LiveEB_Demo)
 
 ## pod 接入
+
 使用Cocoapods的方式来进行集成。在您的podfile中加入需要集成的库即可
 
-pod 'LiveEB_IOS', :git=>'https://github.com/tencentyun/leb-ios-sdk.git' , :tag => '1.0.1'
+pod 'LiveEB_IOS', :git=>'https://github.com/tencentyun/leb-ios-sdk.git' , :tag => '1.0.7'
+
+
+cd LiveEB_Demo
+pod install
+
 
 ## 支持平台
 SDK支持IOS 9.0以上系统
@@ -41,7 +47,11 @@ __weak typeof(self) weakSelf = self;
 [self addSubview:_remoteVideoView];  
 
 _remoteVideoView2.liveEBURL = liveEBURL;  
-eg: webrtc://6721.liveplay.now.qq.com/live/6721_c21f14dc5c3ce1b2513f5810f359ea15? txSecret=c96521895c01742114c033f3cb585339&txTime=5DDE5CBC
+_remoteVideoView2.rtcHost = rtcHost;
+
+eg:
+rtcHost = @"live.rtc.qq.com";
+ liveEBURL= webrtc://6721.liveplay.now.qq.com/live/6721_c21f14dc5c3ce1b2513f5810f359ea15? txSecret=c96521895c01742114c033f3cb585339&txTime=5DDE5CBC
 
 
 ### 3> 获取LiveEBVideoViewControllerDelegate 进行播放控制
