@@ -41,9 +41,6 @@ static NSString *const loopbackLaunchProcessArgument = @"loopback";
   _mainView = [[LiveEBDemoMainView alloc] initWithFrame:CGRectZero];
   _mainView.delegate = self;
   self.view = _mainView;
-//    _audioPlayer = [LiveEBAudioPlayer new];
-//
-//    [_audioPlayer loadPlayer];
 }
 
 + (NSString *)loopbackRoomString {
