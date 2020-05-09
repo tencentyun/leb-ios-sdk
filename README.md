@@ -10,8 +10,8 @@
 pod 'LiveEB_IOS', :git=>'https://github.com/tencentyun/leb-ios-sdk.git' , :tag => '1.0.7'
 
 
-cd LiveEB_Demo
-pod install
+cd LiveEB_Demo  
+pod install  
 
 
 ## 支持平台
@@ -50,9 +50,8 @@ _remoteVideoView2.liveEBURL = liveEBURL;
 _remoteVideoView2.rtcHost = rtcHost;
 
 eg:
-rtcHost = @"live.rtc.qq.com";
- liveEBURL= webrtc://6721.liveplay.now.qq.com/live/6721_c21f14dc5c3ce1b2513f5810f359ea15? txSecret=c96521895c01742114c033f3cb585339&txTime=5DDE5CBC
-
+ rtcHost = @"webrtc.liveplay.myqcloud.com";  
+ liveEBURL= @"webrtc://6721.liveplay.myqcloud.com/live/6721_d71956d9cc93e4a467b11e06fdaf039a";  
 
 ### 3> 获取LiveEBVideoViewControllerDelegate 进行播放控制
 _controlDelegate = _remoteVideoView;
