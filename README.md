@@ -13,9 +13,9 @@
  a> LiveEB_IOS内部使用的是官方webrtc  
     pod 'LiveEB_IOS', :git=>'https://github.com/tencentyun/leb-ios-sdk.git' , :tag => '1.0.7'  
 
- b> LiveEB_IOS内部使用定制版webrtc CustomWebRTC 参考 https://github.com/tencentyun/webrtc-client-native.git编译  
+ b> LiveEB_IOS内部使用定制版webrtc TWebRTC 参考 https://github.com/tencentyun/webrtc-client-native.git编译  
  
-    pod  "CustomWebRTC" , :path=>'./../../CustomWebRTC'  
+    pod  "TWebRTC" , :path=>'./../../TWebRTC'  
     pod 'LiveEB_IOS', :path=>'./../../SRC/LiveEB_IOS'  
 
 
