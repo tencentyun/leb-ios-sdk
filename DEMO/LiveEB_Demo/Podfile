@@ -11,6 +11,6 @@ target 'LiveEB_Demo' do
  
  pod 'LiveEB_IOS', :path=>'./../../SRC/LiveEB_IOS'
  
-# pod 'LiveEB_IOS', :git=>'https://github.com/tencentyun/leb-ios-sdk.git' , :tag => '1.0.7'
+# pod 'LiveEB_IOS', :git=>'https://github.com/tencentyun/leb-ios-sdk.git' , :tag => '1.0.1'
   
 end
