@@ -11,7 +11,7 @@
  两种使用方式。
  
  a> LiveEB_IOS内部使用的是官方webrtc  
-    pod 'LiveEB_IOS', :git=>'https://github.com/tencentyun/leb-ios-sdk.git' , :tag => '1.0.7'  
+     pod 'LiveEB_IOS', :git=>'https://github.com/tencentyun/leb-ios-sdk.git' , :tag => '1.0.7'  
 
  b> LiveEB_IOS内部使用定制版webrtc CustomWebRTC 参考 https://github.com/tencentyun/webrtc-client-native.git编译  
  
