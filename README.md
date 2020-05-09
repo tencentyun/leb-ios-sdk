@@ -10,8 +10,8 @@
 pod 'LiveEB_IOS', :git=>'https://github.com/tencentyun/leb-ios-sdk.git' , :tag => '1.0.7'
 
 
-cd LiveEB_Demo
-pod install
+cd LiveEB_Demo  
+pod install  
 
 
 ## 支持平台
