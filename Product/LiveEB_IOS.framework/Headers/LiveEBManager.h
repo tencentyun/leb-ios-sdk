@@ -13,12 +13,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 typedef enum {
-    LiveEBLogLevelVerbose,
     LiveEBLogLevelDebug,
     LiveEBLogLevelInfo,
     LiveEBLogLevelWarning,
     LiveEBLogLevelError,
-    LiveEBLogLevelSystem,
+    LiveEBLogLevelNone,
 } LiveEBLogLevel;
 
 @protocol LiveEBLogDelegate <NSObject>
@@ -45,7 +44,7 @@ typedef enum {
                 args:(va_list)args;
 
 /**
- 播放器内部没有日志打印模块，为便于问题定位，APP要实现此日志打印接口，方便将播放器内的日志打印到APP的日志中，方便问题定位
+内部日志打印模块还未完善
  */
 
 
@@ -59,7 +58,7 @@ typedef enum {
 
 @property (nonatomic, copy) NSString *clientInfo;
 
--(void)initSDK:(id<LiveEBLogDelegate>) logDelegate;
+-(void)initSDK:(id<LiveEBLogDelegate>) logDelegate minDebugLogLevel:(LiveEBLogLevel)minDebugLogLevel;
 
 -(void)finitSDK;
 

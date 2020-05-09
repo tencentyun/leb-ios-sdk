@@ -36,7 +36,7 @@
 
 
 
--(void)initSDK:(id<LiveEBLogDelegate>)logDelegate {
+-(void)initSDK:(id<LiveEBLogDelegate>)logDelegate minDebugLogLevel:(LiveEBLogLevel)minDebugLogLevel {
     _logDelegate = logDelegate;
     
     NSDictionary *fieldTrials = @{};
@@ -48,7 +48,7 @@
       // In debug builds the default level is LS_INFO and in non-debug builds it is
       // disabled. Continue to log to console in non-debug builds, but only
       // warnings and errors.
-      RTCSetMinDebugLogLevel(RTCLoggingSeverityWarning);
+      RTCSetMinDebugLogLevel(minDebugLogLevel);
     #endif
 }
 

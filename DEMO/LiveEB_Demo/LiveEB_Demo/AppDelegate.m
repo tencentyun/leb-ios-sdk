@@ -30,9 +30,6 @@
     }
     NSString *logLevelString = nil;
     switch (logLevel) {
-        case LiveEBLogLevelVerbose:
-            logLevelString = @"XBrightLogLevelVerbose";
-            break;
         case LiveEBLogLevelDebug:
             logLevelString = @"XBrightLogLevelDebug";
             break;
@@ -61,7 +58,7 @@
     
     
     __weak typeof(self) weakSelf = self;
-    [[LiveEBManager sharedManager] initSDK:weakSelf];
+    [[LiveEBManager sharedManager] initSDK:weakSelf minDebugLogLevel:LiveEBLogLevelDebug];
     [LiveEBManager sharedManager].clientInfo = @"clientinfo_test";
     
   _window =  [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
