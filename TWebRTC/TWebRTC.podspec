@@ -1,8 +1,8 @@
 
 Pod::Spec.new do |s|
 
-  s.name         = "CustomWebRTC"
-  s.summary      = "A short description of CustomWebRTC."
+  s.name         = "TWebRTC"
+  s.summary      = "A short description of TWebRTC."
 
   s.homepage     = "https://github.com/tencentyun/leb-ios-sdk.git"
 

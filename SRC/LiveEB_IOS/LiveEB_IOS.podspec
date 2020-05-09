@@ -23,5 +23,5 @@ Pod::Spec.new do |s|
   s.requires_arc = true
 
   # s.dependency "GoogleWebRTC", '1.1.26465'
-  s.dependency  "CustomWebRTC"
+  s.dependency  "TWebRTC"
 end
