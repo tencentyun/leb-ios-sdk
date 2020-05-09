@@ -273,6 +273,9 @@ NSString *_svrsig;
 //        NSString *host= @"https://live.rtc.qq.com";
 //        NSString *rtcUrl = [host stringByAppendingString:@":8687/webrtc/v1/stopstream"];
     
+    if(_svrsig == nil || _liveBroadcastingStreamUrl == nil) {
+        return;
+    }
     NSDictionary *liveJson = @{
         @"svrsig" : _svrsig,
         @"streamurl"  : _liveBroadcastingStreamUrl
@@ -292,8 +295,8 @@ NSString *_svrsig;
                                         NSData *data,
                                         NSError *error) {
         
-        NSDictionary *responseJSON = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
-        NSInteger errcode = [[responseJSON objectForKey:@"errcode"] intValue];
+//        NSDictionary *responseJSON = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
+//        NSInteger errcode = [[responseJSON objectForKey:@"errcode"] intValue];
         
     }];
 }
@@ -383,11 +386,12 @@ NSString *_svrsig;
          
          NSLog(@"sendAsyncRequest responseJSON=%@", [NSString stringWithFormat:@"responseJSON=%@", responseJSON]);
          
-         NSDictionary *sdpDict = [responseJSON objectForKey:@"remotesdp"];
          NSInteger errcode = [[responseJSON objectForKey:@"errcode"] intValue];
-         if (errcode == 0) {
-             
+         if (errcode != 0) {
+             return;
          }
+         
+         NSDictionary *sdpDict = [responseJSON objectForKey:@"remotesdp"];
          strongSelf->_svrsig = [responseJSON objectForKey:@"svrsig"];
          //NSString *answerType = [sdpDict objectForKey:@"type"];
          //NSString *answerSDP = [sdpDict objectForKey:@"sdp"];

@@ -556,7 +556,7 @@
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/LiveEB_IOS/../../../CustomWebRTC",
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = LiveEB_IOS/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -585,7 +585,7 @@
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/LiveEB_IOS/../../../CustomWebRTC",
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = LiveEB_IOS/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";

@@ -5,11 +5,12 @@ target 'LiveEB_Demo' do
  platform :ios, '9.0'
 
  ####LiveEB_IOS 封装了webrtc接口
- ###LiveEB_IOS内部使用的是官方webrtc
- # pod 'LiveEB_IOS', :git=>'https://github.com/tencentyun/leb-ios-sdk.git' , :tag => '1.0.7'
-
  #####LiveEB_IOS内部使用定制版webrtc TWebRTC 参考 https://github.com/tencentyun/webrtc-client-native.git编译
- pod  "TWebRTC" , :path=>'./../../TWebRTC'
+ 
+ pod 'TWebRTC', :git=>'https://github.com/tencentyun/TWebRTC-IOS-SDK.git' , :tag => '1.0.0'
+ 
  pod 'LiveEB_IOS', :path=>'./../../SRC/LiveEB_IOS'
+ 
+# pod 'LiveEB_IOS', :git=>'https://github.com/tencentyun/leb-ios-sdk.git' , :tag => '1.0.7'
   
 end

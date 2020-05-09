@@ -24,6 +24,9 @@ Pod::Spec.new do |s|
 
   s.requires_arc = true
 
-  s.dependency "GoogleWebRTC", '1.1.26465'
+  #s.dependency "GoogleWebRTC", '1.1.26465'
+  # s.dependency "TWebRTC-IOS-SDK", :git=>'https://github.com/tencentyun/TWebRTC-IOS-SDK.git' , :tag => '1.0.0'
+
+  s.dependency "TWebRTC"
 
 end
