@@ -62,7 +62,6 @@
 		51A2604C2440937D008DD31C /* SRWebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 51A260162440937D008DD31C /* SRWebSocket.m */; };
 		51A2604D2440937D008DD31C /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 51A260172440937D008DD31C /* LICENSE */; };
 		51A2604E2440937D008DD31C /* SRWebSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = 51A260182440937D008DD31C /* SRWebSocket.h */; };
-		51A2605024409830008DD31C /* WebRTC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 51A2604F24409830008DD31C /* WebRTC.framework */; };
 		51F16AC82465A0E10078D65F /* LiveEB_IOS.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 51A25FD32440931D008DD31C /* LiveEB_IOS.framework */; };
 /* End PBXBuildFile section */
 
@@ -137,7 +136,6 @@
 		51A260162440937D008DD31C /* SRWebSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRWebSocket.m; sourceTree = "<group>"; };
 		51A260172440937D008DD31C /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		51A260182440937D008DD31C /* SRWebSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRWebSocket.h; sourceTree = "<group>"; };
-		51A2604F24409830008DD31C /* WebRTC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = WebRTC.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,7 +143,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				51A2605024409830008DD31C /* WebRTC.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -171,7 +168,6 @@
 		51A25FD52440931D008DD31C /* LiveEB_IOS */ = {
 			isa = PBXGroup;
 			children = (
-				51A2604F24409830008DD31C /* WebRTC.framework */,
 				51A25FDE2440937D008DD31C /* api */,
 				51A25FE32440937D008DD31C /* src */,
 				51A25FD62440931D008DD31C /* LiveEB_IOS.h */,
@@ -560,7 +556,7 @@
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/LiveEB_IOS",
+					"$(PROJECT_DIR)/LiveEB_IOS/../../../CustomWebRTC",
 				);
 				INFOPLIST_FILE = LiveEB_IOS/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -589,7 +585,7 @@
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/LiveEB_IOS",
+					"$(PROJECT_DIR)/LiveEB_IOS/../../../CustomWebRTC",
 				);
 				INFOPLIST_FILE = LiveEB_IOS/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";

@@ -55,10 +55,7 @@ static NSString *const loopbackLaunchProcessArgument = @"loopback";
     BOOL useLiveEventBroadcasting = YES;
     NSString *rtcHost = NULL;
   if (!liveUrl.length) {
-    liveUrl = @"webrtc://6721.liveplay.now.qq.com/live/6721_c21f14dc5c3ce1b2513f5810f359ea15?txSecret=c96521895c01742114c033f3cb585339&txTime=5DDE5CBC";
-      
-      
-      //liveUrl=@"webrtc://6721.liveplay.myqcloud.com/live/6721_d71956d9cc93e4a467b11e06fdaf039a";
+      liveUrl=@"webrtc://6721.liveplay.myqcloud.com/live/6721_d71956d9cc93e4a467b11e06fdaf039a";
       
       
     useLiveEventBroadcasting = YES;
