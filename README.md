@@ -9,12 +9,16 @@
 
  LiveEB_IOS 封装了webrtc接口  
  
- a> LiveEB_IOS内部使用的是 TWebRTC:参考 https://github.com/tencentyun/webrtc-client-native.git 编译   
+ a> LiveEB_IOS内部使用的是 TWebRTC:参考 https://github.com/tencentyun/TWebRTC.git 编译   
     
     pod 'TWebRTC', :git=>'https://github.com/tencentyun/TWebRTC-IOS-SDK.git' , :tag => '1.0.0'  
     pod 'LiveEB_IOS', :git=>'https://github.com/tencentyun/leb-ios-sdk.git' , :tag => '1.0.1'  
  
-
+说明：  
+   https://github.com/tencentyun/TWebRTC.git 是TWebRTC源码  
+   https://github.com/tencentyun/TWebRTC-IOS-SDK.git 是ios TWebRTC的源码编译后pod私有仓库  
+   https://github.com/tencentyun/leb-ios-sdk.git  是封装webrtc接口的封装层。包括源码和私有仓库。  
+   
 demo使用：  
 
 cd LiveEB_Demo  
