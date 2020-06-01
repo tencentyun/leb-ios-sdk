@@ -14,6 +14,8 @@
     BOOL _useLiveEventBroadcasting;
     NSString *_liveUrl;
     NSString *_rtcHost;
+    
+    BOOL _isSetStatState;
 }
 
 @synthesize videoCallView = _videoCallView;
@@ -29,6 +31,8 @@
     _delegate = delegate;
       _liveUrl = liveUrl;
       _rtcHost = rtcHost;
+      
+      _isSetStatState = FALSE;
 
   }
   return self;
@@ -40,6 +44,8 @@
     _videoCallView.liveEBURL =_liveUrl;
     _videoCallView.rtcHost = _rtcHost;
     _controlDelegate = _videoCallView.controlDelegate;
+    
+    [_controlDelegate setStatState:true];
   self.view = _videoCallView;
     
     
@@ -55,6 +61,13 @@
 
 - (void)videoCallViewDidHangup:(LiveEBDemoVideoCallView *)view {
   [self hangup];
+}
+
+- (void)videoCallViewDidEnableStats:(LiveEBDemoVideoCallView *)view {
+    
+    _isSetStatState = !_isSetStatState;
+    [_controlDelegate setStatState:_isSetStatState];
+    view.statsView.hidden = !_isSetStatState;
 }
 
 #pragma mark - RTCAudioSessionDelegate

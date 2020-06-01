@@ -57,7 +57,6 @@ static NSString *const loopbackLaunchProcessArgument = @"loopback";
   if (!liveUrl.length) {
       liveUrl=@"webrtc://6721.liveplay.myqcloud.com/live/6721_d71956d9cc93e4a467b11e06fdaf039a";
       
-      
     useLiveEventBroadcasting = YES;
   }
     
@@ -67,6 +66,9 @@ static NSString *const loopbackLaunchProcessArgument = @"loopback";
     } else if ([liveUrl rangeOfString:@"webrtc.liveplay.myqcloud.com" ].location != NSNotFound) {
         rtcHost = @"webrtc.liveplay.myqcloud.com";
     }
+    
+//    liveUrl = @"webrtc://zhibo2.yjwh.shop/live/24297820200601144628?txSecret=1f29fcd7c7d00c6c99c9e5c5281c1864&txTime=5ED5F5C4";
+//    rtcHost=@"zhibo2.yjwh.shop";
   // Trim whitespaces.
   NSCharacterSet *whitespaceSet = [NSCharacterSet whitespaceCharacterSet];
   NSString *trimmedRoom = [liveUrl stringByTrimmingCharactersInSet:whitespaceSet];

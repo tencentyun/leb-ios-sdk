@@ -289,7 +289,7 @@ NSString *_svrsig;
     [request addValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     
     
-    __weak ARDAppClient *weakSelf = self;
+//    __weak ARDAppClient *weakSelf = self;
     [ARDAppClient sendAsyncRequest:request
                     completionHandler:^(NSURLResponse *response,
                                         NSData *data,

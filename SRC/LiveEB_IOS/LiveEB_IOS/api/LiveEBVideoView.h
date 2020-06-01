@@ -26,7 +26,7 @@ NS_ASSUME_NONNULL_BEGIN
     -(void)stop;
 
     -(void)restart;
-    -(void)setStat;
+    -(void)setStatState:(BOOL)stat;
 @end
 
 @protocol LiveEBVideoViewDelegate <NSObject>
@@ -35,6 +35,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)videoView:(LiveEBVideoView *)videoView didError:(NSError *)error;
 - (void)showStats:(LiveEBVideoView *)videoView stat:(NSArray*)stat;
+- (void)showStats:(LiveEBVideoView *)videoView strStat:(NSString*)strStat;
 - (void)videoView:(LiveEBVideoView *)videoView didChangeVideoSize:(CGSize)size;
 
 @end

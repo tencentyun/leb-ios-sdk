@@ -15,6 +15,7 @@
 #import <WebRTC/RTCMTLVideoView.h>
 #endif
 
+#import "ARDStatsBuilder.h"
 #import "ARDSettingsModel.h"
 #import <WebRTC/RTCAudioSession.h>
 #import <WebRTC/RTCCameraVideoCapturer.h>
@@ -22,6 +23,8 @@
 #import <WebRTC/RTCLogging.h>
 #import <WebRTC/RTCMediaConstraints.h>
 #import "LiveEBAudioPlayer.h"
+
+#import <WebRTC/RTCLegacyStatsReport.h>
 
 @interface LiveEBVideoView() <RTCVideoViewDelegate,
                                 ARDAppClientDelegate,
@@ -47,6 +50,8 @@
 //    RTCVideoTrack *_remoteVideoTrack;
     
      BOOL _useLiveEventBroadcasting;
+    
+    ARDStatsBuilder *_statsBuilder;
 }
 
 - (instancetype)initWithFrame:(CGRect)frame
@@ -65,6 +70,8 @@
         
         _remoteVideoView = remoteView;
         
+        
+        _statsBuilder = [[ARDStatsBuilder alloc] init];
         
 //        bringSubview(toFront: childView)
         
@@ -198,7 +205,22 @@
 - (void)appClient:(ARDAppClient *)client
       didGetStats:(NSArray *)stats {
     
-    [_delegate showStats:self stat:stats];
+    if (_delegate && [_delegate respondsToSelector:@selector(showStats:strStat:)]) {
+    //if (!_delegate && [_delegate respondsToSelector:NSSelectorFromString(@"showStats:stat:")]) {
+        if (_statsBuilder != NULL) {
+            for (RTCLegacyStatsReport *report in stats) {
+              [_statsBuilder parseStatsReport:report];
+            }
+            
+            [_delegate showStats:self strStat:_statsBuilder.statsString];
+        }
+    }
+    
+    if (_delegate && [_delegate respondsToSelector:@selector(showStats:stat:)]) {
+        [_delegate showStats:self stat:stats];
+    }
+    
+    
 
 }
 
@@ -220,8 +242,8 @@
     [_client disconnect];
 }
 
--(void)setStat {
-    _client.shouldGetStats = YES;
+-(void)setStatState:(BOOL)stat {
+    _client.shouldGetStats = stat;
 }
 
 

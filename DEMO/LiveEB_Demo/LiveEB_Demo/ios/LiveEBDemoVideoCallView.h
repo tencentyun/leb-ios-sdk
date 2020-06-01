@@ -1,5 +1,6 @@
 #import <UIKit/UIKit.h>
 
+#import "LiveEBDemoStatView.h"
 
 #import <LiveEB_IOS/LiveEB_IOS.h>
 
@@ -26,7 +27,7 @@
 
 
 
-
+@property(nonatomic, readonly) LiveEBDemoStatView *statsView;
 @property(nonatomic, weak) id<LiveEBVideoViewControllerDelegate> controlDelegate;
 @property (nonatomic, copy) NSString *liveEBURL;
 @property (nonatomic, copy) NSString *rtcHost;

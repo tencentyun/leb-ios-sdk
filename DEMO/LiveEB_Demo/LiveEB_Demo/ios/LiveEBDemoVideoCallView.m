@@ -39,6 +39,10 @@ static CGFloat const kStatusBarHeight = 20;
       
      
       
+      _statsView = [[LiveEBDemoStatView alloc] initWithFrame:CGRectZero];
+         _statsView.hidden = NO;
+    [self addSubview:_statsView];
+      
       if (true) {
     _hangupButton = [UIButton buttonWithType:UIButtonTypeCustom];
     _hangupButton.backgroundColor = [UIColor redColor];
@@ -107,7 +111,12 @@ static CGFloat const kStatusBarHeight = 20;
   localVideoFrame.origin.y = CGRectGetMaxY(bounds)
       - localVideoFrame.size.height - kLocalVideoViewPadding;
 
-
+    // Place stats at the top.
+    CGSize statsSize = [_statsView sizeThatFits:bounds.size];
+    _statsView.frame = CGRectMake(CGRectGetMinX(bounds),
+                                  CGRectGetMinY(bounds) + kStatusBarHeight,
+                                  statsSize.width, statsSize.height);
+    
   // Place hangup button in the bottom left.
   _hangupButton.frame =
       CGRectMake(CGRectGetMinX(bounds) + kButtonPadding,
@@ -143,6 +152,10 @@ static CGFloat const kStatusBarHeight = 20;
     
 }
 
+- (void)showStats:(LiveEBVideoView *)videoView strStat:(nonnull NSString *)strStat {
+    [self.statsView setStats:strStat];
+}
+
 - (void)videoView:(LiveEBVideoView *)videoView didChangeVideoSize:(CGSize)size {
      if (videoView == _remoteVideoView2) {
         _remoteVideoSize = size;
@@ -161,7 +174,7 @@ static CGFloat const kStatusBarHeight = 20;
 }
 
 - (void)didTripleTap:(UITapGestureRecognizer *)recognizer {
-  [_delegate videoCallViewDidEnableStats:self];
+    [_delegate videoCallViewDidEnableStats:self];
 }
 
 @end
