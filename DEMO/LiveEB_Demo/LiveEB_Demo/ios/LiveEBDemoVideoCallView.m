@@ -98,7 +98,7 @@ static CGFloat const kStatusBarHeight = 20;
     _remoteVideoView2.frame = bounds;
   }
 
-  NSLog(@"_remoteVideoView2222[ %f %f] x=%f y=%f width=%f height=%f _remoteVideoSize:%f %f ",
+  NSLog(@"_remoteVideoView [ %f %f] x=%f y=%f width=%f height=%f _remoteVideoSize:%f %f ",
         _remoteVideoView2.center.x, _remoteVideoView2.center.y, _remoteVideoView2.frame.origin.x, _remoteVideoView2.frame.origin.y, _remoteVideoView2.frame.size.width, _remoteVideoView2.frame.size.height
         ,_remoteVideoSize.width, _remoteVideoSize.height);
     
@@ -145,7 +145,7 @@ static CGFloat const kStatusBarHeight = 20;
 #pragma mark - RTCVideoViewDelegate
 
 - (void)videoView:(LiveEBVideoView *)videoView didError:(NSError *)error {
-    
+    NSLog(@"_remoteVideoView ");
 }
 
 - (void)showStats:(LiveEBVideoView *)videoView stat:(NSArray*)stat {
@@ -161,6 +161,16 @@ static CGFloat const kStatusBarHeight = 20;
         _remoteVideoSize = size;
       }
       [self setNeedsLayout];
+}
+
+- (void)onPrepared:(LiveEBVideoView*)videoView {
+    NSLog(@"_remoteVideoView onPrepared ");
+}
+
+- (void)onCompletion:(LiveEBVideoView*)videoView {
+    NSLog(@"_remoteVideoView onCompletion ");
+    
+    [self onHangup:nil];
 }
 
 #pragma mark - Private

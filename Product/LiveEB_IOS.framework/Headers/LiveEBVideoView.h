@@ -24,6 +24,8 @@ NS_ASSUME_NONNULL_BEGIN
 @required
     -(void)start;
     -(void)stop;
+        
+    -(void)setAudioMute:(BOOL)mute;
 
     -(void)restart;
     -(void)setStatState:(BOOL)stat;
@@ -34,9 +36,19 @@ NS_ASSUME_NONNULL_BEGIN
 @required
 
 - (void)videoView:(LiveEBVideoView *)videoView didError:(NSError *)error;
+- (void)videoView:(LiveEBVideoView *)videoView didChangeVideoSize:(CGSize)size;
+
+
+@optional
+
+- (void)onPrepared:(LiveEBVideoView*)videoView;
+
+- (void)onCompletion:(LiveEBVideoView*)videoView;
+
+
 - (void)showStats:(LiveEBVideoView *)videoView stat:(NSArray*)stat;
 - (void)showStats:(LiveEBVideoView *)videoView strStat:(NSString*)strStat;
-- (void)videoView:(LiveEBVideoView *)videoView didChangeVideoSize:(CGSize)size;
+
 
 @end
 

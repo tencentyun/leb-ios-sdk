@@ -46,13 +46,16 @@
 
 - (void)configureAudioSession {
   RTCAudioSessionConfiguration *configuration =
-      [[RTCAudioSessionConfiguration alloc] init];
+  [[RTCAudioSessionConfiguration alloc] init];
+    
   configuration.category = AVAudioSessionCategoryAmbient;
   configuration.categoryOptions = AVAudioSessionCategoryOptionDuckOthers;
   configuration.mode = AVAudioSessionModeDefault;
 
   RTCAudioSession *session = [RTCAudioSession sharedInstance];
   [session lockForConfiguration];
+  [session addDelegate:self];
+    
   BOOL hasSucceeded = NO;
   NSError *error = nil;
   if (session.isActive) {

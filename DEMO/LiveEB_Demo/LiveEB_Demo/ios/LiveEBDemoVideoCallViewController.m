@@ -46,6 +46,7 @@
     _controlDelegate = _videoCallView.controlDelegate;
     
     [_controlDelegate setStatState:true];
+//    [_controlDelegate setAudioMute:YES];
   self.view = _videoCallView;
     
     

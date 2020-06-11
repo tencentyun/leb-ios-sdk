@@ -21,6 +21,7 @@
 #import <WebRTC/RTCCameraVideoCapturer.h>
 #import <WebRTC/RTCDispatcher.h>
 #import <WebRTC/RTCLogging.h>
+#import <WebRTC/WebRTC.h>
 #import <WebRTC/RTCMediaConstraints.h>
 #import "LiveEBAudioPlayer.h"
 
@@ -28,21 +29,21 @@
 
 @interface LiveEBVideoView() <RTCVideoViewDelegate,
                                 ARDAppClientDelegate,
-//                                LiveEBDemoVideoCallViewDelegate,
                                 RTCAudioSessionDelegate
 >
 {
     CGSize _remoteVideoSize;
     
     ARDAppClient *_client;
-//    RTCVideoTrack *_remoteVideoTrack;
 }
 
 
 
 @property(nonatomic, strong) RTCVideoTrack *remoteVideoTrack;
+@property(nonatomic, strong) RTCAudioTrack *remoteAudioTrack;
 @property(nonatomic, assign) AVAudioSessionPortOverride portOverride;
 @property(nonatomic, strong) LiveEBAudioPlayer* audioPlayer;
+@property(nonatomic, assign) BOOL audioTrackEnable;
 @end
 
 @implementation LiveEBVideoView
@@ -69,15 +70,12 @@
         
         
         _remoteVideoView = remoteView;
-        
+        _audioTrackEnable = YES;
         
         _statsBuilder = [[ARDStatsBuilder alloc] init];
-        
-//        bringSubview(toFront: childView)
-        
+            
         
         [self addSubview:_remoteVideoView];
-//        [self bringSubviewToFront:_remoteVideoView];
     }
     return self;
 }
@@ -96,10 +94,8 @@
     _client.clientInfo = [LiveEBManager sharedManager].clientInfo;
     _client.sessionid = _sessionid;
     
-    //             if (useLiveEventBroadcasting) {
          _useLiveEventBroadcasting = YES;
          [_client useLiveBroadcasting:liveEBURL];
-    //             }
 
      
     [_client initWithSettings:settingsModel isLoopback:NO];
@@ -107,8 +103,6 @@
     
       RTCAudioSession *session = [RTCAudioSession sharedInstance];
       [session addDelegate:self];
-        
-       
 }
 
 
@@ -129,23 +123,18 @@
   }
 
   [_delegate videoView:self didChangeVideoSize:size];
-    
-//  [self setNeedsLayout];
 }
 
 
 #pragma mark - Private
 
 - (void)onRouteChange:(id)sender {
-//  [_delegate videoCallViewDidChangeRoute:self];
 }
 
 - (void)onHangup:(id)sender {
-//  [_delegate videoCallViewDidHangup:self];
 }
 
 - (void)didTripleTap:(UITapGestureRecognizer *)recognizer {
-//  [_delegate videoCallViewDidEnableStats:self];
 }
 
 
@@ -170,14 +159,21 @@
     didChangeState:(ARDAppClientState)state {
   switch (state) {
     case kARDAppClientStateConnected:
-      RTCLog(@"Client connected.");
+          RTCLog(@"Client connected.");
+          if (_delegate && [_delegate respondsToSelector:@selector(onPrepared:)]) {
+              [_delegate onPrepared:self];
+          }
       break;
     case kARDAppClientStateConnecting:
       RTCLog(@"Client connecting.");
       break;
     case kARDAppClientStateDisconnected:
       RTCLog(@"Client disconnected.");
-//      [self hangup];
+        
+      if (_delegate && [_delegate respondsToSelector:@selector(onCompletion:)]) {
+          [_delegate onCompletion:self];
+      }
+          
       break;
   }
 }
@@ -200,6 +196,13 @@
 - (void)appClient:(ARDAppClient *)client
     didReceiveRemoteVideoTrack:(RTCVideoTrack *)remoteVideoTrack {
   self.remoteVideoTrack = remoteVideoTrack;
+}
+
+- (void)appClient:(ARDAppClient *)client
+    didReceiveRemoteAudioTrack:(RTCAudioTrack *)remoteAudioTrack {
+  self.remoteAudioTrack = remoteAudioTrack;
+    
+    remoteAudioTrack.isEnabled = _audioTrackEnable;
 }
 
 - (void)appClient:(ARDAppClient *)client
@@ -256,5 +259,13 @@
   [_remoteVideoView renderFrame:nil];
   _remoteVideoTrack = remoteVideoTrack;
   [_remoteVideoTrack addRenderer:_remoteVideoView];
+}
+
+- (void)setAudioMute:(BOOL)mute {
+    _audioTrackEnable = !mute;
+    
+    if (_remoteAudioTrack) {
+        _remoteAudioTrack.isEnabled = !mute;
+    }
 }
 @end

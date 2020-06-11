@@ -10,7 +10,7 @@
 
 #import <Foundation/Foundation.h>
 #import <WebRTC/RTCPeerConnection.h>
-#import <WebRTC/RTCVideoTrack.h>
+#import <WebRTC/WebRTC.h>
 
 typedef NS_ENUM(NSInteger, ARDAppClientState) {
   // Disconnected from servers.
@@ -40,6 +40,9 @@ typedef NS_ENUM(NSInteger, ARDAppClientState) {
 
 - (void)appClient:(ARDAppClient *)client
     didReceiveRemoteVideoTrack:(RTCVideoTrack *)remoteVideoTrack;
+
+- (void)appClient:(ARDAppClient *)client
+didReceiveRemoteAudioTrack:(RTCAudioTrack *)remoteAudioTrack;
 
 - (void)appClient:(ARDAppClient *)client didError:(NSError *)error;
 

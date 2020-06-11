@@ -356,7 +356,7 @@ NSString *_svrsig;
        @"streamurl"  : liveBroadcastingStreamUrl
      };
 
-    NSLog(@"sendAsyncRequest requestData=%@", [NSString stringWithFormat:@"liveJson=%@", liveJson]);
+    RTCLog(@"sendAsyncRequest requestData=%@", [NSString stringWithFormat:@"liveJson=%@", liveJson]);
     
      NSData *requestData = [NSJSONSerialization dataWithJSONObject:liveJson options:0 error:nil];
      NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:rtcUrl]];
@@ -371,9 +371,9 @@ NSString *_svrsig;
                                          NSData *data,
                                          NSError *error) {
         if (error) {
-//            if (completionHandler) {
-//                completionHandler(nil, error);
-//            }
+            if (completionHandler) {
+                completionHandler(error);
+            }
          
             return;
         }
@@ -384,7 +384,7 @@ NSString *_svrsig;
          ARDAppClient *strongSelf = weakSelf;
 //         NSDictionary *responseJSON = [NSDictionary dictionaryWithJSONData:data];
          
-         NSLog(@"sendAsyncRequest responseJSON=%@", [NSString stringWithFormat:@"responseJSON=%@", responseJSON]);
+         RTCLog(@"sendAsyncRequest responseJSON=%@", [NSString stringWithFormat:@"responseJSON=%@", responseJSON]);
          
          NSInteger errcode = [[responseJSON objectForKey:@"errcode"] intValue];
          if (errcode != 0) {
@@ -401,8 +401,11 @@ NSString *_svrsig;
          [strongSelf.peerConnection setRemoteDescription:description
                              completionHandler:^(NSError *error) {
              
-             NSLog(@"sendAsyncRequest setRemoteDescription=%@", error);
+             RTCLog(@"sendAsyncRequest setRemoteDescription=%@", error);
              
+             if (completionHandler) {
+                 completionHandler(error);
+             }
         //           ARDAppClient *strongSelf = weakSelf;
         //           [strongSelf peerConnection:strongSelf.peerConnection
         //               didSetSessionDescriptionWithError:error];
@@ -421,9 +424,6 @@ NSString *_svrsig;
         strongSelf.hasReceivedSdp = YES;
         strongSelf.webSocketURL = nil;
         strongSelf.webSocketRestURL = nil;
-        
-        
-        self.state = kARDAppClientStateConnected;
         
         // Create peer connection.
         RTCMediaConstraints *constraints = [self defaultPeerConnectionConstraints];
@@ -488,6 +488,8 @@ NSString *_svrsig;
                   [weakSelf  defaultRemoteDescription:sdp
                   liveBroadcastingStreamUrl:strongSelf->_liveBroadcastingStreamUrl
                                                    completionHandler:^(NSError *error) {
+                      
+                      self.state = kARDAppClientStateConnected;
                       
                   }];
                     
@@ -627,6 +629,7 @@ NSString *_svrsig;
     
     
     [_delegate appClient:self didReceiveRemoteVideoTrack:stream.videoTracks[0]];
+    [_delegate appClient:self didReceiveRemoteAudioTrack:stream.audioTracks[0]];
 }
 
 - (void)peerConnection:(RTCPeerConnection *)peerConnection
