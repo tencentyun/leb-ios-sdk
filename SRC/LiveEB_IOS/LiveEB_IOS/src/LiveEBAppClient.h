@@ -21,7 +21,7 @@ typedef NS_ENUM(NSInteger, ARDAppClientState) {
   kARDAppClientStateConnected,
 };
 
-@class ARDAppClient;
+@class LiveEBAppClient;
 @class ARDSettingsModel;
 @class ARDExternalSampleCapturer;
 @class RTCMediaConstraints;
@@ -30,40 +30,40 @@ typedef NS_ENUM(NSInteger, ARDAppClientState) {
 
 // The delegate is informed of pertinent events and will be called on the
 // main queue.
-@protocol ARDAppClientDelegate <NSObject>
+@protocol LiveEBAppClientDelegate <NSObject>
 
-- (void)appClient:(ARDAppClient *)client didChangeState:(ARDAppClientState)state;
+- (void)appClient:(LiveEBAppClient *)client didChangeState:(ARDAppClientState)state;
 
-- (void)appClient:(ARDAppClient *)client didChangeConnectionState:(RTCIceConnectionState)state;
+- (void)appClient:(LiveEBAppClient *)client didChangeConnectionState:(RTCIceConnectionState)state;
 
-- (void)appClient:(ARDAppClient *)client didReceiveLocalVideoTrack:(RTCVideoTrack *)localVideoTrack;
+- (void)appClient:(LiveEBAppClient *)client didReceiveLocalVideoTrack:(RTCVideoTrack *)localVideoTrack;
 
-- (void)appClient:(ARDAppClient *)client
+- (void)appClient:(LiveEBAppClient *)client
     didReceiveRemoteVideoTrack:(RTCVideoTrack *)remoteVideoTrack;
 
-- (void)appClient:(ARDAppClient *)client
+- (void)appClient:(LiveEBAppClient *)client
 didReceiveRemoteAudioTrack:(RTCAudioTrack *)remoteAudioTrack;
 
-- (void)appClient:(ARDAppClient *)client didError:(NSError *)error;
+- (void)appClient:(LiveEBAppClient *)client didError:(NSError *)error;
 
-- (void)appClient:(ARDAppClient *)client didGetStats:(NSArray *)stats;
+- (void)appClient:(LiveEBAppClient *)client didGetStats:(NSArray *)stats;
 
 
 
-- (void)appClient:(ARDAppClient *)client
+- (void)appClient:(LiveEBAppClient *)client
     didCreateLocalExternalSampleCapturer:(ARDExternalSampleCapturer *)externalSampleCapturer;
 
 @end
 
 // Handles connections to the AppRTC server for a given room. Methods on this
 // class should only be called from the main queue.
-@interface ARDAppClient : NSObject
+@interface LiveEBAppClient : NSObject
 
 // If |shouldGetStats| is true, stats will be reported in 1s intervals through
 // the delegate.
 @property(nonatomic, assign) BOOL shouldGetStats;
 @property(nonatomic, readonly) ARDAppClientState state;
-@property(nonatomic, weak) id<ARDAppClientDelegate> delegate;
+@property(nonatomic, weak) id<LiveEBAppClientDelegate> delegate;
 @property(nonatomic, assign, getter=isBroadcast) BOOL broadcast;
 
 
@@ -74,7 +74,7 @@ didReceiveRemoteAudioTrack:(RTCAudioTrack *)remoteAudioTrack;
 
 // Convenience constructor since all expected use cases will need a delegate
 // in order to receive remote tracks.
-- (instancetype)initWithDelegate:(id<ARDAppClientDelegate>)delegate;
+- (instancetype)initWithDelegate:(id<LiveEBAppClientDelegate>)delegate;
 
 // Establishes a connection with the AppRTC servers for the given room id.
 // |settings| is an object containing settings such as video codec for the call.

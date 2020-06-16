@@ -11,7 +11,7 @@
 #pragma clang diagnostic ignored "-Wunused-variable"
 #pragma clang diagnostic ignored "-Wunused-variable"
 
-#import "ARDAppClient+Internal.h"
+#import "LiveEBAppClient+Internal.h"
 
 #import <WebRTC/RTCAudioTrack.h>
 #import <WebRTC/RTCCameraVideoCapturer.h>
@@ -106,7 +106,7 @@
 @end
 
 
-static NSString * const kARDAppClientErrorDomain = @"ARDAppClient";
+static NSString * const kARDAppClientErrorDomain = @"LiveEBAppClient";
 static NSInteger const kARDAppClientErrorUnknown = -1;
 static NSInteger const kARDAppClientErrorRoomFull = -2;
 static NSInteger const kARDAppClientErrorCreateSDP = -3;
@@ -168,7 +168,7 @@ static int const kKbpsMultiplier = 1000;
 
 @end
 
-@interface ARDAppClient()
+@interface LiveEBAppClient()
 {
 BOOL _useLiveEventBroadcasting;
 NSString *_liveBroadcastingStreamUrl;
@@ -176,7 +176,7 @@ NSString *_svrsig;
 }
 @end
 
-@implementation ARDAppClient {
+@implementation LiveEBAppClient {
   RTCFileLogger *_fileLogger;
   ARDTimerProxy *_statsTimer;
   ARDSettingsModel *_settings;
@@ -210,7 +210,7 @@ NSString *_svrsig;
   return [self initWithDelegate:nil];
 }
 
-- (instancetype)initWithDelegate:(id<ARDAppClientDelegate>)delegate {
+- (instancetype)initWithDelegate:(id<LiveEBAppClientDelegate>)delegate {
   if (self = [super init]) {
     _useLiveEventBroadcasting = FALSE;
       _liveBroadcastingStreamUrl = nil;
@@ -289,8 +289,8 @@ NSString *_svrsig;
     [request addValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     
     
-//    __weak ARDAppClient *weakSelf = self;
-    [ARDAppClient sendAsyncRequest:request
+//    __weak LiveEBAppClient *weakSelf = self;
+    [LiveEBAppClient sendAsyncRequest:request
                     completionHandler:^(NSURLResponse *response,
                                         NSData *data,
                                         NSError *error) {
@@ -365,8 +365,8 @@ NSString *_svrsig;
      [request addValue:host forHTTPHeaderField:@"origin"];
      [request addValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
      
-    __weak ARDAppClient *weakSelf = self;
-     [ARDAppClient sendAsyncRequest:request
+    __weak LiveEBAppClient *weakSelf = self;
+     [LiveEBAppClient sendAsyncRequest:request
                      completionHandler:^(NSURLResponse *response,
                                          NSData *data,
                                          NSError *error) {
@@ -381,7 +381,7 @@ NSString *_svrsig;
          NSDictionary *responseJSON = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
          
 //         __weak RTCPeerConnection *weakSelf = self;
-         ARDAppClient *strongSelf = weakSelf;
+         LiveEBAppClient *strongSelf = weakSelf;
 //         NSDictionary *responseJSON = [NSDictionary dictionaryWithJSONData:data];
          
          RTCLog(@"sendAsyncRequest responseJSON=%@", [NSString stringWithFormat:@"responseJSON=%@", responseJSON]);
@@ -396,7 +396,7 @@ NSString *_svrsig;
          //NSString *answerType = [sdpDict objectForKey:@"type"];
          //NSString *answerSDP = [sdpDict objectForKey:@"sdp"];
          
-         RTCSessionDescription *description = [ARDAppClient descriptionFromJSONDictionary:sdpDict];
+         RTCSessionDescription *description = [LiveEBAppClient descriptionFromJSONDictionary:sdpDict];
          
          [strongSelf.peerConnection setRemoteDescription:description
                              completionHandler:^(NSError *error) {
@@ -406,7 +406,7 @@ NSString *_svrsig;
              if (completionHandler) {
                  completionHandler(error);
              }
-        //           ARDAppClient *strongSelf = weakSelf;
+        //           LiveEBAppClient *strongSelf = weakSelf;
         //           [strongSelf peerConnection:strongSelf.peerConnection
         //               didSetSessionDescriptionWithError:error];
          }];
@@ -416,7 +416,7 @@ NSString *_svrsig;
 
 -(void)connectLiveBroadcast {
     if (_useLiveEventBroadcasting) {
-        ARDAppClient *strongSelf = self;
+        LiveEBAppClient *strongSelf = self;
         
         strongSelf.roomId = @"";
         strongSelf.clientId = @"";
@@ -443,11 +443,11 @@ NSString *_svrsig;
         
         if (_isInitiator) {
           // Send offer.
-          __weak ARDAppClient *weakSelf = self;
+          __weak LiveEBAppClient *weakSelf = self;
           [_peerConnection offerForConstraints:[self defaultOfferConstraints]
                              completionHandler:^(RTCSessionDescription *sdp,
                                                  NSError *error) {
-            ARDAppClient *strongSelf = weakSelf;
+            LiveEBAppClient *strongSelf = weakSelf;
               
               dispatch_async(dispatch_get_main_queue(), ^{
                 if (error) {
@@ -465,7 +465,7 @@ NSString *_svrsig;
                 }
 
                   
-                __weak ARDAppClient *weakSelf = self;
+                __weak LiveEBAppClient *weakSelf = self;
                 [weakSelf.peerConnection setLocalDescription:sdp
                                completionHandler:^(NSError *error) {
 
@@ -520,16 +520,16 @@ NSString *_svrsig;
     return;
   }
   if (shouldGetStats) {
-    __weak ARDAppClient *weakSelf = self;
+    __weak LiveEBAppClient *weakSelf = self;
     _statsTimer = [[ARDTimerProxy alloc] initWithInterval:1
                                                   repeats:YES
                                              timerHandler:^{
-      ARDAppClient *strongSelf = weakSelf;
+      LiveEBAppClient *strongSelf = weakSelf;
       [strongSelf.peerConnection statsForTrack:nil
                               statsOutputLevel:RTCStatsOutputLevelDebug
                              completionHandler:^(NSArray *stats) {
         dispatch_async(dispatch_get_main_queue(), ^{
-          ARDAppClient *strongSelf = weakSelf;
+          LiveEBAppClient *strongSelf = weakSelf;
           [strongSelf.delegate appClient:strongSelf didGetStats:stats];
         });
       }];
@@ -711,13 +711,13 @@ NSString *_svrsig;
 // signaling channel.
 - (void)sendSignalingMessage:(ARDSignalingMessage *)message {
   if (_isInitiator) {
-    __weak ARDAppClient *weakSelf = self;
+    __weak LiveEBAppClient *weakSelf = self;
     [_roomServerClient sendMessage:message
                          forRoomId:_roomId
                           clientId:_clientId
                  completionHandler:^(ARDMessageResponse *response,
                                      NSError *error) {
-      ARDAppClient *strongSelf = weakSelf;
+      LiveEBAppClient *strongSelf = weakSelf;
       if (error) {
         [strongSelf.delegate appClient:strongSelf didError:error];
         return;

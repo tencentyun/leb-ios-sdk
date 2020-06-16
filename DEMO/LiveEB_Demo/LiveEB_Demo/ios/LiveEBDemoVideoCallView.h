@@ -13,6 +13,8 @@
 // Called when the hangup button is pressed.
 - (void)videoCallViewDidHangup:(LiveEBDemoVideoCallView *)view;
 
+- (void)videoCallViewDidPauseResume:(LiveEBDemoVideoCallView *)view;
+
 // Called when stats are enabled by triple tapping.
 - (void)videoCallViewDidEnableStats:(LiveEBDemoVideoCallView *)view;
 

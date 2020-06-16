@@ -24,10 +24,12 @@ NS_ASSUME_NONNULL_BEGIN
 @required
     -(void)start;
     -(void)stop;
-        
-    -(void)setAudioMute:(BOOL)mute;
+    -(void)pause;
+    -(void)resume;
 
-    -(void)restart;
+    -(void)setAudioMute:(BOOL)mute;
+    
+    /*开启调试信息*/
     -(void)setStatState:(BOOL)stat;
 @end
 
@@ -36,6 +38,7 @@ NS_ASSUME_NONNULL_BEGIN
 @required
 
 - (void)videoView:(LiveEBVideoView *)videoView didError:(NSError *)error;
+
 - (void)videoView:(LiveEBVideoView *)videoView didChangeVideoSize:(CGSize)size;
 
 
@@ -45,8 +48,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)onCompletion:(LiveEBVideoView*)videoView;
 
+- (void)onFirstFrameRender:(LiveEBVideoView*)videoView;
 
+/*调试信息回调*/
 - (void)showStats:(LiveEBVideoView *)videoView stat:(NSArray*)stat;
+
 - (void)showStats:(LiveEBVideoView *)videoView strStat:(NSString*)strStat;
 
 

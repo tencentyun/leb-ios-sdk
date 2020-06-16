@@ -8,7 +8,7 @@
 #import "LiveEBVideoView.h"
 #import "LiveEBManager.h"
 
-#import "ARDAppClient.h"
+#import "LiveEBAppClient.h"
 
 #import <WebRTC/RTCEAGLVideoView.h>
 #if defined(RTC_SUPPORTS_METAL)
@@ -28,13 +28,13 @@
 #import <WebRTC/RTCLegacyStatsReport.h>
 
 @interface LiveEBVideoView() <RTCVideoViewDelegate,
-                                ARDAppClientDelegate,
+                                LiveEBAppClientDelegate,
                                 RTCAudioSessionDelegate
 >
 {
     CGSize _remoteVideoSize;
     
-    ARDAppClient *_client;
+    LiveEBAppClient *_client;
 }
 
 
@@ -90,7 +90,7 @@
     [_audioPlayer loadPlayer];
     
     ARDSettingsModel *settingsModel = [[ARDSettingsModel alloc] init];
-    _client = [[ARDAppClient alloc] initWithDelegate:self];
+    _client = [[LiveEBAppClient alloc] initWithDelegate:self];
     _client.clientInfo = [LiveEBManager sharedManager].clientInfo;
     _client.sessionid = _sessionid;
     
@@ -125,6 +125,11 @@
   [_delegate videoView:self didChangeVideoSize:size];
 }
 
+- (void)videoView:(id<RTCVideoRenderer>)videoView isFirstFrame:(BOOL)isfirstFrame {
+  if ([_delegate respondsToSelector:@selector(onFirstFrameRender:)]) {
+      [_delegate onFirstFrameRender:self];
+  }
+}
 
 #pragma mark - Private
 
@@ -155,7 +160,7 @@
 
 #pragma mark - ARDAppClientDelegate
 
-- (void)appClient:(ARDAppClient *)client
+- (void)appClient:(LiveEBAppClient *)client
     didChangeState:(ARDAppClientState)state {
   switch (state) {
     case kARDAppClientStateConnected:
@@ -178,7 +183,7 @@
   }
 }
 
-- (void)appClient:(ARDAppClient *)client
+- (void)appClient:(LiveEBAppClient *)client
     didChangeConnectionState:(RTCIceConnectionState)state {
   RTCLog(@"ICE state changed: %ld", (long)state);
   __weak LiveEBVideoView *weakSelf = self;
@@ -189,23 +194,23 @@
      
 }
 
-- (void)appClient:(ARDAppClient *)client
+- (void)appClient:(LiveEBAppClient *)client
     didReceiveLocalVideoTrack:(RTCVideoTrack *)localVideoTrack {
 }
 
-- (void)appClient:(ARDAppClient *)client
+- (void)appClient:(LiveEBAppClient *)client
     didReceiveRemoteVideoTrack:(RTCVideoTrack *)remoteVideoTrack {
   self.remoteVideoTrack = remoteVideoTrack;
 }
 
-- (void)appClient:(ARDAppClient *)client
+- (void)appClient:(LiveEBAppClient *)client
     didReceiveRemoteAudioTrack:(RTCAudioTrack *)remoteAudioTrack {
   self.remoteAudioTrack = remoteAudioTrack;
     
     remoteAudioTrack.isEnabled = _audioTrackEnable;
 }
 
-- (void)appClient:(ARDAppClient *)client
+- (void)appClient:(LiveEBAppClient *)client
       didGetStats:(NSArray *)stats {
     
     if (_delegate && [_delegate respondsToSelector:@selector(showStats:strStat:)]) {
@@ -227,9 +232,9 @@
 
 }
 
-- (void)appClient:(ARDAppClient *)client
+- (void)appClient:(LiveEBAppClient *)client
          didError:(NSError *)error {
-
+  [self.delegate videoView:self didError:error];
 }
 
 #pragma mark - LiveEBVideoViewControllerDelegate
@@ -244,6 +249,28 @@
     [_audioPlayer finished];
     [_client disconnect];
 }
+
+
+- (void)pause {
+  [_remoteVideoView pause:TRUE];
+  if (_remoteAudioTrack) {
+      _remoteAudioTrack.isEnabled = FALSE;
+  }
+}
+
+//- (void)restart {
+//  [self stop];
+//  [self start];
+//}
+
+- (void)resume {
+  [_remoteVideoView pause:FALSE];
+  
+  if (_remoteAudioTrack) {
+      _remoteAudioTrack.isEnabled = TRUE;
+  }
+}
+
 
 -(void)setStatState:(BOOL)stat {
     _client.shouldGetStats = stat;

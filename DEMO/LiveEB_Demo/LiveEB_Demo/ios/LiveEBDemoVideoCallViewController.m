@@ -16,6 +16,7 @@
     NSString *_rtcHost;
     
     BOOL _isSetStatState;
+  BOOL _isPaused;
 }
 
 @synthesize videoCallView = _videoCallView;
@@ -33,6 +34,8 @@
       _rtcHost = rtcHost;
       
       _isSetStatState = FALSE;
+    
+    _isPaused = false;
 
   }
   return self;
@@ -63,6 +66,19 @@
 - (void)videoCallViewDidHangup:(LiveEBDemoVideoCallView *)view {
   [self hangup];
 }
+
+- (void)videoCallViewDidPauseResume:(LiveEBDemoVideoCallView *)view {
+  
+  if (_isPaused) {
+    [_controlDelegate resume];
+  } else {
+    [_controlDelegate pause];
+  }
+  
+  
+  _isPaused = !_isPaused;
+}
+
 
 - (void)videoCallViewDidEnableStats:(LiveEBDemoVideoCallView *)view {
     

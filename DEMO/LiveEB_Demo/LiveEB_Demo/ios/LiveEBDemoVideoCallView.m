@@ -20,6 +20,7 @@ static CGFloat const kStatusBarHeight = 20;
   UIButton *_routeChangeButton;
   UIButton *_cameraSwitchButton;
   UIButton *_hangupButton;
+  UIButton *_pauseResumeButton;
   CGSize _remoteVideoSize;
 }
 
@@ -44,19 +45,32 @@ static CGFloat const kStatusBarHeight = 20;
     [self addSubview:_statsView];
       
       if (true) {
-    _hangupButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    _hangupButton.backgroundColor = [UIColor redColor];
-    _hangupButton.layer.cornerRadius = kButtonSize / 2;
-    _hangupButton.layer.masksToBounds = YES;
-    image = [UIImage imageForName:@"ic_call_end_black_24dp.png"
-                            color:[UIColor whiteColor]];
-    [_hangupButton setImage:image forState:UIControlStateNormal];
-    [_hangupButton addTarget:self
-                      action:@selector(onHangup:)
-            forControlEvents:UIControlEventTouchUpInside];
-          [self addSubview:_hangupButton];
+        _hangupButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        _hangupButton.backgroundColor = [UIColor redColor];
+        _hangupButton.layer.cornerRadius = kButtonSize / 2;
+        _hangupButton.layer.masksToBounds = YES;
+        image = [UIImage imageForName:@"ic_call_end_black_24dp.png"
+                                color:[UIColor whiteColor]];
+        [_hangupButton setImage:image forState:UIControlStateNormal];
+        [_hangupButton addTarget:self
+                          action:@selector(onHangup:)
+                forControlEvents:UIControlEventTouchUpInside];
+              [self addSubview:_hangupButton];
           
       }
+    
+    if (true) {
+      _pauseResumeButton = [UIButton buttonWithType:UIButtonTypeCustom];
+      _pauseResumeButton.backgroundColor = [UIColor blueColor];
+      [_pauseResumeButton setTitle:@"P/R" forState:UIControlStateNormal];
+      _pauseResumeButton.layer.cornerRadius = kButtonSize / 2;
+      _pauseResumeButton.layer.masksToBounds = YES;
+           [_pauseResumeButton addTarget:self
+                        action:@selector(onPauseResume:)
+              forControlEvents:UIControlEventTouchUpInside];
+            [self addSubview:_pauseResumeButton];
+        
+    }
 
     _statusLabel = [[UILabel alloc] initWithFrame:CGRectZero];
     _statusLabel.font = [UIFont fontWithName:@"Roboto" size:16];
@@ -129,7 +143,7 @@ static CGFloat const kStatusBarHeight = 20;
   CGRect cameraSwitchFrame = _hangupButton.frame;
   cameraSwitchFrame.origin.x =
       CGRectGetMaxX(cameraSwitchFrame) + kButtonPadding;
-  _cameraSwitchButton.frame = cameraSwitchFrame;
+  _pauseResumeButton.frame = cameraSwitchFrame;
 
   // Place route button to the right of camera button.
   CGRect routeChangeFrame = _cameraSwitchButton.frame;
@@ -173,6 +187,10 @@ static CGFloat const kStatusBarHeight = 20;
     [self onHangup:nil];
 }
 
+-(void)onFirstFrameRender:(LiveEBVideoView *)videoView {
+  NSLog(@"_remoteVideoView onFirstFrameRender ");
+}
+
 #pragma mark - Private
 
 - (void)onRouteChange:(id)sender {
@@ -181,6 +199,10 @@ static CGFloat const kStatusBarHeight = 20;
 
 - (void)onHangup:(id)sender {
   [_delegate videoCallViewDidHangup:self];
+}
+
+- (void)onPauseResume:(id)sender {
+  [_delegate videoCallViewDidPauseResume:self];
 }
 
 - (void)didTripleTap:(UITapGestureRecognizer *)recognizer {

@@ -28,12 +28,18 @@ RTC_OBJC_EXPORT
 /** The frame to be displayed. */
 - (void)renderFrame:(nullable RTCVideoFrame *)frame;
 
+-(void)pause:(BOOL)isPause;
+
 @end
 
 RTC_OBJC_EXPORT
-@protocol RTCVideoViewDelegate
+@protocol RTCVideoViewDelegate <NSObject>
 
 - (void)videoView:(id<RTCVideoRenderer>)videoView didChangeVideoSize:(CGSize)size;
+
+
+@optional
+- (void)videoView:(id<RTCVideoRenderer>)videoView isFirstFrame:(BOOL)isfirstFrame;
 
 @end
 

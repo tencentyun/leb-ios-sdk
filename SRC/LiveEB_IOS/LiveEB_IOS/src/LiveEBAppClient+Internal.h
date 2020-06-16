@@ -8,7 +8,7 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 
-#import "ARDAppClient.h"
+#import "LiveEBAppClient.h"
 
 #import <WebRTC/RTCPeerConnection.h>
 
@@ -18,7 +18,7 @@
 
 @class RTCPeerConnectionFactory;
 
-@interface ARDAppClient () <RTCPeerConnectionDelegate>
+@interface LiveEBAppClient () <RTCPeerConnectionDelegate>
 
 // All properties should only be mutated from the main queue.
 @property(nonatomic, strong) id<ARDRoomServerClient> roomServerClient;

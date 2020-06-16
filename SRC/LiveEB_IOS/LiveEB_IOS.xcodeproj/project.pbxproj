@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		518A33322498F606001BED99 /* LiveEBAppClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 518A332F2498F606001BED99 /* LiveEBAppClient.m */; };
+		518A33332498F606001BED99 /* LiveEBAppClient+Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = 518A33302498F606001BED99 /* LiveEBAppClient+Internal.h */; };
+		518A33342498F606001BED99 /* LiveEBAppClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 518A33312498F606001BED99 /* LiveEBAppClient.h */; };
 		51A25FD82440931D008DD31C /* LiveEB_IOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 51A25FD62440931D008DD31C /* LiveEB_IOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		51A260192440937D008DD31C /* LiveEBVideoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 51A25FDF2440937D008DD31C /* LiveEBVideoView.m */; };
 		51A2601A2440937D008DD31C /* LiveEBManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 51A25FE02440937D008DD31C /* LiveEBManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -28,7 +31,6 @@
 		51A2602A2440937D008DD31C /* ARDBitrateTracker.h in Headers */ = {isa = PBXBuildFile; fileRef = 51A25FF12440937D008DD31C /* ARDBitrateTracker.h */; };
 		51A2602B2440937D008DD31C /* ARDSettingsStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 51A25FF22440937D008DD31C /* ARDSettingsStore.h */; };
 		51A2602C2440937D008DD31C /* ARDAppEngineClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 51A25FF32440937D008DD31C /* ARDAppEngineClient.m */; };
-		51A2602D2440937D008DD31C /* ARDAppClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 51A25FF42440937D008DD31C /* ARDAppClient.h */; };
 		51A2602E2440937D008DD31C /* RTCIceServer+JSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 51A25FF52440937D008DD31C /* RTCIceServer+JSON.m */; };
 		51A2602F2440937D008DD31C /* CCCCTest.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 51A25FF62440937D008DD31C /* CCCCTest.hpp */; };
 		51A260302440937D008DD31C /* ARDExternalSampleCapturer.h in Headers */ = {isa = PBXBuildFile; fileRef = 51A25FF72440937D008DD31C /* ARDExternalSampleCapturer.h */; };
@@ -49,12 +51,10 @@
 		51A2603F2440937D008DD31C /* ARDStatsBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 51A260072440937D008DD31C /* ARDStatsBuilder.m */; };
 		51A260402440937D008DD31C /* ARDSignalingMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = 51A260082440937D008DD31C /* ARDSignalingMessage.h */; };
 		51A260412440937D008DD31C /* ARDMessageResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 51A260092440937D008DD31C /* ARDMessageResponse.m */; };
-		51A260422440937D008DD31C /* ARDAppClient+Internal.h in Headers */ = {isa = PBXBuildFile; fileRef = 51A2600A2440937D008DD31C /* ARDAppClient+Internal.h */; };
 		51A260432440937D008DD31C /* RTCSessionDescription+JSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 51A2600B2440937D008DD31C /* RTCSessionDescription+JSON.m */; };
 		51A260442440937D008DD31C /* RTCIceCandidate+JSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 51A2600C2440937D008DD31C /* RTCIceCandidate+JSON.m */; };
 		51A260452440937D008DD31C /* ARDExternalSampleCapturer.m in Sources */ = {isa = PBXBuildFile; fileRef = 51A2600D2440937D008DD31C /* ARDExternalSampleCapturer.m */; };
 		51A260462440937D008DD31C /* RTCIceServer+JSON.h in Headers */ = {isa = PBXBuildFile; fileRef = 51A2600E2440937D008DD31C /* RTCIceServer+JSON.h */; };
-		51A260472440937D008DD31C /* ARDAppClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 51A2600F2440937D008DD31C /* ARDAppClient.m */; };
 		51A260482440937D008DD31C /* ARDSettingsStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 51A260102440937D008DD31C /* ARDSettingsStore.m */; };
 		51A260492440937D008DD31C /* ARDAppEngineClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 51A260112440937D008DD31C /* ARDAppEngineClient.h */; };
 		51A2604A2440937D008DD31C /* RTCVideoCodecInfo+HumanReadable.m in Sources */ = {isa = PBXBuildFile; fileRef = 51A260122440937D008DD31C /* RTCVideoCodecInfo+HumanReadable.m */; };
@@ -79,6 +79,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		518A332F2498F606001BED99 /* LiveEBAppClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LiveEBAppClient.m; sourceTree = "<group>"; };
+		518A33302498F606001BED99 /* LiveEBAppClient+Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "LiveEBAppClient+Internal.h"; sourceTree = "<group>"; };
+		518A33312498F606001BED99 /* LiveEBAppClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LiveEBAppClient.h; sourceTree = "<group>"; };
 		51A25FD32440931D008DD31C /* LiveEB_IOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = LiveEB_IOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		51A25FD62440931D008DD31C /* LiveEB_IOS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LiveEB_IOS.h; sourceTree = "<group>"; };
 		51A25FD72440931D008DD31C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -102,7 +105,6 @@
 		51A25FF12440937D008DD31C /* ARDBitrateTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARDBitrateTracker.h; sourceTree = "<group>"; };
 		51A25FF22440937D008DD31C /* ARDSettingsStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARDSettingsStore.h; sourceTree = "<group>"; };
 		51A25FF32440937D008DD31C /* ARDAppEngineClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARDAppEngineClient.m; sourceTree = "<group>"; };
-		51A25FF42440937D008DD31C /* ARDAppClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARDAppClient.h; sourceTree = "<group>"; };
 		51A25FF52440937D008DD31C /* RTCIceServer+JSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RTCIceServer+JSON.m"; sourceTree = "<group>"; };
 		51A25FF62440937D008DD31C /* CCCCTest.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = CCCCTest.hpp; sourceTree = "<group>"; };
 		51A25FF72440937D008DD31C /* ARDExternalSampleCapturer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARDExternalSampleCapturer.h; sourceTree = "<group>"; };
@@ -123,12 +125,10 @@
 		51A260072440937D008DD31C /* ARDStatsBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARDStatsBuilder.m; sourceTree = "<group>"; };
 		51A260082440937D008DD31C /* ARDSignalingMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARDSignalingMessage.h; sourceTree = "<group>"; };
 		51A260092440937D008DD31C /* ARDMessageResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARDMessageResponse.m; sourceTree = "<group>"; };
-		51A2600A2440937D008DD31C /* ARDAppClient+Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ARDAppClient+Internal.h"; sourceTree = "<group>"; };
 		51A2600B2440937D008DD31C /* RTCSessionDescription+JSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RTCSessionDescription+JSON.m"; sourceTree = "<group>"; };
 		51A2600C2440937D008DD31C /* RTCIceCandidate+JSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RTCIceCandidate+JSON.m"; sourceTree = "<group>"; };
 		51A2600D2440937D008DD31C /* ARDExternalSampleCapturer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARDExternalSampleCapturer.m; sourceTree = "<group>"; };
 		51A2600E2440937D008DD31C /* RTCIceServer+JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RTCIceServer+JSON.h"; sourceTree = "<group>"; };
-		51A2600F2440937D008DD31C /* ARDAppClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARDAppClient.m; sourceTree = "<group>"; };
 		51A260102440937D008DD31C /* ARDSettingsStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARDSettingsStore.m; sourceTree = "<group>"; };
 		51A260112440937D008DD31C /* ARDAppEngineClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARDAppEngineClient.h; sourceTree = "<group>"; };
 		51A260122440937D008DD31C /* RTCVideoCodecInfo+HumanReadable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RTCVideoCodecInfo+HumanReadable.m"; sourceTree = "<group>"; };
@@ -194,6 +194,9 @@
 				51A25FE42440937D008DD31C /* LiveEBAudioPlayer.m */,
 				51A25FE52440937D008DD31C /* ARDJoinResponse.h */,
 				51A25FE62440937D008DD31C /* ARDMessageResponse+Internal.h */,
+				518A33312498F606001BED99 /* LiveEBAppClient.h */,
+				518A332F2498F606001BED99 /* LiveEBAppClient.m */,
+				518A33302498F606001BED99 /* LiveEBAppClient+Internal.h */,
 				51A25FE72440937D008DD31C /* ARDRoomServerClient.h */,
 				51A25FE82440937D008DD31C /* ARDSettingsModel.h */,
 				51A25FE92440937D008DD31C /* ARDWebSocketChannel.h */,
@@ -207,7 +210,6 @@
 				51A25FF12440937D008DD31C /* ARDBitrateTracker.h */,
 				51A25FF22440937D008DD31C /* ARDSettingsStore.h */,
 				51A25FF32440937D008DD31C /* ARDAppEngineClient.m */,
-				51A25FF42440937D008DD31C /* ARDAppClient.h */,
 				51A25FF52440937D008DD31C /* RTCIceServer+JSON.m */,
 				51A25FF62440937D008DD31C /* CCCCTest.hpp */,
 				51A25FF72440937D008DD31C /* ARDExternalSampleCapturer.h */,
@@ -227,12 +229,10 @@
 				51A260072440937D008DD31C /* ARDStatsBuilder.m */,
 				51A260082440937D008DD31C /* ARDSignalingMessage.h */,
 				51A260092440937D008DD31C /* ARDMessageResponse.m */,
-				51A2600A2440937D008DD31C /* ARDAppClient+Internal.h */,
 				51A2600B2440937D008DD31C /* RTCSessionDescription+JSON.m */,
 				51A2600C2440937D008DD31C /* RTCIceCandidate+JSON.m */,
 				51A2600D2440937D008DD31C /* ARDExternalSampleCapturer.m */,
 				51A2600E2440937D008DD31C /* RTCIceServer+JSON.h */,
-				51A2600F2440937D008DD31C /* ARDAppClient.m */,
 				51A260102440937D008DD31C /* ARDSettingsStore.m */,
 				51A260112440937D008DD31C /* ARDAppEngineClient.h */,
 				51A260122440937D008DD31C /* RTCVideoCodecInfo+HumanReadable.m */,
@@ -287,10 +287,11 @@
 				51A260372440937D008DD31C /* ARDJoinResponse+Internal.h in Headers */,
 				51A2602B2440937D008DD31C /* ARDSettingsStore.h in Headers */,
 				51A260272440937D008DD31C /* ARDMessageResponse.h in Headers */,
-				51A260422440937D008DD31C /* ARDAppClient+Internal.h in Headers */,
 				51A260222440937D008DD31C /* ARDWebSocketChannel.h in Headers */,
 				51A2603C2440937D008DD31C /* ARDTURNClient+Internal.h in Headers */,
+				518A33332498F606001BED99 /* LiveEBAppClient+Internal.h in Headers */,
 				51A260232440937D008DD31C /* ARDTURNClient.h in Headers */,
+				518A33342498F606001BED99 /* LiveEBAppClient.h in Headers */,
 				51A260462440937D008DD31C /* RTCIceServer+JSON.h in Headers */,
 				51A260322440937D008DD31C /* ARDSettingsModel+Private.h in Headers */,
 				51A260342440937D008DD31C /* ARDUtilities.h in Headers */,
@@ -301,7 +302,6 @@
 				51A260302440937D008DD31C /* ARDExternalSampleCapturer.h in Headers */,
 				51A260402440937D008DD31C /* ARDSignalingMessage.h in Headers */,
 				51A260292440937D008DD31C /* RTCVideoCodecInfo+HumanReadable.h in Headers */,
-				51A2602D2440937D008DD31C /* ARDAppClient.h in Headers */,
 				51A260312440937D008DD31C /* RTCIceCandidate+JSON.h in Headers */,
 				51A260282440937D008DD31C /* ARDStatsBuilder.h in Headers */,
 				51A2601F2440937D008DD31C /* ARDMessageResponse+Internal.h in Headers */,
@@ -411,9 +411,9 @@
 				51A2602E2440937D008DD31C /* RTCIceServer+JSON.m in Sources */,
 				51A260242440937D008DD31C /* ARDCaptureController.m in Sources */,
 				51A2603B2440937D008DD31C /* ARDWebSocketChannel.m in Sources */,
+				518A33322498F606001BED99 /* LiveEBAppClient.m in Sources */,
 				51A260442440937D008DD31C /* RTCIceCandidate+JSON.m in Sources */,
 				51A2604A2440937D008DD31C /* RTCVideoCodecInfo+HumanReadable.m in Sources */,
-				51A260472440937D008DD31C /* ARDAppClient.m in Sources */,
 				51A260332440937D008DD31C /* ARDUtilities.m in Sources */,
 				51A2601C2440937D008DD31C /* LiveEBManager.m in Sources */,
 				51A260192440937D008DD31C /* LiveEBVideoView.m in Sources */,
