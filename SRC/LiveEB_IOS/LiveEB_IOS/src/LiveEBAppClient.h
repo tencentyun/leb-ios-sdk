@@ -87,5 +87,8 @@ didReceiveRemoteAudioTrack:(RTCAudioTrack *)remoteAudioTrack;
 
 -(void)useLiveBroadcasting:(NSString*)streamurl;
 
+-(void)stopStream;
+
 -(void)connectLiveBroadcast;
+
 @end

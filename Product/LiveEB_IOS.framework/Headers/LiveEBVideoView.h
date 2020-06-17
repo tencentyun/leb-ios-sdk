@@ -29,6 +29,8 @@ NS_ASSUME_NONNULL_BEGIN
 
     -(void)setAudioMute:(BOOL)mute;
     
+    - (void)restart;
+
     /*开启调试信息*/
     -(void)setStatState:(BOOL)stat;
 @end

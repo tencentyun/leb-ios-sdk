@@ -21,6 +21,7 @@ static CGFloat const kStatusBarHeight = 20;
   UIButton *_cameraSwitchButton;
   UIButton *_hangupButton;
   UIButton *_pauseResumeButton;
+  UIButton *_restartButton;
   CGSize _remoteVideoSize;
 }
 
@@ -69,6 +70,19 @@ static CGFloat const kStatusBarHeight = 20;
                         action:@selector(onPauseResume:)
               forControlEvents:UIControlEventTouchUpInside];
             [self addSubview:_pauseResumeButton];
+        
+    }
+    
+    if (true) {
+      _restartButton = [UIButton buttonWithType:UIButtonTypeCustom];
+      _restartButton.backgroundColor = [UIColor whiteColor];
+      [_restartButton setTitle:@"restart" forState:UIControlStateNormal];
+      _restartButton.layer.cornerRadius = kButtonSize / 2;
+      _restartButton.layer.masksToBounds = YES;
+           [_restartButton addTarget:self
+                        action:@selector(onRestart:)
+              forControlEvents:UIControlEventTouchUpInside];
+            [self addSubview:_restartButton];
         
     }
 
@@ -146,10 +160,10 @@ static CGFloat const kStatusBarHeight = 20;
   _pauseResumeButton.frame = cameraSwitchFrame;
 
   // Place route button to the right of camera button.
-  CGRect routeChangeFrame = _cameraSwitchButton.frame;
+  CGRect routeChangeFrame = _pauseResumeButton.frame;
   routeChangeFrame.origin.x =
       CGRectGetMaxX(routeChangeFrame) + kButtonPadding;
-  _routeChangeButton.frame = routeChangeFrame;
+  _restartButton.frame = routeChangeFrame;
 
   [_statusLabel sizeToFit];
   _statusLabel.center =
@@ -203,6 +217,10 @@ static CGFloat const kStatusBarHeight = 20;
 
 - (void)onPauseResume:(id)sender {
   [_delegate videoCallViewDidPauseResume:self];
+}
+
+- (void)onRestart:(id)sender {
+  [_delegate videoCallViewDidRestart:self];
 }
 
 - (void)didTripleTap:(UITapGestureRecognizer *)recognizer {

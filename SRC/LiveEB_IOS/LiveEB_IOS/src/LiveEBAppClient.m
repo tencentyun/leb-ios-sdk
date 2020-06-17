@@ -253,7 +253,7 @@ NSString *_svrsig;
 -(void)stopStream {
     
     NSString *rtcUrl = NULL;
-    bool ismyqcloud = false;
+    bool ismyqcloud = true;
     NSString *host= NULL;
     
     if (_rtcHost != NULL && [_rtcHost rangeOfString:@"live.rtc.qq.com"].location != NSNotFound) {
@@ -308,7 +308,7 @@ NSString *_svrsig;
     //https://live.rtc.qq.com/webrtc/v1/pullstream
     NSString *host = NULL;
     NSString *rtcUrl = NULL;
-    bool ismyqcloud = false;
+    bool ismyqcloud = true;
     
     if (_rtcHost != NULL && [_rtcHost rangeOfString:@"live.rtc.qq.com"].location != NSNotFound) {
         ismyqcloud = false;

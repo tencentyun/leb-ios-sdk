@@ -258,10 +258,10 @@
   }
 }
 
-//- (void)restart {
-//  [self stop];
-//  [self start];
-//}
+- (void)restart {
+  [_client stopStream];
+  [self start];
+}
 
 - (void)resume {
   [_remoteVideoView pause:FALSE];

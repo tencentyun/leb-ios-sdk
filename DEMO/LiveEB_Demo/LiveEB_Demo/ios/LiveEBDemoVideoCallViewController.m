@@ -79,6 +79,9 @@
   _isPaused = !_isPaused;
 }
 
+- (void)videoCallViewDidRestart:(LiveEBDemoVideoCallView *)view {
+    [_controlDelegate restart];
+}
 
 - (void)videoCallViewDidEnableStats:(LiveEBDemoVideoCallView *)view {
     

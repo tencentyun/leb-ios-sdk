@@ -15,6 +15,8 @@
 
 - (void)videoCallViewDidPauseResume:(LiveEBDemoVideoCallView *)view;
 
+- (void)videoCallViewDidRestart:(LiveEBDemoVideoCallView *)view;
+
 // Called when stats are enabled by triple tapping.
 - (void)videoCallViewDidEnableStats:(LiveEBDemoVideoCallView *)view;
 
