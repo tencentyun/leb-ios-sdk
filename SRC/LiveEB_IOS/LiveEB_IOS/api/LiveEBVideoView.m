@@ -44,6 +44,8 @@
 @property(nonatomic, assign) AVAudioSessionPortOverride portOverride;
 @property(nonatomic, strong) LiveEBAudioPlayer* audioPlayer;
 @property(nonatomic, assign) BOOL audioTrackEnable;
+
+@property(nonatomic, assign) BOOL isRTCPlaying;
 @end
 
 @implementation LiveEBVideoView
@@ -161,24 +163,37 @@
 #pragma mark - ARDAppClientDelegate
 
 - (void)appClient:(LiveEBAppClient *)client
-    didChangeState:(ARDAppClientState)state {
+    didChangeState:(LiveEBClientState)state {
   switch (state) {
-    case kARDAppClientStateConnected:
+    case kLiveEBClientStateConnected:
           RTCLog(@"Client connected.");
           if (_delegate && [_delegate respondsToSelector:@selector(onPrepared:)]) {
               [_delegate onPrepared:self];
           }
+      
+      _isRTCPlaying = false;
       break;
-    case kARDAppClientStateConnecting:
+      
+    case kLiveEBClientStateConnecting:
       RTCLog(@"Client connecting.");
+      
+      _isRTCPlaying = false;
       break;
-    case kARDAppClientStateDisconnected:
+      
+    case kLiveEBClientStatePlaying:
+      RTCLog(@"Client playing.");
+      
+      _isRTCPlaying = true;
+      break;
+      
+    case kLiveEBClientStateDisconnected:
       RTCLog(@"Client disconnected.");
         
       if (_delegate && [_delegate respondsToSelector:@selector(onCompletion:)]) {
           [_delegate onCompletion:self];
       }
-          
+      
+      _isRTCPlaying = false;
       break;
   }
 }
@@ -271,6 +286,9 @@
   }
 }
 
+- (BOOL)isPlaying {
+  return _isRTCPlaying;
+}
 
 -(void)setStatState:(BOOL)stat {
     _client.shouldGetStats = stat;

@@ -58,7 +58,7 @@
     
     
     __weak typeof(self) weakSelf = self;
-    [[LiveEBManager sharedManager] initSDK:weakSelf minDebugLogLevel:LiveEBLogLevelDebug];
+    [[LiveEBManager sharedManager] initSDK:weakSelf minDebugLogLevel:LiveEBLogLevelInfo];
     [LiveEBManager sharedManager].clientInfo = @"clientinfo_test";
     
   _window =  [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];

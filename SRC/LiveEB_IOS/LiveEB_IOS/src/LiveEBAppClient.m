@@ -489,7 +489,7 @@ NSString *_svrsig;
                   liveBroadcastingStreamUrl:strongSelf->_liveBroadcastingStreamUrl
                                                    completionHandler:^(NSError *error) {
                       
-                      self.state = kARDAppClientStateConnected;
+                      self.state = kLiveEBClientStateConnected;
                       
                   }];
                     
@@ -541,7 +541,7 @@ NSString *_svrsig;
   _shouldGetStats = shouldGetStats;
 }
 
-- (void)setState:(ARDAppClientState)state {
+- (void)setState:(LiveEBClientState)state {
   if (_state == state) {
     return;
   }
@@ -552,10 +552,10 @@ NSString *_svrsig;
 - (void)initWithSettings:(ARDSettingsModel *)settings
                  isLoopback:(BOOL)isLoopback {
 //  NSParameterAssert(roomId.length);
-  NSParameterAssert(_state == kARDAppClientStateDisconnected);
+//  NSParameterAssert(_state == kLiveEBClientStateDisconnected);
   _settings = settings;
   _isLoopback = isLoopback;
-  self.state = kARDAppClientStateConnecting;
+  self.state = kLiveEBClientStateConnecting;
 
   RTCDefaultVideoDecoderFactory *decoderFactory = [[RTCDefaultVideoDecoderFactory alloc] init];
   RTCDefaultVideoEncoderFactory *encoderFactory = [[RTCDefaultVideoEncoderFactory alloc] init];
@@ -586,7 +586,7 @@ NSString *_svrsig;
 }
 
 - (void)disconnect {
-  if (_state == kARDAppClientStateDisconnected) {
+  if (_state == kLiveEBClientStateDisconnected) {
     return;
   }
 
@@ -602,7 +602,7 @@ NSString *_svrsig;
 #endif
   [_peerConnection close];
   _peerConnection = nil;
-  self.state = kARDAppClientStateDisconnected;
+  self.state = kLiveEBClientStateDisconnected;
 #if defined(WEBRTC_IOS)
   if (kARDAppClientEnableTracing) {
     RTCStopInternalCapture();
@@ -618,7 +618,7 @@ NSString *_svrsig;
 
 - (void)peerConnection:(RTCPeerConnection *)peerConnection
     didChangeSignalingState:(RTCSignalingState)stateChanged {
-  RTCLog(@"Signaling state changed: %ld", (long)stateChanged);
+  RTCLog(@"Signaling RTCSignalingState state changed: %ld", (long)stateChanged);
 }
 
 - (void)peerConnection:(RTCPeerConnection *)peerConnection
@@ -657,17 +657,43 @@ NSString *_svrsig;
 
 - (void)peerConnection:(RTCPeerConnection *)peerConnection
     didChangeConnectionState:(RTCPeerConnectionState)newState {
-  RTCLog(@"ICE+DTLS state changed: %ld", (long)newState);
+  RTCLog(@"Signaling RTCPeerConnectionState ICE+DTLS state changed: %ld", (long)newState);
+  
+  dispatch_async(dispatch_get_main_queue(), ^{
+    switch (newState) {
+      case RTCPeerConnectionStateConnecting:
+      case RTCPeerConnectionStateNew:
+        [self setState:kLiveEBClientStateConnecting];
+        break;
+        
+      case RTCPeerConnectionStateConnected:
+        [self setState:kLiveEBClientStatePlaying];
+        break;
+      
+      case RTCPeerConnectionStateDisconnected:
+      case RTCPeerConnectionStateClosed:
+        [self setState:kLiveEBClientStateDisconnected];
+        break;
+      case RTCPeerConnectionStateFailed:
+        [self setState:kLiveEBClientStateFailed];
+        
+        break;
+      default:
+        break;
+    }
+    
+  });
+  
 }
 
 - (void)peerConnection:(RTCPeerConnection *)peerConnection
     didChangeIceGatheringState:(RTCIceGatheringState)newState {
-  RTCLog(@"ICE gathering state changed: %ld", (long)newState);
+  RTCLog(@"Signaling RTCIceGatheringState ICE gathering state changed: %ld", (long)newState);
 }
 
 - (void)peerConnection:(RTCPeerConnection *)peerConnection
     didGenerateIceCandidate:(RTCIceCandidate *)candidate {
-
+  
 }
 
 - (void)peerConnection:(RTCPeerConnection *)peerConnection

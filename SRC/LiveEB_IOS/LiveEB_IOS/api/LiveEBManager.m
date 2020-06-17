@@ -44,12 +44,14 @@
     RTCInitializeSSL();
     RTCSetupInternalTracer();
     
-    #if defined(NDEBUG)
+//    #if defined(NDEBUG)
       // In debug builds the default level is LS_INFO and in non-debug builds it is
       // disabled. Continue to log to console in non-debug builds, but only
       // warnings and errors.
-      RTCSetMinDebugLogLevel(minDebugLogLevel);
-    #endif
+      
+//    #endif
+  
+  RTCSetMinDebugLogLevel(minDebugLogLevel);
 }
 
 -(void)finitSDK {

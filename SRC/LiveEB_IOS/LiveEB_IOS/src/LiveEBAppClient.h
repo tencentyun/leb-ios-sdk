@@ -12,13 +12,17 @@
 #import <WebRTC/RTCPeerConnection.h>
 #import <WebRTC/WebRTC.h>
 
-typedef NS_ENUM(NSInteger, ARDAppClientState) {
+typedef NS_ENUM(NSInteger, LiveEBClientState) {
+  kLiveEBClientStateFailed,
   // Disconnected from servers.
-  kARDAppClientStateDisconnected,
+  kLiveEBClientStateDisconnected,
   // Connecting to servers.
-  kARDAppClientStateConnecting,
+  kLiveEBClientStateConnecting,
+  
+  kLiveEBClientStatePlaying,
+  
   // Connected to servers.
-  kARDAppClientStateConnected,
+  kLiveEBClientStateConnected,
 };
 
 @class LiveEBAppClient;
@@ -32,7 +36,7 @@ typedef NS_ENUM(NSInteger, ARDAppClientState) {
 // main queue.
 @protocol LiveEBAppClientDelegate <NSObject>
 
-- (void)appClient:(LiveEBAppClient *)client didChangeState:(ARDAppClientState)state;
+- (void)appClient:(LiveEBAppClient *)client didChangeState:(LiveEBClientState)state;
 
 - (void)appClient:(LiveEBAppClient *)client didChangeConnectionState:(RTCIceConnectionState)state;
 
@@ -62,7 +66,7 @@ didReceiveRemoteAudioTrack:(RTCAudioTrack *)remoteAudioTrack;
 // If |shouldGetStats| is true, stats will be reported in 1s intervals through
 // the delegate.
 @property(nonatomic, assign) BOOL shouldGetStats;
-@property(nonatomic, readonly) ARDAppClientState state;
+@property(nonatomic, readonly) LiveEBClientState state;
 @property(nonatomic, weak) id<LiveEBAppClientDelegate> delegate;
 @property(nonatomic, assign, getter=isBroadcast) BOOL broadcast;
 
