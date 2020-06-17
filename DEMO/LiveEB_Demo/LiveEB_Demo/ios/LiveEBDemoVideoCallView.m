@@ -75,8 +75,8 @@ static CGFloat const kStatusBarHeight = 20;
     
     if (true) {
       _restartButton = [UIButton buttonWithType:UIButtonTypeCustom];
-      _restartButton.backgroundColor = [UIColor whiteColor];
-      [_restartButton setTitle:@"restart" forState:UIControlStateNormal];
+      _restartButton.backgroundColor = [UIColor grayColor];
+      [_restartButton setTitle:@"RES" forState:UIControlStateNormal];
       _restartButton.layer.cornerRadius = kButtonSize / 2;
       _restartButton.layer.masksToBounds = YES;
            [_restartButton addTarget:self
@@ -197,8 +197,6 @@ static CGFloat const kStatusBarHeight = 20;
 
 - (void)onCompletion:(LiveEBVideoView*)videoView { 
     NSLog(@"_remoteVideoView onCompletion ");
-//    [_delegate videoCallViewDidstop:self];
-//    [self onHangup:nil];
 }
 
 -(void)onFirstFrameRender:(LiveEBVideoView *)videoView {
