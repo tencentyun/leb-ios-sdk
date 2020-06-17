@@ -50,7 +50,7 @@
     
     [_controlDelegate setStatState:true];
 //    [_controlDelegate setAudioMute:YES];
-  self.view = _videoCallView;
+      self.view = _videoCallView;
     
     
     [_controlDelegate start];
@@ -64,7 +64,13 @@
 #pragma mark - LiveEBDemoVideoCallViewDelegate
 
 - (void)videoCallViewDidHangup:(LiveEBDemoVideoCallView *)view {
+  [_controlDelegate stop];
+  
   [self hangup];
+}
+
+- (void)videoCallViewDidstop:(LiveEBDemoVideoCallView *)view {
+     [_controlDelegate stop];
 }
 
 - (void)videoCallViewDidPauseResume:(LiveEBDemoVideoCallView *)view {
@@ -95,9 +101,7 @@
 #pragma mark - Private
 
 - (void)hangup {
-    [_controlDelegate stop];
-    
-  [_delegate viewControllerDidFinish:self];
+    [_delegate viewControllerDidFinish:self];
 }
 
 - (void)showAlertWithMessage:(NSString*)message {

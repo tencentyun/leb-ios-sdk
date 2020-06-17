@@ -436,7 +436,9 @@ NSString *_svrsig;
         //        config.certificate = pcert;
         config.sdpSemantics = RTCSdpSemanticsUnifiedPlan;
 
-
+      if (_peerConnection!= NULL) {
+          [_peerConnection close];
+      }
         _peerConnection = [_factory peerConnectionWithConfiguration:config
                                                         constraints:constraints
                                                            delegate:self];
@@ -489,7 +491,16 @@ NSString *_svrsig;
                   liveBroadcastingStreamUrl:strongSelf->_liveBroadcastingStreamUrl
                                                    completionHandler:^(NSError *error) {
                       
+                    
+                    if(error) {
+                      
+                      [weakSelf.delegate appClient:self didError:error];
+                      
+                    } else {
+                      
                       self.state = kLiveEBClientStateConnected;
+                    }
+                      
                       
                   }];
                     

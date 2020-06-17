@@ -57,6 +57,7 @@ static NSString *const loopbackLaunchProcessArgument = @"loopback";
   if (!liveUrl.length) {
       liveUrl=@"webrtc://6721.liveplay.myqcloud.com/live/6721_d71956d9cc93e4a467b11e06fdaf039a";
       
+//    liveUrl =@"webrtc://liveplay.mafengwo.cn/live/room11840";
     useLiveEventBroadcasting = YES;
   }
     

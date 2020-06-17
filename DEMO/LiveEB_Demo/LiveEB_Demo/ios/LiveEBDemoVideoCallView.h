@@ -13,6 +13,8 @@
 // Called when the hangup button is pressed.
 - (void)videoCallViewDidHangup:(LiveEBDemoVideoCallView *)view;
 
+- (void)videoCallViewDidstop:(LiveEBDemoVideoCallView *)view;
+
 - (void)videoCallViewDidPauseResume:(LiveEBDemoVideoCallView *)view;
 
 - (void)videoCallViewDidRestart:(LiveEBDemoVideoCallView *)view;

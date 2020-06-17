@@ -87,9 +87,7 @@
 }
 
 - (void)setLiveEBURL:(NSString *)liveEBURL {
-    _audioPlayer = [LiveEBAudioPlayer new];
     
-    [_audioPlayer loadPlayer];
     
     ARDSettingsModel *settingsModel = [[ARDSettingsModel alloc] init];
     _client = [[LiveEBAppClient alloc] initWithDelegate:self];
@@ -103,8 +101,7 @@
     [_client initWithSettings:settingsModel isLoopback:NO];
     
     
-      RTCAudioSession *session = [RTCAudioSession sharedInstance];
-      [session addDelegate:self];
+      
 }
 
 
@@ -195,8 +192,15 @@
       
       _isRTCPlaying = false;
       break;
-    default:
+    case kLiveEBClientStateFailed: {
+      NSString *domain = @"com.liveeb.rtc.ErrorDomain";
+      NSString *desc = NSLocalizedString(@"Peer Connection state failed.", @"");
+      NSDictionary *userInfo = @{ NSLocalizedDescriptionKey : desc };
+
+      [self.delegate videoView:self didError:[NSError errorWithDomain:domain code:-101 userInfo:userInfo]];
       _isRTCPlaying = false;
+    }
+      
       break;
   }
 }
@@ -245,9 +249,6 @@
     if (_delegate && [_delegate respondsToSelector:@selector(showStats:stat:)]) {
         [_delegate showStats:self stat:stats];
     }
-    
-    
-
 }
 
 - (void)appClient:(LiveEBAppClient *)client
@@ -258,14 +259,25 @@
 #pragma mark - LiveEBVideoViewControllerDelegate
 
 -(void)start {
-    if (_useLiveEventBroadcasting) {
-               [_client connectLiveBroadcast];
-           }
+  _audioPlayer = [LiveEBAudioPlayer new];
+  
+  [_audioPlayer loadPlayer];
+  
+  RTCAudioSession *session = [RTCAudioSession sharedInstance];
+  [session addDelegate:self];
+  
+  if (_useLiveEventBroadcasting) {
+      [_client connectLiveBroadcast];
+   }
 }
 
 -(void)stop {
-    [_audioPlayer finished];
-    [_client disconnect];
+  RTCAudioSession *session = [RTCAudioSession sharedInstance];
+  [session addDelegate:nil];
+  
+  [_audioPlayer finished];
+
+  [_client disconnect];
 }
 
 
@@ -277,7 +289,7 @@
 }
 
 - (void)restart {
-  [_client stopStream];
+  [self stop];
   [self start];
 }
 
@@ -290,7 +302,7 @@
 }
 
 - (BOOL)isPlaying {
-  return _isRTCPlaying;
+  return _isRTCPlaying && _remoteAudioTrack.isEnabled;
 }
 
 -(void)setStatState:(BOOL)stat {

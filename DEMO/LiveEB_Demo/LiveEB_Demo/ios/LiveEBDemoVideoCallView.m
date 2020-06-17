@@ -195,10 +195,10 @@ static CGFloat const kStatusBarHeight = 20;
     NSLog(@"_remoteVideoView onPrepared ");
 }
 
-- (void)onCompletion:(LiveEBVideoView*)videoView {
+- (void)onCompletion:(LiveEBVideoView*)videoView { 
     NSLog(@"_remoteVideoView onCompletion ");
-    
-    [self onHangup:nil];
+//    [_delegate videoCallViewDidstop:self];
+//    [self onHangup:nil];
 }
 
 -(void)onFirstFrameRender:(LiveEBVideoView *)videoView {
