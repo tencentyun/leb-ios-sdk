@@ -195,6 +195,9 @@
       
       _isRTCPlaying = false;
       break;
+    default:
+      _isRTCPlaying = false;
+      break;
   }
 }
 
