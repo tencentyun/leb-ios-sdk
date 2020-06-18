@@ -57,7 +57,8 @@ static NSString *const loopbackLaunchProcessArgument = @"loopback";
   if (!liveUrl.length) {
       liveUrl=@"webrtc://6721.liveplay.myqcloud.com/live/6721_d71956d9cc93e4a467b11e06fdaf039a";
       
-    liveUrl =@"webrtc://liveplay.mafengwo.cn/live/room11855";
+//    liveUrl =@"webrtc://liveplay.mafengwo.cn/live/room11855";
+//    liveUrl = @"webrtc://zhibo2.yjwh.shop/live/38736320200617185024?txSecret=c7734564dd8acf3588298e1702f7e9d4&txTime=5EEB4948";
     useLiveEventBroadcasting = YES;
   }
     
@@ -97,8 +98,8 @@ static NSString *const loopbackLaunchProcessArgument = @"loopback";
         }
     }
   
-  LiveEBDemoVideoCallViewController *videoCallViewController =
-      [[LiveEBDemoVideoCallViewController alloc] initForRoom:trimmedRoom
+    LiveEBDemoVideoCallViewController *videoCallViewController =
+    [[LiveEBDemoVideoCallViewController alloc] initForRoom:trimmedRoom
                                             rtcHost:rtcHost
                                            isLoopback:isLoopback
                                            useLiveEventBroadcasting:useLiveEventBroadcasting

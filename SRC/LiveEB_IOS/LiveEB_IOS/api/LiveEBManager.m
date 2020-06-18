@@ -34,7 +34,15 @@
     return instance;
 }
 
-
+- (instancetype)init
+{
+  self = [super init];
+  if (self) {
+    self.connectRetryCount = 3;
+    self.connectRetryInterval = 3;
+  }
+  return self;
+}
 
 -(void)initSDK:(id<LiveEBLogDelegate>)logDelegate minDebugLogLevel:(LiveEBLogLevel)minDebugLogLevel {
     _logDelegate = logDelegate;
@@ -51,7 +59,7 @@
       
 //    #endif
   
-  RTCSetMinDebugLogLevel(minDebugLogLevel);
+  RTCSetMinDebugLogLevel((RTCLoggingSeverity)minDebugLogLevel);
 }
 
 -(void)finitSDK {
@@ -59,3 +67,14 @@
     RTCCleanupSSL();
 }
 @end
+
+
+
+void LiveEBLogEx(LiveEBLogLevel severity, NSString* log_string) {
+  RTCLogEx((RTCLoggingSeverity)severity, log_string);
+}
+
+NSString* LiveEBLogFileName(const char* file_path) {
+  
+  return RTCFileName(file_path);
+}

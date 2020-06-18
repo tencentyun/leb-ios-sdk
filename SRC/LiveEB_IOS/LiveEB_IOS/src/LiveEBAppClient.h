@@ -13,7 +13,7 @@
 #import <WebRTC/WebRTC.h>
 
 typedef NS_ENUM(NSInteger, LiveEBClientState) {
-  kLiveEBClientStateFailed,
+  kLiveEBClientStateClosed,
   // Disconnected from servers.
   kLiveEBClientStateDisconnected,
   // Connecting to servers.

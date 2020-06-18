@@ -195,18 +195,20 @@ static CGFloat const kStatusBarHeight = 20;
     NSLog(@"_remoteVideoView onPrepared ");
 }
 
+
+//尽量不要在onCompletion里重试。
 - (void)onCompletion:(LiveEBVideoView*)videoView { 
     NSLog(@"_remoteVideoView onCompletion ");
   
   //重试
   
-  __weak LiveEBVideoView *weakSelf = videoView;
-  dispatch_async(dispatch_get_main_queue(), ^{
-    
-    LiveEBVideoView *strongSelf = weakSelf;
-    
-    [_delegate videoCallViewDidRestart:strongSelf];
-  });
+//  __weak LiveEBVideoView *weakSelf = videoView;
+//  dispatch_async(dispatch_get_main_queue(), ^{
+//
+//    LiveEBVideoView *strongSelf = weakSelf;
+//
+//    [_delegate videoCallViewDidRestart:strongSelf];
+//  });
   
 }
 

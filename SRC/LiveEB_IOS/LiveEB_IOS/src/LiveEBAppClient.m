@@ -553,9 +553,9 @@ NSString *_svrsig;
 }
 
 - (void)setState:(LiveEBClientState)state {
-  if (_state == state) {
-    return;
-  }
+//  if (_state == state) {
+//    return;
+//  }
   _state = state;
   [_delegate appClient:self didChangeState:_state];
 }
@@ -597,9 +597,9 @@ NSString *_svrsig;
 }
 
 - (void)disconnect {
-  if (_state == kLiveEBClientStateDisconnected) {
-    return;
-  }
+//  if (_state == kLiveEBClientStateDisconnected) {
+//    return;
+//  }
 
   _clientId = nil;
   _roomId = nil;
@@ -611,9 +611,12 @@ NSString *_svrsig;
   [_factory stopAecDump];
   [_peerConnection stopRtcEventLog];
 #endif
-  [_peerConnection close];
+  if (_peerConnection) {
+    [_peerConnection close];
+  }
+
   _peerConnection = nil;
-  self.state = kLiveEBClientStateDisconnected;
+//  self.state = kLiveEBClientStateDisconnected;
 #if defined(WEBRTC_IOS)
   if (kARDAppClientEnableTracing) {
     RTCStopInternalCapture();
@@ -682,11 +685,12 @@ NSString *_svrsig;
         break;
       
       case RTCPeerConnectionStateDisconnected:
-      case RTCPeerConnectionStateClosed:
-        [self setState:kLiveEBClientStateDisconnected];
-        break;
       case RTCPeerConnectionStateFailed:
-        [self setState:kLiveEBClientStateFailed];
+        [self setState:kLiveEBClientStateDisconnected];
+        
+        break;
+      case RTCPeerConnectionStateClosed:
+        [self setState:kLiveEBClientStateClosed];
         
         break;
       default:

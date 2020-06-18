@@ -35,6 +35,9 @@
     CGSize _remoteVideoSize;
     
     LiveEBAppClient *_client;
+  
+    int _currConnectRetryCount;
+    BOOL _isStringRetryConnect;
 }
 
 
@@ -74,6 +77,9 @@
         _remoteVideoView = remoteView;
         _audioTrackEnable = YES;
         
+        _isStringRetryConnect = FALSE;
+        self->_currConnectRetryCount = 0;
+      
         _statsBuilder = [[ARDStatsBuilder alloc] init];
             
         
@@ -87,21 +93,16 @@
 }
 
 - (void)setLiveEBURL:(NSString *)liveEBURL {
-    
-    
     ARDSettingsModel *settingsModel = [[ARDSettingsModel alloc] init];
     _client = [[LiveEBAppClient alloc] initWithDelegate:self];
     _client.clientInfo = [LiveEBManager sharedManager].clientInfo;
     _client.sessionid = _sessionid;
     
-         _useLiveEventBroadcasting = YES;
-         [_client useLiveBroadcasting:liveEBURL];
+   _useLiveEventBroadcasting = YES;
+   [_client useLiveBroadcasting:liveEBURL];
 
      
     [_client initWithSettings:settingsModel isLoopback:NO];
-    
-    
-      
 }
 
 
@@ -110,8 +111,9 @@
     _remoteVideoView.frame = bounds;
 
              NSLog(@"_remoteVideoView[ %f %f] x=%f y=%f width=%f height=%f _remoteVideoSize:%f %f ",
-               _remoteVideoView.center.x, _remoteVideoView.center.y, _remoteVideoView.frame.origin.x, _remoteVideoView.frame.origin.y, _remoteVideoView.frame.size.width, _remoteVideoView.frame.size.height
-                   ,_remoteVideoSize.width, _remoteVideoSize.height);
+                   _remoteVideoView.center.x, _remoteVideoView.center.y, _remoteVideoView.frame.origin.x,
+                   _remoteVideoView.frame.origin.y, _remoteVideoView.frame.size.width,
+                   _remoteVideoView.frame.size.height ,_remoteVideoSize.width, _remoteVideoSize.height);
 }
 
 #pragma mark - RTCVideoViewDelegate
@@ -161,6 +163,8 @@
 
 - (void)appClient:(LiveEBAppClient *)client
     didChangeState:(LiveEBClientState)state {
+  RTCLog(@"Client RTCPeerConnectionState state:.%ld" , (long)state);
+  
   switch (state) {
     case kLiveEBClientStateConnected:
           RTCLog(@"Client connected.");
@@ -181,23 +185,66 @@
       RTCLog(@"Client playing.");
       
       _isRTCPlaying = true;
+      _isStringRetryConnect = FALSE;
+      self->_currConnectRetryCount = 0;
       break;
       
     case kLiveEBClientStateDisconnected:
       RTCLog(@"Client disconnected.");
-        
-      if (_delegate && [_delegate respondsToSelector:@selector(onCompletion:)]) {
-          [_delegate onCompletion:self];
-      }
       
       _isRTCPlaying = false;
+      
+      if (!_isStringRetryConnect && self->_currConnectRetryCount == 0) {
+        _isStringRetryConnect = true;
+      } else if (self->_currConnectRetryCount >= [LiveEBManager sharedManager].connectRetryCount) {
+        if (self.delegate && [self.delegate respondsToSelector:@selector(onCompletion:)]) {
+            [self.delegate onCompletion:self];
+        }
+        
+        _isStringRetryConnect = FALSE;
+      }
+      
+      if (!_isStringRetryConnect) {
+        break;
+      }
+      
+      self->_currConnectRetryCount++;
+      
+      {
+        __weak LiveEBVideoView *weakSelf = self;
+        void (^_sendMsg)(void) = ^() {
+          
+          LiveEBVideoView *strongSelf = weakSelf;
+          if (!strongSelf) {
+              return;
+          }
+          
+          //[strongSelf restart];
+          
+          [strongSelf stop];
+          [strongSelf start];
+          
+        };
+        
+       dispatch_after(dispatch_time(DISPATCH_TIME_NOW, [LiveEBManager sharedManager].connectRetryCount
+                                    * [LiveEBManager sharedManager].connectRetryInterval * NSEC_PER_SEC),
+                                    dispatch_get_main_queue(), _sendMsg);
+      }
       break;
-    case kLiveEBClientStateFailed: {
-      NSString *domain = @"com.liveeb.rtc.ErrorDomain";
-      NSString *desc = NSLocalizedString(@"Peer Connection state failed.", @"");
-      NSDictionary *userInfo = @{ NSLocalizedDescriptionKey : desc };
-
-      [self.delegate videoView:self didError:[NSError errorWithDomain:domain code:-101 userInfo:userInfo]];
+      
+    case kLiveEBClientStateClosed: {
+      
+      if (!self->_isStringRetryConnect) {
+        if (self.delegate && [self.delegate respondsToSelector:@selector(onCompletion:)]) {
+            [self.delegate onCompletion:self];
+        }
+      }
+      
+//      NSString *domain = @"com.liveeb.rtc.ErrorDomain";
+//      NSString *desc = NSLocalizedString(@"Peer Connection state failed.", @"");
+//      NSDictionary *userInfo = @{ NSLocalizedDescriptionKey : desc };
+//
+//      [self.delegate videoView:self didError:[NSError errorWithDomain:domain code:-101 userInfo:userInfo]];
       _isRTCPlaying = false;
     }
       
@@ -272,8 +319,9 @@
 }
 
 -(void)stop {
-  RTCAudioSession *session = [RTCAudioSession sharedInstance];
-  [session addDelegate:nil];
+//  RTCAudioSession *session = [RTCAudioSession sharedInstance];
+//  [session addDelegate:nil];
+  RTCLog("stop");
   
   [_audioPlayer finished];
 
@@ -282,6 +330,8 @@
 
 
 - (void)pause {
+  RTCLog("pause");
+  
   [_remoteVideoView pause:TRUE];
   if (_remoteAudioTrack) {
       _remoteAudioTrack.isEnabled = FALSE;
@@ -289,6 +339,11 @@
 }
 
 - (void)restart {
+  RTCLog("restart");
+  
+  self->_currConnectRetryCount = 0;
+  _isStringRetryConnect = FALSE;
+  
   [self stop];
   [self start];
 }
