@@ -351,9 +351,9 @@ NSString *_svrsig;
 
      NSDictionary *liveJson = @{
          @"clientinfo" : _clientInfo != nil ?  _clientInfo : @"clientinfo_test",
-       @"localsdp"   : sdpJson,
-       @"sessionid"  : _sessionid != nil ? _sessionid : @"IOS_Test",
-       @"streamurl"  : liveBroadcastingStreamUrl
+         @"localsdp"   : sdpJson,
+         @"sessionid"  : _sessionid != nil ? _sessionid : @"IOS_Test",
+         @"streamurl"  : liveBroadcastingStreamUrl
      };
 
     RTCLog(@"sendAsyncRequest requestData=%@", [NSString stringWithFormat:@"liveJson=%@", liveJson]);

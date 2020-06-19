@@ -194,22 +194,24 @@
       
       _isRTCPlaying = false;
       
-      if (!_isStringRetryConnect && self->_currConnectRetryCount == 0) {
-        _isStringRetryConnect = true;
-      } else if (self->_currConnectRetryCount >= [LiveEBManager sharedManager].connectRetryCount) {
-        if (self.delegate && [self.delegate respondsToSelector:@selector(onCompletion:)]) {
-            [self.delegate onCompletion:self];
+      @synchronized (self) {
+        if (!_isStringRetryConnect && self->_currConnectRetryCount == 0) {
+          _isStringRetryConnect = true;
+        } else if (self->_currConnectRetryCount >= [LiveEBManager sharedManager].connectRetryCount) {
+          if (self.delegate && [self.delegate respondsToSelector:@selector(onCompletion:)]) {
+              [self.delegate onCompletion:self];
+          }
+          
+          _isStringRetryConnect = FALSE;
         }
         
-        _isStringRetryConnect = FALSE;
+        if (!_isStringRetryConnect) {
+          break;
+        }
+        
+        self->_currConnectRetryCount++;
       }
-      
-      if (!_isStringRetryConnect) {
-        break;
-      }
-      
-      self->_currConnectRetryCount++;
-      
+
       {
         __weak LiveEBVideoView *weakSelf = self;
         void (^_sendMsg)(void) = ^() {
@@ -220,10 +222,10 @@
           }
           
           //[strongSelf restart];
-          
-          [strongSelf stop];
-          [strongSelf start];
-          
+          @synchronized(strongSelf) {
+            [strongSelf stop];
+            [strongSelf start];
+          }
         };
         
        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, [LiveEBManager sharedManager].connectRetryCount
@@ -306,53 +308,68 @@
 #pragma mark - LiveEBVideoViewControllerDelegate
 
 -(void)start {
-  _audioPlayer = [LiveEBAudioPlayer new];
-  
-  [_audioPlayer loadPlayer];
-  
-  RTCAudioSession *session = [RTCAudioSession sharedInstance];
-  [session addDelegate:self];
-  
-  if (_useLiveEventBroadcasting) {
-      [_client connectLiveBroadcast];
-   }
+  @synchronized(self) {
+    _audioPlayer = [LiveEBAudioPlayer new];
+     
+     [_audioPlayer loadPlayer];
+     
+     RTCAudioSession *session = [RTCAudioSession sharedInstance];
+     [session addDelegate:self];
+     
+     if (_useLiveEventBroadcasting) {
+         [_client connectLiveBroadcast];
+      }
+  }
 }
 
 -(void)stop {
 //  RTCAudioSession *session = [RTCAudioSession sharedInstance];
 //  [session addDelegate:nil];
-  RTCLog("stop");
-  
-  [_audioPlayer finished];
+  @synchronized(self) {
+    RTCLog("stop");
+    
+    [_audioPlayer finished];
 
-  [_client disconnect];
+    [_client disconnect];
+  }
 }
 
 
 - (void)pause {
   RTCLog("pause");
   
-  [_remoteVideoView pause:TRUE];
-  if (_remoteAudioTrack) {
-      _remoteAudioTrack.isEnabled = FALSE;
+  @synchronized(self) {
+    [_remoteVideoView pause:TRUE];
+    if (_remoteAudioTrack) {
+        _remoteAudioTrack.isEnabled = FALSE;
+    }
   }
 }
 
 - (void)restart {
   RTCLog("restart");
   
-  self->_currConnectRetryCount = 0;
-  _isStringRetryConnect = FALSE;
-  
-  [self stop];
-  [self start];
+  @synchronized(self) {
+    if (!_isStringRetryConnect) {
+      self->_currConnectRetryCount = 0;
+      
+      [self stop];
+      [self start];
+      
+    } else {
+      self->_currConnectRetryCount = 0;
+      _isStringRetryConnect = FALSE;
+    }
+  }
 }
 
 - (void)resume {
-  [_remoteVideoView pause:FALSE];
-  
-  if (_remoteAudioTrack) {
-      _remoteAudioTrack.isEnabled = TRUE;
+  @synchronized(self) {
+    [_remoteVideoView pause:FALSE];
+    
+    if (_remoteAudioTrack) {
+        _remoteAudioTrack.isEnabled = TRUE;
+    }
   }
 }
 

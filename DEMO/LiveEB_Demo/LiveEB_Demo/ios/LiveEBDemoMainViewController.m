@@ -59,6 +59,7 @@ static NSString *const loopbackLaunchProcessArgument = @"loopback";
       
 //    liveUrl =@"webrtc://liveplay.mafengwo.cn/live/room11855";
 //    liveUrl = @"webrtc://zhibo2.yjwh.shop/live/38736320200617185024?txSecret=c7734564dd8acf3588298e1702f7e9d4&txTime=5EEB4948";
+//    liveUrl=@"webrtc://liveplay.mafengwo.cn/live/room12079";
     useLiveEventBroadcasting = YES;
   }
     
