@@ -26,8 +26,8 @@
 -(void) loadPlayer {
     RTCAudioSessionConfiguration *webRTCConfig =
         [RTCAudioSessionConfiguration webRTCConfiguration];
-    webRTCConfig.categoryOptions = webRTCConfig.categoryOptions |
-        AVAudioSessionCategoryOptionDefaultToSpeaker;
+    webRTCConfig.categoryOptions = webRTCConfig.categoryOptions;
+    //| AVAudioSessionCategoryOptionDefaultToSpeaker;
     [RTCAudioSessionConfiguration setWebRTCConfiguration:webRTCConfig];
 
     RTCAudioSession *session = [RTCAudioSession sharedInstance];

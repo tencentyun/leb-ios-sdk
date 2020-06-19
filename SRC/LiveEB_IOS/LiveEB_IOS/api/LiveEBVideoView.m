@@ -168,9 +168,6 @@
   switch (state) {
     case kLiveEBClientStateConnected:
           RTCLog(@"Client connected.");
-          if (_delegate && [_delegate respondsToSelector:@selector(onPrepared:)]) {
-              [_delegate onPrepared:self];
-          }
       
       _isRTCPlaying = false;
       break;
@@ -183,6 +180,10 @@
       
     case kLiveEBClientStatePlaying:
       RTCLog(@"LiveEB view Client playing.");
+      
+      if (_delegate && [_delegate respondsToSelector:@selector(onPrepared:)]) {
+          [_delegate onPrepared:self];
+      }
       
       _isRTCPlaying = true;
       _isStringRetryConnect = FALSE;

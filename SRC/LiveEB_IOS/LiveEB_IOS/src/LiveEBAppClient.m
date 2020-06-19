@@ -46,8 +46,8 @@
 //#import "ARDSDPUtils.h"ff
 #import <objc/runtime.h>
 
-
-
+#define TEST_ENCODER_HOOK
+#ifdef TEST_ENCODER_HOOK
 @interface RTCDefaultVideoEncoderFactory (BugFix)
 
 + (void)load;
@@ -104,6 +104,8 @@
 }
 
 @end
+
+#endif
 
 
 static NSString * const kARDAppClientErrorDomain = @"LiveEBAppClient";
@@ -384,7 +386,7 @@ NSString *_svrsig;
          LiveEBAppClient *strongSelf = weakSelf;
 //         NSDictionary *responseJSON = [NSDictionary dictionaryWithJSONData:data];
          
-//         RTCLog(@"sendAsyncRequest responseJSON=%@", [NSString stringWithFormat:@"responseJSON=%@", responseJSON]);
+         RTCLog(@"sendAsyncRequest responseJSON=%@", [NSString stringWithFormat:@"responseJSON=%@", responseJSON]);
          
          NSInteger errcode = [[responseJSON objectForKey:@"errcode"] intValue];
          if (errcode != 0) {
@@ -571,6 +573,7 @@ NSString *_svrsig;
   RTCDefaultVideoDecoderFactory *decoderFactory = [[RTCDefaultVideoDecoderFactory alloc] init];
   RTCDefaultVideoEncoderFactory *encoderFactory = [[RTCDefaultVideoEncoderFactory alloc] init];
     
+#ifdef TEST_ENCODER_HOOK
     NSDictionary<NSString *, NSString *> *constrainedHighParams = @{
         @"profile-level-id" : @"42e01f",
         @"level-asymmetry-allowed" : @"1",
@@ -581,7 +584,7 @@ NSString *_svrsig;
                                        parameters:constrainedHighParams];
       
     encoderFactory.preferredCodec = constrainedHighInfo;
-    
+#endif
     
 //  encoderFactory.preferredCodec = [settings currentVideoCodecSettingFromStore];
   _factory = [[RTCPeerConnectionFactory alloc] initWithEncoderFactory:encoderFactory

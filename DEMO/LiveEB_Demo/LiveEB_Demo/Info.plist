@@ -42,8 +42,6 @@
 	<string>1.0</string>
 	<key>NSCameraUsageDescription</key>
 	<string>Camera access needed for video calling</string>
-	<key>NSMicrophoneUsageDescription</key>
-	<string>Microphone access needed for video calling</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Roboto-Regular.ttf</string>
