@@ -356,7 +356,7 @@ NSString *_svrsig;
          @"streamurl"  : liveBroadcastingStreamUrl
      };
 
-    RTCLog(@"sendAsyncRequest requestData=%@", [NSString stringWithFormat:@"liveJson=%@", liveJson]);
+//    RTCLog(@"sendAsyncRequest requestData=%@", [NSString stringWithFormat:@"liveJson=%@", liveJson]);
     
      NSData *requestData = [NSJSONSerialization dataWithJSONObject:liveJson options:0 error:nil];
      NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:rtcUrl]];
@@ -384,7 +384,7 @@ NSString *_svrsig;
          LiveEBAppClient *strongSelf = weakSelf;
 //         NSDictionary *responseJSON = [NSDictionary dictionaryWithJSONData:data];
          
-         RTCLog(@"sendAsyncRequest responseJSON=%@", [NSString stringWithFormat:@"responseJSON=%@", responseJSON]);
+//         RTCLog(@"sendAsyncRequest responseJSON=%@", [NSString stringWithFormat:@"responseJSON=%@", responseJSON]);
          
          NSInteger errcode = [[responseJSON objectForKey:@"errcode"] intValue];
          if (errcode != 0) {
@@ -401,7 +401,7 @@ NSString *_svrsig;
          [strongSelf.peerConnection setRemoteDescription:description
                              completionHandler:^(NSError *error) {
              
-             RTCLog(@"sendAsyncRequest setRemoteDescription=%@", error);
+//             RTCLog(@"sendAsyncRequest setRemoteDescription=%@", error);
              
              if (completionHandler) {
                  completionHandler(error);
@@ -453,10 +453,10 @@ NSString *_svrsig;
               
               dispatch_async(dispatch_get_main_queue(), ^{
                 if (error) {
-                  RTCLogError(@"Failed to create session description. Error: %@", error);
+                  RTCLogError(@"LiveEB Failed to create session description. Error: %@", error);
                   [self disconnect];
                   NSDictionary *userInfo = @{
-                    NSLocalizedDescriptionKey: @"Failed to create session description.",
+                    NSLocalizedDescriptionKey: @"LiveEB Failed to create session description.",
                   };
                   NSError *sdpError =
                       [[NSError alloc] initWithDomain:kARDAppClientErrorDomain
@@ -472,10 +472,10 @@ NSString *_svrsig;
                                completionHandler:^(NSError *error) {
 
                 if (error) {
-                      RTCLogError(@"Failed to set session description. Error: %@", error);
+                      RTCLogError(@"LiveEB Failed to set session description. Error: %@", error);
                       [weakSelf disconnect];
                       NSDictionary *userInfo = @{
-                        NSLocalizedDescriptionKey: @"Failed to set session description.",
+                        NSLocalizedDescriptionKey: @"LiveEB Failed to set session description.",
                       };
                       NSError *sdpError =
                           [[NSError alloc] initWithDomain:kARDAppClientErrorDomain
@@ -632,12 +632,12 @@ NSString *_svrsig;
 
 - (void)peerConnection:(RTCPeerConnection *)peerConnection
     didChangeSignalingState:(RTCSignalingState)stateChanged {
-  RTCLog(@"Signaling RTCSignalingState state changed: %ld", (long)stateChanged);
+  RTCLog(@"LiveEB Signaling RTCSignalingState state changed: %ld", (long)stateChanged);
 }
 
 - (void)peerConnection:(RTCPeerConnection *)peerConnection
           didAddStream:(RTCMediaStream *)stream {
-  RTCLog(@"Stream with %lu video tracks and %lu audio tracks was added.",
+  RTCLog(@"LiveEB Stream with %lu video tracks and %lu audio tracks was added.",
          (unsigned long)stream.videoTracks.count,
          (unsigned long)stream.audioTracks.count);
     
@@ -649,21 +649,21 @@ NSString *_svrsig;
 - (void)peerConnection:(RTCPeerConnection *)peerConnection
     didStartReceivingOnTransceiver:(RTCRtpTransceiver *)transceiver {
   RTCMediaStreamTrack *track = transceiver.receiver.track;
-  RTCLog(@"Now receiving %@ on track %@.", track.kind, track.trackId);
+  RTCLog(@"LiveEB Now receiving %@ on track %@.", track.kind, track.trackId);
 }
 
 - (void)peerConnection:(RTCPeerConnection *)peerConnection
        didRemoveStream:(RTCMediaStream *)stream {
-  RTCLog(@"Stream was removed.");
+  RTCLog(@"LiveEB Stream was removed.");
 }
 
 - (void)peerConnectionShouldNegotiate:(RTCPeerConnection *)peerConnection {
-  RTCLog(@"WARNING: Renegotiation needed but unimplemented.");
+  RTCLog(@"LiveEB WARNING: Renegotiation needed but unimplemented.");
 }
 
 - (void)peerConnection:(RTCPeerConnection *)peerConnection
     didChangeIceConnectionState:(RTCIceConnectionState)newState {
-  RTCLog(@"ICE state changed: %ld", (long)newState);
+  RTCLog(@"LiveEB RTCPeerConnectionState ICE state changed: %ld", (long)newState);
   dispatch_async(dispatch_get_main_queue(), ^{
     [self.delegate appClient:self didChangeConnectionState:newState];
   });
@@ -671,7 +671,7 @@ NSString *_svrsig;
 
 - (void)peerConnection:(RTCPeerConnection *)peerConnection
     didChangeConnectionState:(RTCPeerConnectionState)newState {
-  RTCLog(@"Signaling RTCPeerConnectionState ICE+DTLS state changed: %ld", (long)newState);
+  RTCLog(@"LiveEB Signaling RTCPeerConnectionState ICE+DTLS state changed: %ld", (long)newState);
   
   dispatch_async(dispatch_get_main_queue(), ^{
     switch (newState) {
@@ -703,7 +703,7 @@ NSString *_svrsig;
 
 - (void)peerConnection:(RTCPeerConnection *)peerConnection
     didChangeIceGatheringState:(RTCIceGatheringState)newState {
-  RTCLog(@"Signaling RTCIceGatheringState ICE gathering state changed: %ld", (long)newState);
+  RTCLog(@"LiveEB Signaling RTCIceGatheringState ICE gathering state changed: %ld", (long)newState);
 }
 
 - (void)peerConnection:(RTCPeerConnection *)peerConnection
@@ -720,7 +720,7 @@ NSString *_svrsig;
     didChangeRemoteCandidate:(RTCIceCandidate *)remote
               lastReceivedMs:(int)lastDataReceivedMs
                didHaveReason:(NSString *)reason {
-  RTCLog(@"ICE candidate pair changed because: %@", reason);
+  RTCLog(@"LiveEB ICE candidate pair changed because: %@", reason);
 }
 
 - (void)peerConnection:(RTCPeerConnection *)peerConnection

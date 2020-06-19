@@ -9,7 +9,7 @@ Pod::Spec.new do |s|
   s.license      = "MIT"
 
   s.author             = { "tstan" => "tstan@tencent.com" }
-  s.version = "1.4.5"
+  s.version = "1.6.5"
   s.platform     = :ios
   s.platform     = :ios, "9.0"
 

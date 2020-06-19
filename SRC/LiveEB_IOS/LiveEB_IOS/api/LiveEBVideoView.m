@@ -110,7 +110,7 @@
     CGRect bounds = self.bounds;
     _remoteVideoView.frame = bounds;
 
-             NSLog(@"_remoteVideoView[ %f %f] x=%f y=%f width=%f height=%f _remoteVideoSize:%f %f ",
+             NSLog(@"LiveEB view [ %f %f] x=%f y=%f width=%f height=%f _remoteVideoSize:%f %f ",
                    _remoteVideoView.center.x, _remoteVideoView.center.y, _remoteVideoView.frame.origin.x,
                    _remoteVideoView.frame.origin.y, _remoteVideoView.frame.size.width,
                    _remoteVideoView.frame.size.height ,_remoteVideoSize.width, _remoteVideoSize.height);
@@ -163,7 +163,7 @@
 
 - (void)appClient:(LiveEBAppClient *)client
     didChangeState:(LiveEBClientState)state {
-  RTCLog(@"Client RTCPeerConnectionState state:.%ld" , (long)state);
+  RTCLog(@"LiveEB view Client  state:.%ld" , (long)state);
   
   switch (state) {
     case kLiveEBClientStateConnected:
@@ -176,13 +176,13 @@
       break;
       
     case kLiveEBClientStateConnecting:
-      RTCLog(@"Client connecting.");
+      RTCLog(@"LiveEB view Client connecting.");
       
       _isRTCPlaying = false;
       break;
       
     case kLiveEBClientStatePlaying:
-      RTCLog(@"Client playing.");
+      RTCLog(@"LiveEB view Client playing.");
       
       _isRTCPlaying = true;
       _isStringRetryConnect = FALSE;
@@ -190,7 +190,7 @@
       break;
       
     case kLiveEBClientStateDisconnected:
-      RTCLog(@"Client disconnected.");
+      RTCLog(@"LiveEB view Client disconnected.");
       
       _isRTCPlaying = false;
       
@@ -236,12 +236,18 @@
       
     case kLiveEBClientStateClosed: {
       
-      if (!self->_isStringRetryConnect) {
-        if (self.delegate && [self.delegate respondsToSelector:@selector(onCompletion:)]) {
-            [self.delegate onCompletion:self];
+      @synchronized (self) {
+        if (!self->_isStringRetryConnect) {
+          if (self.delegate && [self.delegate respondsToSelector:@selector(onCompletion:)]) {
+              [self.delegate onCompletion:self];
+          }
+        } else {
+          dispatch_async(dispatch_get_main_queue(), ^{
+
+            [self appClient:client didChangeState:kLiveEBClientStateDisconnected];
+          });
         }
       }
-      
 //      NSString *domain = @"com.liveeb.rtc.ErrorDomain";
 //      NSString *desc = NSLocalizedString(@"Peer Connection state failed.", @"");
 //      NSDictionary *userInfo = @{ NSLocalizedDescriptionKey : desc };
@@ -256,7 +262,7 @@
 
 - (void)appClient:(LiveEBAppClient *)client
     didChangeConnectionState:(RTCIceConnectionState)state {
-  RTCLog(@"ICE state changed: %ld", (long)state);
+  RTCLog(@"LiveEB view ICE state changed: %ld", (long)state);
   __weak LiveEBVideoView *weakSelf = self;
   dispatch_async(dispatch_get_main_queue(), ^{
     LiveEBVideoView *strongSelf = weakSelf;
@@ -309,6 +315,8 @@
 
 -(void)start {
   @synchronized(self) {
+    RTCLog("LiveEB view start");
+    
     _audioPlayer = [LiveEBAudioPlayer new];
      
      [_audioPlayer loadPlayer];
@@ -326,7 +334,7 @@
 //  RTCAudioSession *session = [RTCAudioSession sharedInstance];
 //  [session addDelegate:nil];
   @synchronized(self) {
-    RTCLog("stop");
+    RTCLog("LiveEB view stop");
     
     [_audioPlayer finished];
 
@@ -336,7 +344,7 @@
 
 
 - (void)pause {
-  RTCLog("pause");
+  RTCLog("LiveEB view pause");
   
   @synchronized(self) {
     [_remoteVideoView pause:TRUE];
@@ -347,18 +355,21 @@
 }
 
 - (void)restart {
-  RTCLog("restart");
+  RTCLog("LiveEB view restart");
   
   @synchronized(self) {
     if (!_isStringRetryConnect) {
+      //开始重试
+      _isStringRetryConnect = TRUE;
       self->_currConnectRetryCount = 0;
       
       [self stop];
       [self start];
       
     } else {
+      //重新开始重试
       self->_currConnectRetryCount = 0;
-      _isStringRetryConnect = FALSE;
+      _isStringRetryConnect = TRUE;
     }
   }
 }
