@@ -26,6 +26,7 @@
 #import "LiveEBAudioPlayer.h"
 
 #import <WebRTC/RTCLegacyStatsReport.h>
+#include <sys/time.h>
 
 @interface LiveEBVideoView() <RTCVideoViewDelegate,
                                 LiveEBAppClientDelegate,
@@ -49,6 +50,9 @@
 @property(nonatomic, assign) BOOL audioTrackEnable;
 
 @property(nonatomic, assign) BOOL isRTCPlaying;
+@property(nonatomic, assign) int64_t loadRTCPlayingStart;
+@property(nonatomic, assign) int64_t loadRTCPlayingCost;
+@property(nonatomic, assign) int64_t loadRTCFirstFrameCost;
 @end
 
 @implementation LiveEBVideoView
@@ -76,7 +80,9 @@
         
         _remoteVideoView = remoteView;
         _audioTrackEnable = YES;
-        
+        self.loadRTCPlayingStart = 0;
+        self.loadRTCPlayingCost = 0;
+      
         _isStringRetryConnect = FALSE;
         self->_currConnectRetryCount = 0;
       
@@ -127,6 +133,12 @@
 }
 
 - (void)videoView:(id<RTCVideoRenderer>)videoView isFirstFrame:(BOOL)isfirstFrame {
+  if (isfirstFrame) {
+    self.loadRTCPlayingCost = [self getCurrTimeStramp] - self.loadRTCPlayingStart;
+    
+    RTCLog(@"LiveEB view first frame cost:%lld" , self.loadRTCPlayingCost);
+  }
+  
   if ([_delegate respondsToSelector:@selector(onFirstFrameRender:)]) {
       [_delegate onFirstFrameRender:self];
   }
@@ -159,7 +171,20 @@
   }
 }
 
+-(int64_t) getCurrTimeStramp {
+  struct timeval tv;
+  gettimeofday(&tv, NULL);
+  
+  return tv.tv_sec * 1000 +  tv.tv_usec / 1000;
+}
+
 #pragma mark - ARDAppClientDelegate
+
+- (void)appClient:(LiveEBAppClient *)client didReceiveFirstPacketForMediaType:(RTCRtpMediaType)mediaType {
+  self.loadRTCFirstFrameCost = [self getCurrTimeStramp] - self.loadRTCPlayingStart;
+  
+  RTCLog(@"LiveEB view first type:%ld packet:%lld", (long)mediaType, self.loadRTCFirstFrameCost);
+}
 
 - (void)appClient:(LiveEBAppClient *)client
     didChangeState:(LiveEBClientState)state {
@@ -319,6 +344,7 @@
   @synchronized(self) {
     RTCLog("LiveEB view start");
     
+    self.loadRTCPlayingStart = [self getCurrTimeStramp];
     _audioPlayer = [LiveEBAudioPlayer new];
      
      [_audioPlayer loadPlayer];

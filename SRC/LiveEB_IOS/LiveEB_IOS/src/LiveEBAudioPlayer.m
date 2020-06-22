@@ -34,7 +34,6 @@
     [session addDelegate:self];
 
     [self configureAudioSession];
-    [self setupAudioPlayer];
     
     
     ARDSettingsModel *settingsModel = [[ARDSettingsModel alloc] init];
@@ -86,9 +85,11 @@
 - (void)restartAudioPlayerIfNeeded {
   [self configureAudioSession];
     
-  if (_isAudioLoopPlaying /*&& !self.presentedViewController*/) {
-    RTCLog(@"Starting audio loop due to WebRTC end.");
-    [_audioPlayer play];
+  if (_audioPlayer) {
+    if (_isAudioLoopPlaying /*&& !self.presentedViewController*/) {
+      RTCLog(@"Starting audio loop due to WebRTC end.");
+      [_audioPlayer play];
+    }
   }
 }
 
@@ -99,11 +100,12 @@
   // Stop playback on main queue and then configure WebRTC.
   [RTCDispatcher dispatchAsyncOnType:RTCDispatcherTypeMain
                                block:^{
-                                 if (self.isAudioLoopPlaying) {
+                                 if (self.audioPlayer && self.isAudioLoopPlaying) {
                                    RTCLog(@"Stopping audio loop due to WebRTC start.");
                                    [self.audioPlayer stop];
                                  }
                                  RTCLog(@"Setting isAudioEnabled to YES.");
+    
                                  session.isAudioEnabled = YES;
                                }];
 }
@@ -113,6 +115,7 @@
   [RTCDispatcher dispatchAsyncOnType:RTCDispatcherTypeMain
                                block:^{
     RTCLog(@"audioSessionDidStopPlayOrRecord");
+    
     [self restartAudioPlayerIfNeeded];
   }];
 }
@@ -128,6 +131,7 @@
 }
 
 -(void)audioLoop {
+  if (_audioPlayer) {
     if (_isAudioLoopPlaying) {
       [_audioPlayer stop];
     } else {
@@ -135,6 +139,7 @@
     }
     
     _isAudioLoopPlaying = _audioPlayer.playing;
+  }
 }
 
 - (void)finished {

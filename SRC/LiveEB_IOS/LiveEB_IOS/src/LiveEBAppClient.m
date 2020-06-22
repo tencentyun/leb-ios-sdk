@@ -170,11 +170,11 @@ static int const kKbpsMultiplier = 1000;
 
 @end
 
-@interface LiveEBAppClient()
+@interface LiveEBAppClient() <RTCRtpReceiverDelegate>
 {
-BOOL _useLiveEventBroadcasting;
-NSString *_liveBroadcastingStreamUrl;
-NSString *_svrsig;
+  BOOL _useLiveEventBroadcasting;
+  NSString *_liveBroadcastingStreamUrl;
+  NSString *_svrsig;
 }
 @end
 
@@ -215,7 +215,7 @@ NSString *_svrsig;
 - (instancetype)initWithDelegate:(id<LiveEBAppClientDelegate>)delegate {
   if (self = [super init]) {
     _useLiveEventBroadcasting = FALSE;
-      _liveBroadcastingStreamUrl = nil;
+    _liveBroadcastingStreamUrl = nil;
     _roomServerClient = [[ARDAppEngineClient alloc] init];
     _delegate = delegate;
       
@@ -629,9 +629,26 @@ NSString *_svrsig;
     [self stopStream];
 }
 
+#pragma mark - RTCRtpReceiverDelegate
+
+- (void)rtpReceiver:(RTCRtpReceiver *)rtpReceiver
+  didReceiveFirstPacketForMediaType:(RTCRtpMediaType)mediaType {
+  [_delegate appClient:self didReceiveFirstPacketForMediaType:mediaType];
+}
+
 #pragma mark - RTCPeerConnectionDelegate
 // Callbacks for this delegate occur on non-main thread and need to be
 // dispatched back to main queue as needed.
+
+- (void)peerConnection:(RTCPeerConnection *)peerConnection
+              didAddReceiver:(RTCRtpReceiver *)rtpReceiver
+               streams:(NSArray<RTCMediaStream *> *)mediaStreams {
+//  if (rtpReceiver != nil) {
+//    rtpReceiver.delegate = self;
+//  }
+  
+//
+}
 
 - (void)peerConnection:(RTCPeerConnection *)peerConnection
     didChangeSignalingState:(RTCSignalingState)stateChanged {

@@ -36,6 +36,8 @@ typedef NS_ENUM(NSInteger, LiveEBClientState) {
 // main queue.
 @protocol LiveEBAppClientDelegate <NSObject>
 
+- (void)appClient:(LiveEBAppClient *)client didReceiveFirstPacketForMediaType:(RTCRtpMediaType)mediaType;
+
 - (void)appClient:(LiveEBAppClient *)client didChangeState:(LiveEBClientState)state;
 
 - (void)appClient:(LiveEBAppClient *)client didChangeConnectionState:(RTCIceConnectionState)state;
