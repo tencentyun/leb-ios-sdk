@@ -99,6 +99,7 @@
 }
 
 - (void)setLiveEBURL:(NSString *)liveEBURL {
+  @synchronized (self) {
     ARDSettingsModel *settingsModel = [[ARDSettingsModel alloc] init];
     _client = [[LiveEBAppClient alloc] initWithDelegate:self];
     _client.clientInfo = [LiveEBManager sharedManager].clientInfo;
@@ -109,6 +110,8 @@
 
      
     [_client initWithSettings:settingsModel isLoopback:NO];
+    
+  }
 }
 
 
@@ -139,9 +142,7 @@
     RTCLog(@"LiveEB view first frame cost:%lld" , self.loadRTCPlayingCost);
   }
   
-  if ([_delegate respondsToSelector:@selector(onFirstFrameRender:)]) {
-      [_delegate onFirstFrameRender:self];
-  }
+  [self onFirstFrameRender];
 }
 
 #pragma mark - Private
@@ -201,33 +202,33 @@
       RTCLog(@"LiveEB view Client connecting.");
       
       _isRTCPlaying = false;
+      
       break;
       
     case kLiveEBClientStatePlaying:
       RTCLog(@"LiveEB view Client playing.");
       
-      _isRTCPlaying = true;
-      _isStringRetryConnect = FALSE;
-      self->_currConnectRetryCount = 0;
-      
-      if (_delegate && [_delegate respondsToSelector:@selector(onPrepared:)]) {
-          [_delegate onPrepared:self];
+      @synchronized (self) {
+        _isRTCPlaying = true;
+        _isStringRetryConnect = FALSE;
+        self->_currConnectRetryCount = 0;
       }
-
+      
+      [self onPrepared];
+      
       break;
       
     case kLiveEBClientStateDisconnected:
       RTCLog(@"LiveEB view Client disconnected.");
       
-      _isRTCPlaying = false;
-      
       @synchronized (self) {
+        _isRTCPlaying = false;
+        
         if (!_isStringRetryConnect && self->_currConnectRetryCount == 0) {
           _isStringRetryConnect = true;
+          
         } else if (self->_currConnectRetryCount >= [LiveEBManager sharedManager].connectRetryCount) {
-          if (self.delegate && [self.delegate respondsToSelector:@selector(onCompletion:)]) {
-              [self.delegate onCompletion:self];
-          }
+          [self onCompletion];
           
           _isStringRetryConnect = FALSE;
         }
@@ -250,9 +251,14 @@
           
           //[strongSelf restart];
           @synchronized(strongSelf) {
-            [strongSelf stop];
-            [strongSelf start];
+            if (!strongSelf->_isRTCPlaying) {
+                [strongSelf stop];
+                [strongSelf start];
+            } else {
+              //[self onCompletion];
+            }
           }
+          
         };
         
        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, [LiveEBManager sharedManager].connectRetryCount
@@ -264,27 +270,48 @@
     case kLiveEBClientStateClosed: {
       
       @synchronized (self) {
+        __weak LiveEBVideoView *weakSelf = self;
+        
         if (!self->_isStringRetryConnect) {
-          if (self.delegate && [self.delegate respondsToSelector:@selector(onCompletion:)]) {
-              [self.delegate onCompletion:self];
-          }
+          
+          [self onCompletion];
+          
         } else {
           dispatch_async(dispatch_get_main_queue(), ^{
-
-            [self appClient:client didChangeState:kLiveEBClientStateDisconnected];
+            [weakSelf appClient:client didChangeState:kLiveEBClientStateDisconnected];
           });
         }
+        
+        _isRTCPlaying = false;
       }
-//      NSString *domain = @"com.liveeb.rtc.ErrorDomain";
-//      NSString *desc = NSLocalizedString(@"Peer Connection state failed.", @"");
-//      NSDictionary *userInfo = @{ NSLocalizedDescriptionKey : desc };
-//
-//      [self.delegate videoView:self didError:[NSError errorWithDomain:domain code:-101 userInfo:userInfo]];
-      _isRTCPlaying = false;
     }
       
       break;
   }
+}
+
+-(void) onFirstFrameRender {
+  __weak LiveEBVideoView *weakSelf = self;
+  dispatch_async(dispatch_get_main_queue(), ^{
+    if ([weakSelf.delegate respondsToSelector:@selector(onFirstFrameRender:)]) {
+      [weakSelf.delegate onFirstFrameRender:weakSelf];
+  } });
+}
+
+-(void)onPrepared {
+  __weak LiveEBVideoView *weakSelf = self;
+  dispatch_async(dispatch_get_main_queue(), ^{
+  if (weakSelf.delegate && [weakSelf.delegate respondsToSelector:@selector(onPrepared:)]) {
+      [weakSelf.delegate onPrepared:self];
+  } });
+}
+
+-(void)onCompletion {
+  __weak LiveEBVideoView *weakSelf = self;
+  dispatch_async(dispatch_get_main_queue(), ^{
+  if (weakSelf.delegate && [weakSelf.delegate respondsToSelector:@selector(onCompletion:)]) {
+      [weakSelf.delegate onCompletion:self];
+  } });
 }
 
 - (void)appClient:(LiveEBAppClient *)client
@@ -324,7 +351,10 @@
               [_statsBuilder parseStatsReport:report];
             }
             
-            [_delegate showStats:self strStat:_statsBuilder.statsString];
+          dispatch_async(dispatch_get_main_queue(), ^{
+            
+            [self.delegate showStats:self strStat:self->_statsBuilder.statsString];
+          });
         }
     }
     

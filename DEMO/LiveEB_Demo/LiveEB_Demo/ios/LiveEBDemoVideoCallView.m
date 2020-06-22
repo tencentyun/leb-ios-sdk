@@ -173,7 +173,7 @@ static CGFloat const kStatusBarHeight = 20;
 #pragma mark - RTCVideoViewDelegate
 
 - (void)videoView:(LiveEBVideoView *)videoView didError:(NSError *)error {
-    NSLog(@"_remoteVideoView ");
+    NSLog(@"LiveEB view _remoteVideoView ");
 }
 
 - (void)showStats:(LiveEBVideoView *)videoView stat:(NSArray*)stat {
@@ -192,13 +192,13 @@ static CGFloat const kStatusBarHeight = 20;
 }
 
 - (void)onPrepared:(LiveEBVideoView*)videoView {
-    NSLog(@"_remoteVideoView onPrepared ");
+    NSLog(@"LiveEB view _remoteVideoView onPrepared ");
 }
 
 
 //尽量不要在onCompletion里重试。
 - (void)onCompletion:(LiveEBVideoView*)videoView { 
-    NSLog(@"_remoteVideoView onCompletion ");
+    NSLog(@"LiveEB view _remoteVideoView onCompletion ");
   
   //重试
   
@@ -213,7 +213,7 @@ static CGFloat const kStatusBarHeight = 20;
 }
 
 -(void)onFirstFrameRender:(LiveEBVideoView *)videoView {
-  NSLog(@"_remoteVideoView onFirstFrameRender ");
+  NSLog(@"LiveEB view _remoteVideoView onFirstFrameRender ");
 }
 
 #pragma mark - Private
