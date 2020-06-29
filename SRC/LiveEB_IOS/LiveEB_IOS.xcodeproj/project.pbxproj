@@ -69,7 +69,7 @@
 		51F16AC72465A0C20078D65F /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
-			dstPath = "$(SRCROOT)/../../Product";
+			dstPath = "$(SRCROOT)/../../Product/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
 			dstSubfolderSpec = 0;
 			files = (
 				51F16AC82465A0E10078D65F /* LiveEB_IOS.framework in CopyFiles */,
@@ -391,7 +391,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\n# Type a script or drag a script file from your workspace to insert its path.\ncd ${PROJECT_DIR}/\necho pwd=`pwd`\necho SRCROOT=$(SRCROOT)\ncd ..\ncd ..\ncd Product\n echo \"ffdsaf\" `pwd`\nif [ -f ./Release-iphoneos/LiveEB_IOS.framework/LiveEB_IOS ]; then\n    echo \"AAAAAAAA\"\nfi\n\n";
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\ncd ${PROJECT_DIR}/\necho pwd=`pwd`\necho SRCROOT=$(SRCROOT)\ncd ..\ncd ..\ncd Product\necho \"pwd=\" `pwd`\n\nif [ -f ./Release-iphoneos/LiveEB_IOS.framework/LiveEB_IOS ]; then\n    if [ -f ./Release-iphoneos/LiveEB_IOS.framework/LiveEB_IOS ] && [ -f ./Release-iphonesimulator/LiveEB_IOS.framework/LiveEB_IOS ]; then\n    \n      cp -r -f ./Release-iphoneos/LiveEB_IOS.framework .\n      lipo -create ./Release-iphoneos/LiveEB_IOS.framework/LiveEB_IOS ./Release-iphonesimulator/LiveEB_IOS.framework/LiveEB_IOS -output LiveEB_IOS.framework/LiveEB_IOS\n      \n      echo \"create framework\"\n    fi\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 

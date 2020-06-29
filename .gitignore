@@ -12,3 +12,5 @@ DEMO/LiveEB_Demo/Podfile.lock
 DEMO/LiveEB_Demo/Pods
 ~$veEB SDK工程配置 (iOS).docx
 ~\$veEB\ SDK工程配置\ \(iOS\).doc
+Product/Release-iphoneos/
+Product/Release-iphonesimulator/

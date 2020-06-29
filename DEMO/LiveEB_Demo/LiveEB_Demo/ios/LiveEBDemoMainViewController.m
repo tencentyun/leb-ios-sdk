@@ -60,7 +60,9 @@ static NSString *const loopbackLaunchProcessArgument = @"loopback";
 //    liveUrl =@"webrtc://liveplay.mafengwo.cn/live/room11855";
 //    liveUrl = @"webrtc://zhibo2.yjwh.shop/live/38736320200617185024?txSecret=c7734564dd8acf3588298e1702f7e9d4&txTime=5EEB4948";
 //    liveUrl=@"webrtc://liveplay.mafengwo.cn/live/room12079";
-    useLiveEventBroadcasting = YES;
+//    liveUrl=@"webrtc://liveplay.chinaedu.com/live/0001000028005_0929e816-801a-49ca-848f-0910f7f2f9a6";
+//    liveUrl=@"webrtc://play.live.gungun8.com/live/29084_1592881372";
+      useLiveEventBroadcasting = YES;
   }
     
     
@@ -121,7 +123,7 @@ static NSString *const loopbackLaunchProcessArgument = @"loopback";
       [self restartAudioPlayerIfNeeded];
     }];
   }
-NSLog(@"Dismissing VC");
+  NSLog(@"Dismissing VC");
 //     [_audioPlayer finished];
 }
 

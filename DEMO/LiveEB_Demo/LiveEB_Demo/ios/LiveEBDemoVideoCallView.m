@@ -30,20 +30,19 @@ static CGFloat const kStatusBarHeight = 20;
 
 - (instancetype)initWithFrame:(CGRect)frame {
   if (self = [super initWithFrame:frame]) {
-
+      
       self.backgroundColor = [UIColor blackColor];
-    _remoteVideoView2 = [LiveEBVideoView new];
+      _remoteVideoView2 = [LiveEBVideoView new];
       _remoteVideoView2.delegate = self;
       
       [self addSubview:_remoteVideoView2];
       _controlDelegate = _remoteVideoView2;
       UIImage *image;
-      
-     
-      
-      _statsView = [[LiveEBDemoStatView alloc] initWithFrame:CGRectZero];
-         _statsView.hidden = NO;
-    [self addSubview:_statsView];
+
+      _statsView = [[LiveEBDemoStatView alloc] initWithFrame:CGRectMake(0, 0, kLocalVideoViewSize, kLocalVideoViewSize)];
+      //_statsView.hidden = YES;
+
+      [self addSubview:_statsView];
       
       if (true) {
         _hangupButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -126,32 +125,24 @@ static CGFloat const kStatusBarHeight = 20;
     _remoteVideoView2.frame = bounds;
   }
 
-  NSLog(@"_remoteVideoView [ %f %f] x=%f y=%f width=%f height=%f _remoteVideoSize:%f %f ",
-        _remoteVideoView2.center.x, _remoteVideoView2.center.y, _remoteVideoView2.frame.origin.x, _remoteVideoView2.frame.origin.y, _remoteVideoView2.frame.size.width, _remoteVideoView2.frame.size.height
+  NSLog(@"LiveEB view [ %f %f] x=%f y=%f width=%f height=%f _remoteVideoSize:%f %f ",
+        _remoteVideoView2.center.x, _remoteVideoView2.center.y, _remoteVideoView2.frame.origin.x,
+        _remoteVideoView2.frame.origin.y, _remoteVideoView2.frame.size.width, _remoteVideoView2.frame.size.height
         ,_remoteVideoSize.width, _remoteVideoSize.height);
-    
-  // Aspect fit local video view into a square box.
-  CGRect localVideoFrame =
-      CGRectMake(0, 0, kLocalVideoViewSize, kLocalVideoViewSize);
-  // Place the view in the bottom right.
-  localVideoFrame.origin.x = CGRectGetMaxX(bounds)
-      - localVideoFrame.size.width - kLocalVideoViewPadding;
-  localVideoFrame.origin.y = CGRectGetMaxY(bounds)
-      - localVideoFrame.size.height - kLocalVideoViewPadding;
 
-    // Place stats at the top.
-    CGSize statsSize = [_statsView sizeThatFits:bounds.size];
-    _statsView.frame = CGRectMake(CGRectGetMinX(bounds),
-                                  CGRectGetMinY(bounds) + kStatusBarHeight,
-                                  statsSize.width, statsSize.height);
+  // Place stats at the top.
+  CGSize statsSize = [_statsView sizeThatFits:bounds.size];
+  _statsView.frame = CGRectMake(CGRectGetMinX(bounds),
+                                CGRectGetMinY(bounds) + kStatusBarHeight,
+                                _remoteVideoView2.frame.size.width, CGRectGetMinY(_remoteVideoView2.frame));
     
   // Place hangup button in the bottom left.
   _hangupButton.frame =
-      CGRectMake(CGRectGetMinX(bounds) + kButtonPadding,
-                 CGRectGetMaxY(bounds) - kButtonPadding -
-                     kButtonSize,
-                 kButtonSize,
-                 kButtonSize);
+    CGRectMake(CGRectGetMinX(bounds) + kButtonPadding,
+               CGRectGetMaxY(bounds) - kButtonPadding -
+                   kButtonSize,
+                    kButtonSize,
+                    kButtonSize);
 
   // Place button to the right of hangup button.
   CGRect cameraSwitchFrame = _hangupButton.frame;
@@ -181,6 +172,7 @@ static CGFloat const kStatusBarHeight = 20;
 }
 
 - (void)showStats:(LiveEBVideoView *)videoView strStat:(nonnull NSString *)strStat {
+
     [self.statsView setStats:strStat];
 }
 
