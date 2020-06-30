@@ -40,7 +40,7 @@
 
     RTCAudioSession *audiosession = [RTCAudioSession sharedInstance];
     audiosession.useManualAudio = [settingsModel currentUseManualAudioConfigSettingFromStore];
-    audiosession.isAudioEnabled = NO;
+//    audiosession.isAudioEnabled = NO;
 }
 
 - (void)configureAudioSession {
@@ -144,6 +144,6 @@
 
 - (void)finished {
     RTCAudioSession *session = [RTCAudioSession sharedInstance];
-    session.isAudioEnabled = NO;
+//    session.isAudioEnabled = NO;
 }
 @end

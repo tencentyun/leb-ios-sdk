@@ -463,10 +463,12 @@
 }
 
 - (void)setAudioMute:(BOOL)mute {
+  @synchronized(self) {
     _audioTrackEnable = !mute;
     
     if (_remoteAudioTrack) {
         _remoteAudioTrack.isEnabled = !mute;
     }
+  }
 }
 @end
