@@ -462,6 +462,24 @@
   [_remoteVideoTrack addRenderer:_remoteVideoView];
 }
 
+- (CGFloat)getVolume {
+  @synchronized(self) {
+    if (_remoteAudioTrack && _remoteAudioTrack.source) {
+      return _remoteAudioTrack.source.volume / 10.;
+    }
+  }
+  
+  return 0;
+}
+
+- (void)setVolume:(CGFloat)volume {
+  @synchronized(self) {
+    if (_remoteAudioTrack && _remoteAudioTrack.source) {
+      _remoteAudioTrack.source.volume = volume * 10;
+    }
+  }
+}
+
 - (void)setAudioMute:(BOOL)mute {
   @synchronized(self) {
     _audioTrackEnable = !mute;
