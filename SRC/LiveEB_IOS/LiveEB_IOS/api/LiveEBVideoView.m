@@ -28,6 +28,11 @@
 #import <WebRTC/RTCLegacyStatsReport.h>
 #include <sys/time.h>
 
+
+@implementation LiveEBAudioSessionConfiguration
+
+@end
+
 @interface LiveEBVideoView() <RTCVideoViewDelegate,
                                 LiveEBAppClientDelegate,
                                 RTCAudioSessionDelegate
@@ -492,5 +497,15 @@
         _remoteAudioTrack.isEnabled = !mute;
     }
   }
+}
+
+- (void)setWebRTCConfiguration:(LiveEBAudioSessionConfiguration *)configuration {
+  if (configuration) {
+    RTCAudioSessionConfiguration *webRTCConfig = [RTCAudioSessionConfiguration webRTCConfiguration];
+    webRTCConfig.category = configuration.category;
+    webRTCConfig.categoryOptions = configuration.categoryOptions;
+    webRTCConfig.mode = configuration.mode;
+  }
+  
 }
 @end

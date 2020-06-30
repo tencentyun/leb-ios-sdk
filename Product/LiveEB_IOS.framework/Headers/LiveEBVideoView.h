@@ -20,6 +20,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class LiveEBVideoView;
 
+@interface LiveEBAudioSessionConfiguration : NSObject
+
+@property(nonatomic, strong) NSString *category;
+@property(nonatomic, assign) AVAudioSessionCategoryOptions categoryOptions;
+@property(nonatomic, strong) NSString *mode;
+
+@end
+
 @protocol LiveEBVideoViewControllerDelegate <NSObject>
 @required
     -(void)start;
@@ -38,6 +46,9 @@ NS_ASSUME_NONNULL_BEGIN
 
     /*开启调试信息*/
     -(void)setStatState:(BOOL)stat;
+
+    -(void)setWebRTCConfiguration:(LiveEBAudioSessionConfiguration *)configuration;
+
 @end
 
 @protocol LiveEBVideoViewDelegate <NSObject>
