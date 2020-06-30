@@ -28,11 +28,9 @@ NS_ASSUME_NONNULL_BEGIN
     -(void)resume;
     
     -(BOOL)isPlaying;
-    
-    -(CGFloat)getVolume;
 
-    /* 0 ~ 1*/
-    -(void)setVolume:(CGFloat)volume;
+    /* 0 ~ 1 返回上次的设置值*/
+    -(CGFloat)setVolume:(CGFloat)volume;
 
     -(void)setAudioMute:(BOOL)mute;
     

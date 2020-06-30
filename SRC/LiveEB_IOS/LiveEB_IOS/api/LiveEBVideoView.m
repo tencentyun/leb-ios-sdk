@@ -472,12 +472,16 @@
   return 0;
 }
 
-- (void)setVolume:(CGFloat)volume {
+- (CGFloat)setVolume:(CGFloat)volume {
+  CGFloat retVolume = 0.;
   @synchronized(self) {
     if (_remoteAudioTrack && _remoteAudioTrack.source) {
+      retVolume = _remoteAudioTrack.source.volume / 10.;
       _remoteAudioTrack.source.volume = volume * 10;
     }
   }
+  
+  return retVolume;
 }
 
 - (void)setAudioMute:(BOOL)mute {
