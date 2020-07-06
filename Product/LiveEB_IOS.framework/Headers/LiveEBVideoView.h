@@ -28,6 +28,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+
 @protocol LiveEBVideoViewControllerDelegate <NSObject>
 @required
     -(void)start;
@@ -48,6 +49,9 @@ NS_ASSUME_NONNULL_BEGIN
     -(void)setStatState:(BOOL)stat;
 
     -(void)setWebRTCConfiguration:(LiveEBAudioSessionConfiguration *)configuration;
+    
+    ///【字段含义】播放器遭遇网络连接断开时 SDK 默认重试的次数 和网络重连的时间间隔
+    -(void)setConnectRetryCount:(int)retryCount retryInterval:(int)retryInterval;
 
 @end
 
