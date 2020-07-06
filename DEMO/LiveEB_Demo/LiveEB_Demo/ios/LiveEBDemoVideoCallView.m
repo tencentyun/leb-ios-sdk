@@ -173,8 +173,15 @@ static CGFloat const kStatusBarHeight = 20;
 
 - (void)showStats:(LiveEBVideoView *)videoView strStat:(nonnull NSString *)strStat {
 
-    [self.statsView setStats:strStat];
+    
 }
+
+- (void)showStats:(LiveEBVideoView *)videoView statReport:(LEBStatReport *)statReport {
+  NSLog(@"LiveEB view statReport %@", [statReport description]);
+  
+  [self.statsView setStats:[statReport description]];
+}
+
 
 - (void)videoView:(LiveEBVideoView *)videoView didChangeVideoSize:(CGSize)size {
      if (videoView == _remoteVideoView2) {
@@ -188,7 +195,7 @@ static CGFloat const kStatusBarHeight = 20;
 }
 
 
-//尽量不要在onCompletion里重试。
+//onCompletion里重试。
 - (void)onCompletion:(LiveEBVideoView*)videoView { 
     NSLog(@"LiveEB view _remoteVideoView onCompletion ");
   

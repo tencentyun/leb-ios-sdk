@@ -16,6 +16,8 @@
 #import <WebRTC/RTCMTLVideoView.h>
 #endif
 
+#import "LEBStatReport.h"
+
 NS_ASSUME_NONNULL_BEGIN
 
 @class LiveEBVideoView;
@@ -68,11 +70,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)onPrepared:(LiveEBVideoView*)videoView;
 
+/*播放结束 包括主动结束和被动结束(断流等)*/
 - (void)onCompletion:(LiveEBVideoView*)videoView;
 
 - (void)onFirstFrameRender:(LiveEBVideoView*)videoView;
 
-/*调试信息回调*/
+
+- (void)showStats:(LiveEBVideoView *)videoView statReport:(LEBStatReport*)statReport;
+
+/*调试信息回调 deprecated*/
 - (void)showStats:(LiveEBVideoView *)videoView stat:(NSArray*)stat;
 
 - (void)showStats:(LiveEBVideoView *)videoView strStat:(NSString*)strStat;
