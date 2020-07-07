@@ -4,6 +4,8 @@
 <dict>
 	<key>BuildMachineOSBuild</key>
 	<string>12E55</string>
+	<key>BuildTimeStr</key>
+	<string>20200707150232</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
@@ -39,7 +41,9 @@
 		<string>iPhoneOS</string>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1.0</string>
+	<string>v..</string>
+	<key>GitCommitID</key>
+	<string>0af7968</string>
 	<key>NSCameraUsageDescription</key>
 	<string>Camera access needed for video calling</string>
 	<key>UIAppFonts</key>

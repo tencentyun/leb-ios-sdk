@@ -15,3 +15,5 @@ DEMO/LiveEB_Demo/Pods
 Product/Release-iphoneos/
 Product/Release-iphonesimulator/
 SRC
+DEMO/build/build_output/*
+DEMO/bin/LiveEB_Demo.ipa

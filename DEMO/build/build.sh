@@ -33,11 +33,15 @@ function Demo_build() {
     	/usr/libexec/PlistBuddy -c "Set :GitCommitID $GIT_COMMIT_ID" "${INFO_PLIST}"
 	fi
 
+	cd  $WORKDIR/../LiveEB_Demo/
 
-	xcodebuild -project $WORKDIR/../LiveEB_Demo/LiveEB_Demo.xcodeproj -scheme LiveEB_Demo  \
-	-configuration Release -derivedDataPath $WORKDIR/build_output
+	pod install
+	# xcodebuild -project $WORKDIR/../LiveEB_Demo/LiveEB_Demo.xcodeproj -scheme LiveEB_Demo  \
+	# -configuration Release -derivedDataPath $WORKDIR/build_output
 
-	cd build_output
+	xcodebuild -workspace  LiveEB_Demo.xcworkspace -scheme LiveEB_Demo -configuration Release -derivedDataPath $WORKDIR/build_output
+
+	# cd build_output
 	if [ -e Build/Products/Release-iphoneos/LiveEB_Demo.app ] ;then
 		cp -r Build/Products/Release-iphoneos/LiveEB_Demo.app .
 		mkdir -p Payload
