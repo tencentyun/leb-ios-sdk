@@ -32,7 +32,7 @@ static NSString *const loopbackLaunchProcessArgument = @"loopback";
 - (void)viewDidLoad {
   [super viewDidLoad];
   if ([[[NSProcessInfo processInfo] arguments] containsObject:loopbackLaunchProcessArgument]) {
-    [self mainView:nil didInputRoom:@"" isLoopback:YES];
+    [self mainView:nil didInputRoom:@"" didInputHost:@"" isLoopback:YES];
   }
 }
 
@@ -51,9 +51,9 @@ static NSString *const loopbackLaunchProcessArgument = @"loopback";
 
 #pragma mark - ARDMainViewDelegate
 
-- (void)mainView:(LiveEBDemoMainView *)mainView didInputRoom:(NSString *)liveUrl isLoopback:(BOOL)isLoopback {
+- (void)mainView:(LiveEBDemoMainView *)mainView didInputRoom:(NSString *)liveUrl didInputHost:(NSString *)rtcHost isLoopback:(BOOL)isLoopback {
     BOOL useLiveEventBroadcasting = YES;
-    NSString *rtcHost = NULL;
+//    NSString *rtcHost = NULL;
   if (!liveUrl.length) {
       liveUrl=@"webrtc://6721.liveplay.myqcloud.com/live/6721_d71956d9cc93e4a467b11e06fdaf039a";
       
@@ -62,15 +62,21 @@ static NSString *const loopbackLaunchProcessArgument = @"loopback";
 //    liveUrl=@"webrtc://liveplay.mafengwo.cn/live/room12079";
 //    liveUrl=@"webrtc://liveplay.chinaedu.com/live/0001000028005_0929e816-801a-49ca-848f-0910f7f2f9a6";
 //    liveUrl=@"webrtc://play.live.gungun8.com/live/29084_1592881372";
+//    liveUrl=@"webrtc://2001.liveplay.myqcloud.com/live/1234324124132fasdf";
       useLiveEventBroadcasting = YES;
   }
     
+  if (!rtcHost.length) {
+    rtcHost = @"https://webrtc.liveplay.myqcloud.com";
+  }
+  rtcHost=@"http://219.151.31.40/webrtc.liveplay.myqcloud.com";
+  rtcHost=@"https://webrtc.liveplay.myqcloud.com";
     
-    if ([liveUrl rangeOfString:@"liveplay.now.qq.com" ].location != NSNotFound) {
-        rtcHost = @"live.rtc.qq.com";
-    } else if ([liveUrl rangeOfString:@"webrtc.liveplay.myqcloud.com" ].location != NSNotFound) {
-        rtcHost = @"webrtc.liveplay.myqcloud.com";
-    }
+//    if ([liveUrl rangeOfString:@"liveplay.now.qq.com" ].location != NSNotFound) {
+//        rtcHost = @"live.rtc.qq.com";
+//    } else if ([liveUrl rangeOfString:@"webrtc.liveplay.myqcloud.com" ].location != NSNotFound) {
+//        rtcHost = @"webrtc.liveplay.myqcloud.com";
+//    }
     
 //    liveUrl = @"webrtc://zhibo2.yjwh.shop/live/24297820200601144628?txSecret=1f29fcd7c7d00c6c99c9e5c5281c1864&txTime=5ED5F5C4";
 //    rtcHost=@"zhibo2.yjwh.shop";

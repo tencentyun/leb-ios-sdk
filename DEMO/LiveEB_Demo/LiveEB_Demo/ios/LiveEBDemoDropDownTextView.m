@@ -82,9 +82,12 @@
 
 
 
--(id)initWithFrame:(CGRect)frame
+-(id)initWithFrame:(CGRect)frame hintText:(NSString*)hintText
 {
 if (self = [super initWithFrame:frame]) {
+  if (!self.hintText) {
+    self.hintText = hintText;
+  }
 //    self.backgroundColor = [UIColor grayColor];
     showList = NO; //默认不显示下拉框
     
@@ -109,10 +112,10 @@ if (self = [super initWithFrame:frame]) {
            _textField.borderStyle = UITextBorderStyleRoundedRect;
             
            _textField.font = [UIFont systemFontOfSize:15];
-           _textField.placeholder = @"input LiveBroadcasting url ：";
+            _textField.placeholder = self.hintText;
             //[_textField setValue:[UIColor greenColor] forKeyPath:@"_placeholderLabel.textColor"];
     
-            _textField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"input LiveBroadcasting url ：" attributes:@{NSForegroundColorAttributeName: [UIColor greenColor]}];
+            _textField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:self.hintText attributes:@{NSForegroundColorAttributeName: [UIColor greenColor]}];
     
            _textField.autocorrectionType = UITextAutocorrectionTypeNo;
            _textField.autocapitalizationType = UITextAutocapitalizationTypeNone;

@@ -33,13 +33,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 }
 
-
+-(id)initWithFrame:(CGRect)frame hintText:(NSString*)hintText;
 
 @property (nonatomic,retain) UITableView *tv;
 
 @property (nonatomic,retain) NSArray *tableArray;
 
 @property (nonatomic,retain) SubTextField *textField;
+
+@property (nonatomic,copy) NSString *hintText;
 
 
 

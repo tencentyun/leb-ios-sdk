@@ -66,6 +66,7 @@ static CGFloat const kCallControlMargin = 18;
 
 @implementation LiveEBDemoMainView {
   DropDownTextView *_roomText;
+  DropDownTextView *_roomText2;
   UIButton *_startRegularCallButton;
   UIButton *_startLoopbackCallButton;
   UIButton *_audioLoopButton;
@@ -80,13 +81,23 @@ static CGFloat const kCallControlMargin = 18;
 
 - (instancetype)initWithFrame:(CGRect)frame {
   if (self = [super initWithFrame:frame]) {
-    _roomText = [[DropDownTextView alloc] initWithFrame:CGRectZero];
-      
-      
-      NSArray* arr=[[NSArray alloc]initWithObjects:@"webrtc://6721.liveplay.now.qq.com/live/6721_c21f14dc5c3ce1b2513f5810f359ea15?txSecret=c96521895c01742114c033f3cb585339&txTime=5DDE5CBC", nil];
+    //webrtc://6721.liveplay.now.qq.com/live/6721_c21f14dc5c3ce1b2513f5810f359ea15?txSecret=c96521895c01742114c033f3cb585339&txTime=5DDE5CBC
+    _roomText = [[DropDownTextView alloc] initWithFrame:CGRectZero hintText:@"input LiveBroadcasting url ："];
+
+      NSArray* arr=[[NSArray alloc]initWithObjects:@"webrtc://6721.liveplay.myqcloud.com/live/6721_d71956d9cc93e4a467b11e06fdaf039a", nil];
 
          _roomText.tableArray = arr;
     [self addSubview:_roomText];
+    
+    
+    _roomText2 = [[DropDownTextView alloc] initWithFrame:CGRectZero hintText:@"input host:"];
+    
+//    NSArray* arr2=[[NSArray alloc]initWithObjects:@"219.151.31.40", nil];
+     NSArray* arr2=[[NSArray alloc]initWithObjects:@"https://webrtc.liveplay.myqcloud.com", nil];
+    
+    _roomText2.tableArray = arr2;
+    [self addSubview:_roomText2];
+    
 
     UIFont *controlFont = [UIFont boldSystemFontOfSize:18.0];
     UIColor *controlFontColor = [UIColor whiteColor];
@@ -125,11 +136,19 @@ static CGFloat const kCallControlMargin = 18;
                        roomTextHeight);
     }
   
+  if (_roomText2.frame.size.width < 10 || _roomText2.frame.size.height <  10) {
+      CGFloat roomTextWidth = bounds.size.width - 2 * kRoomTextFieldMargin;
+      CGFloat roomTextHeight = kRoomTextFieldHeight;
+      _roomText2.frame =
+          CGRectMake(kRoomTextFieldMargin, kRoomTextFieldMargin + CGRectGetMaxY(_roomText.frame), roomTextWidth,
+                     roomTextHeight);
+  }
+  
 
   CGFloat buttonHeight =
-      (CGRectGetMaxY(self.bounds) - CGRectGetMaxY(_roomText.frame) - kCallControlMargin * 4) / 3;
+      (CGRectGetMaxY(self.bounds) - CGRectGetMaxY(_roomText2.frame) - kCallControlMargin * 4) / 3;
 
-  CGFloat regularCallFrameTop = CGRectGetMaxY(_roomText.frame) + kCallControlMargin;
+  CGFloat regularCallFrameTop = CGRectGetMaxY(_roomText2.frame) + kCallControlMargin;
   CGRect regularCallFrame = CGRectMake(kCallControlMargin,
                                        regularCallFrameTop,
                                        bounds.size.width - 2*kCallControlMargin,
@@ -155,11 +174,11 @@ static CGFloat const kCallControlMargin = 18;
 }
 
 - (void)onStartRegularCall:(id)sender {
-  [_delegate mainView:self didInputRoom:_roomText.textField.text isLoopback:NO];
+  [_delegate mainView:self didInputRoom:_roomText.textField.text didInputHost:_roomText2.textField.text isLoopback:NO];
 }
 
 - (void)onStartLoopbackCall:(id)sender {
-  [_delegate mainView:self didInputRoom:_roomText.textField.text isLoopback:YES];
+  [_delegate mainView:self didInputRoom:_roomText.textField.text  didInputHost:_roomText2.textField.text  isLoopback:YES];
 }
 
 @end
