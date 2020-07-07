@@ -41,7 +41,7 @@ function Demo_build() {
 
 	xcodebuild -workspace  LiveEB_Demo.xcworkspace -scheme LiveEB_Demo -configuration Release -derivedDataPath $WORKDIR/build_output
 
-	# cd build_output
+	cd $WORKDIR/build_output
 	if [ -e Build/Products/Release-iphoneos/LiveEB_Demo.app ] ;then
 		cp -r Build/Products/Release-iphoneos/LiveEB_Demo.app .
 		mkdir -p Payload
