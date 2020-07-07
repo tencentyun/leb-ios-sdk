@@ -69,8 +69,8 @@ static NSString *const loopbackLaunchProcessArgument = @"loopback";
   if (!rtcHost.length) {
     rtcHost = @"https://webrtc.liveplay.myqcloud.com";
   }
-  rtcHost=@"http://219.151.31.40/webrtc.liveplay.myqcloud.com";
-  rtcHost=@"https://webrtc.liveplay.myqcloud.com";
+//  rtcHost=@"http://219.151.31.40/webrtc.liveplay.myqcloud.com";
+//  rtcHost=@"https://webrtc.liveplay.myqcloud.com";
     
 //    if ([liveUrl rangeOfString:@"liveplay.now.qq.com" ].location != NSNotFound) {
 //        rtcHost = @"live.rtc.qq.com";
