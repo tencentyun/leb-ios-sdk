@@ -1,9 +1,9 @@
-## LiveEB_IOS SDK (live event Broadcasting)
+## 一> LiveEB_IOS SDK (live event Broadcasting)
 快直播 LEB （超低延迟直播） IOS SDK https://cloud.tencent.com/product/leb  
 
 下载Demo体验请前点击 [IOS demo下载地址](https://github.com/tencentyun/leb-ios-sdk/tree/master/DEMO/LiveEB_Demo)
 
-## pod 接入
+## 二> pod 接入
 
 使用Cocoapods的方式来进行集成。在您的podfile中加入需要集成的库即可  
 
@@ -11,8 +11,8 @@
  
  a> LiveEB_IOS内部使用的是 TWebRTC:参考 https://github.com/tencentyun/TWebRTC.git 编译   
     
-    参考master分支 demo文件夹里面的最新podfile文件里面的版本:
-    https://github.com/tencentyun/leb-ios-sdk/blob/master/DEMO/LiveEB_Demo/Podfile
+    参考master分支 demo文件夹里面的最新podfile文件里面的[最新版本](https://github.com/tencentyun/leb-ios-sdk/blob/master/DEMO/LiveEB_Demo/Podfile)
+    
     
     pod 'TWebRTC', :git=>'https://github.com/tencentyun/TWebRTC-IOS-SDK.git' , :tag => '1.0.0'  
     pod 'LiveEB_IOS', :git=>'https://github.com/tencentyun/leb-ios-sdk.git' , :tag => '1.0.1' 
@@ -22,7 +22,7 @@
    https://github.com/tencentyun/TWebRTC-IOS-SDK.git 是ios TWebRTC的源码编译后pod私有仓库  
    https://github.com/tencentyun/leb-ios-sdk.git  是封装webrtc接口的封装层。包括源码和私有仓库。  
    
-## demo使用：  
+## 三> demo使用：  
 
 1> cd LiveEB_Demo  
 2> pod install  
@@ -42,7 +42,7 @@ xcode10及以上环境
 
 
 
-## API使用说明
+## 四> API使用说明
 
 ### 添加头文件
 #import <LiveEB_IOS/LiveEB_IOS.h>
