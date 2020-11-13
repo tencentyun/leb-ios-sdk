@@ -11,7 +11,7 @@
  
  a> LiveEB_IOS内部使用的是 TWebRTC:参考 https://github.com/tencentyun/TWebRTC.git 编译   
     
-    参考master分支 demo文件夹里面的最新podfile文件里面的[最新版本](https://github.com/tencentyun/leb-ios-sdk/blob/master/DEMO/LiveEB_Demo/Podfile)
+    参考master分支 demo文件夹里面的最新podfile文件里面的[最新版本] (https://github.com/tencentyun/leb-ios-sdk/blob/master/DEMO/LiveEB_Demo/Podfile)
     
     
     pod 'TWebRTC', :git=>'https://github.com/tencentyun/TWebRTC-IOS-SDK.git' , :tag => '1.0.0'  
