@@ -63,7 +63,8 @@ static NSString *const loopbackLaunchProcessArgument = @"loopback";
 //    liveUrl=@"webrtc://liveplay.chinaedu.com/live/0001000028005_0929e816-801a-49ca-848f-0910f7f2f9a6";
 //    liveUrl=@"webrtc://play.live.gungun8.com/live/29084_1592881372";
 //    liveUrl=@"webrtc://2001.liveplay.myqcloud.com/live/1234324124132fasdf";
-      useLiveEventBroadcasting = YES;
+//     liveUrl = @"webrtc://140.249.28.162/flv265.3954.01.liveplay.myqcloud.com/live/9999";
+     useLiveEventBroadcasting = YES;
   }
     
   if (!rtcHost.length) {

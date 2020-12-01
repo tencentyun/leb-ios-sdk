@@ -36,6 +36,7 @@ static CGFloat const kStatusBarHeight = 20;
       _remoteVideoView2.delegate = self;
       
       [self addSubview:_remoteVideoView2];
+//    _remoteVideoView2.transform = CGAffineTransformMakeRotation(90 *M_PI / 180.0);
       _controlDelegate = _remoteVideoView2;
       UIImage *image;
 

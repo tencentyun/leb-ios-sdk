@@ -90,9 +90,16 @@ NS_ASSUME_NONNULL_BEGIN
 @interface LiveEBVideoView : UIView <LiveEBVideoViewControllerDelegate>
 
 @property (nonatomic, copy) NSString *rtcHost;
-@property (nonatomic, copy) NSString *liveEBURL; //播放流地址 webrtc://
-@property (nonatomic, copy) NSString *sessionid; //业务生成的唯一key，标识本次播放会话
 
+@property (nonatomic, copy) NSString *sessionid;      //业务生成的唯一key，标识本次播放会话
+
+/*V1*/
+-(void)setLiveURL:(NSString *)liveEBURL pullStream:(NSString *)pullStream stopStream:(NSString *)stopStream;
+
+/*V2*/
+@property (nonatomic, copy) NSString *streamIDSDPStream; //live/streamID.sdp?route=mcd0&token=tencent_video
+
+@property (nonatomic, copy) NSString *liveEBURL;  //播放流地址
 @property(nonatomic, weak) id<LiveEBVideoViewDelegate> delegate;
 @property(nonatomic, readonly) __kindof UIView<RTCVideoRenderer> *remoteVideoView;
 @end
