@@ -22,6 +22,7 @@ static CGFloat const kStatusBarHeight = 20;
   UIButton *_hangupButton;
   UIButton *_pauseResumeButton;
   UIButton *_restartButton;
+  UIButton *_captureButton;
   CGSize _remoteVideoSize;
 }
 
@@ -76,13 +77,26 @@ static CGFloat const kStatusBarHeight = 20;
     if (true) {
       _restartButton = [UIButton buttonWithType:UIButtonTypeCustom];
       _restartButton.backgroundColor = [UIColor grayColor];
-      [_restartButton setTitle:@"RES" forState:UIControlStateNormal];
+      [_restartButton setTitle:@"RE" forState:UIControlStateNormal];
       _restartButton.layer.cornerRadius = kButtonSize / 2;
       _restartButton.layer.masksToBounds = YES;
            [_restartButton addTarget:self
                         action:@selector(onRestart:)
               forControlEvents:UIControlEventTouchUpInside];
             [self addSubview:_restartButton];
+        
+    }
+    
+    if (true) {
+      _captureButton = [UIButton buttonWithType:UIButtonTypeCustom];
+      _captureButton.backgroundColor = [UIColor grayColor];
+      [_captureButton setTitle:@"Cap" forState:UIControlStateNormal];
+      _captureButton.layer.cornerRadius = kButtonSize / 2;
+      _captureButton.layer.masksToBounds = YES;
+           [_captureButton addTarget:self
+                        action:@selector(onCapture:)
+              forControlEvents:UIControlEventTouchUpInside];
+            [self addSubview:_captureButton];
         
     }
 
@@ -156,7 +170,13 @@ static CGFloat const kStatusBarHeight = 20;
   routeChangeFrame.origin.x =
       CGRectGetMaxX(routeChangeFrame) + kButtonPadding;
   _restartButton.frame = routeChangeFrame;
-
+  
+  CGRect capFrame = _restartButton.frame;
+  capFrame.origin.x =
+      CGRectGetMaxX(capFrame) + kButtonPadding;
+  
+  _captureButton.frame = capFrame;
+  
   [_statusLabel sizeToFit];
   _statusLabel.center =
       CGPointMake(CGRectGetMidX(bounds), CGRectGetMidY(bounds));
@@ -232,6 +252,10 @@ static CGFloat const kStatusBarHeight = 20;
 
 - (void)onRestart:(id)sender {
   [_delegate videoCallViewDidRestart:self];
+}
+
+-(void)onCapture:(id)sender {
+  [_delegate onCapture];
 }
 
 - (void)didTripleTap:(UITapGestureRecognizer *)recognizer {

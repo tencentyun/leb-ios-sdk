@@ -22,6 +22,7 @@
 // Called when stats are enabled by triple tapping.
 - (void)videoCallViewDidEnableStats:(LiveEBDemoVideoCallView *)view;
 
+-(void)onCapture;
 @end
 
 // Video call view that shows local and remote video, provides a label to

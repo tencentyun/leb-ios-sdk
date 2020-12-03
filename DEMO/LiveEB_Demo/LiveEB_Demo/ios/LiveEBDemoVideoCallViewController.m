@@ -85,6 +85,32 @@
   _isPaused = !_isPaused;
 }
 
+-(NSString*)getSavePath {
+  NSArray *path = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+  NSString *documentPath = [path firstObject];
+  NSString *defaultPath = [documentPath stringByAppendingPathComponent:@"IMG"];
+  
+  NSFileManager *fileManager = [NSFileManager defaultManager];
+  [fileManager createDirectoryAtPath:defaultPath withIntermediateDirectories:NO attributes:nil error:nil];
+  
+  return defaultPath;
+}
+
+- (void)onCapture {
+  static int index = 0;
+  UIImage* pic = [_controlDelegate captureVideoFrame];
+  if (pic != NULL) {
+    NSString *filePath = [[self getSavePath] stringByAppendingPathComponent:[NSString stringWithFormat:@"/img_%d.png", index++]];
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+      BOOL wy = [UIImagePNGRepresentation(pic) writeToFile:filePath atomically:YES];
+      
+      NSLog(@"write file wy %d", wy);
+    });
+    
+  }
+}
+
 - (void)videoCallViewDidRestart:(LiveEBDemoVideoCallView *)view {
     [_controlDelegate restart];
 }
