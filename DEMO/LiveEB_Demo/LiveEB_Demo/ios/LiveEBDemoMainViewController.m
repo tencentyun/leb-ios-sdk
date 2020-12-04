@@ -64,6 +64,7 @@ static NSString *const loopbackLaunchProcessArgument = @"loopback";
 //    liveUrl=@"webrtc://play.live.gungun8.com/live/29084_1592881372";
 //    liveUrl=@"webrtc://2001.liveplay.myqcloud.com/live/1234324124132fasdf";
 //     liveUrl = @"webrtc://140.249.28.162/flv265.3954.01.liveplay.myqcloud.com/live/9999";
+    liveUrl=@"webrtc://play.feiying24.com/live/17226_027b0978d13911e9b04e6c92bf487b62";
      useLiveEventBroadcasting = YES;
   }
     
