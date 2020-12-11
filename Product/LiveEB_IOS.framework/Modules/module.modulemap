@@ -1,0 +1,6 @@
+framework module LiveEB_IOS {
+  umbrella header "LiveEB_IOS.h"
+
+  export *
+  module * { export * }
+}

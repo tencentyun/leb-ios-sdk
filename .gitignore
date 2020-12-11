@@ -1,0 +1,19 @@
+build/build_output/
+LiveEB_Demo/Podfile.lock
+LiveEB_Demo/Pods/
+xcuserdata/
+WebRTC
+## compatibility with Xcode 8 and earlier (ignoring not required starting Xcode 9)
+*.xcscmblueprint
+*.xccheckout
+**/**.xcodeproj/xcuserdata/**
+DEMO/LiveEB_Demo/LiveEB_Demo.xcworkspace
+DEMO/LiveEB_Demo/Podfile.lock
+DEMO/LiveEB_Demo/Pods
+~$veEB SDK工程配置 (iOS).docx
+~\$veEB\ SDK工程配置\ \(iOS\).doc
+Product/Release-iphoneos/
+Product/Release-iphonesimulator/
+SRC
+DEMO/build/build_output/*
+DEMO/bin/LiveEB_Demo.ipa
