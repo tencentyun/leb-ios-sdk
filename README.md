@@ -76,6 +76,7 @@ _controlDelegate = _remoteVideoView;
 @protocol LiveEBVideoViewDelegate <NSObject>
 
 @required
+
 //错误信息回调
 - (void)videoView:(LiveEBVideoView *)videoView didError:(NSError *)error;
 
