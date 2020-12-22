@@ -91,7 +91,7 @@ _controlDelegate = _remoteVideoView;
 /*播放结束 包括主动结束和被动结束(断流等)*/
 - (void)onCompletion:(LiveEBVideoView*)videoView;
 
-/*首帧渲染回调*/
+/**首帧渲染回调*/
 - (void)onFirstFrameRender:(LiveEBVideoView*)videoView;
 
 /*统计回调*/
