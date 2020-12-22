@@ -79,7 +79,7 @@ _controlDelegate = _remoteVideoView;
 //错误信息回调
 - (void)videoView:(LiveEBVideoView *)videoView didError:(NSError *)error;
 
-/*视频大小回调*/
+//视频大小回调
 - (void)videoView:(LiveEBVideoView *)videoView didChangeVideoSize:(CGSize)size;
 
 
