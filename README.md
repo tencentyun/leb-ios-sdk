@@ -76,7 +76,7 @@ _controlDelegate = _remoteVideoView;
 @protocol LiveEBVideoViewDelegate <NSObject>
 
 @required
-/*错误信息回调*/
+//错误信息回调
 - (void)videoView:(LiveEBVideoView *)videoView didError:(NSError *)error;
 
 /*视频大小回调*/
@@ -85,16 +85,16 @@ _controlDelegate = _remoteVideoView;
 
 @optional
 
-/*播放准备*/
+//播放准备
 - (void)onPrepared:(LiveEBVideoView*)videoView;
 
-/*播放结束 包括主动结束和被动结束(断流等)*/
+//播放结束 包括主动结束和被动结束(断流等)
 - (void)onCompletion:(LiveEBVideoView*)videoView;
 
-/**首帧渲染回调*/
+//首帧渲染回调
 - (void)onFirstFrameRender:(LiveEBVideoView*)videoView;
 
-/*统计回调*/
+//统计回调
 - (void)showStats:(LiveEBVideoView *)videoView statReport:(LEBStatReport*)statReport;
 
 @end
