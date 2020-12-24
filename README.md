@@ -72,4 +72,31 @@ _controlDelegate = _remoteVideoView;
 ### 4 释放sdk.
 -(void)finitSDK;
 
+### 5 事件回调.
+@protocol LiveEBVideoViewDelegate <NSObject>
+
+@required
+
+//错误信息回调
+- (void)videoView:(LiveEBVideoView *)videoView didError:(NSError *)error;
+
+//视频大小回调
+- (void)videoView:(LiveEBVideoView *)videoView didChangeVideoSize:(CGSize)size;
+
+
+@optional
+
+//播放准备
+- (void)onPrepared:(LiveEBVideoView*)videoView;
+
+//播放结束 包括主动结束和被动结束(断流等)
+- (void)onCompletion:(LiveEBVideoView*)videoView;
+
+//首帧渲染回调
+- (void)onFirstFrameRender:(LiveEBVideoView*)videoView;
+
+//统计回调
+- (void)showStats:(LiveEBVideoView *)videoView statReport:(LEBStatReport*)statReport;
+
+@end
 
