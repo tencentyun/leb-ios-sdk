@@ -58,8 +58,13 @@
     
     
     __weak typeof(self) weakSelf = self;
-    [[LiveEBManager sharedManager] initSDK:weakSelf minDebugLogLevel:LiveEBLogLevelInfo];
-    [LiveEBManager sharedManager].clientInfo = @"clientinfo_test";
+//    [[LiveEBManager sharedManager] initSDK:weakSelf minDebugLogLevel:LiveEBLogLevelInfo];
+  
+  NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+  NSString *documentDirPath = [paths firstObject];
+  NSString *defaultDirPath = [documentDirPath stringByAppendingPathComponent:@"lebsdk_logs"];
+  [[LiveEBManager sharedManager] initSDK:defaultDirPath maxFileSize:kDefaultMaxFileSize minDebugLogLevel:LiveEBLogLevelInfo];
+  [LiveEBManager sharedManager].clientInfo = @"clientinfo_test";
     
   _window =  [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
   [_window makeKeyAndVisible];

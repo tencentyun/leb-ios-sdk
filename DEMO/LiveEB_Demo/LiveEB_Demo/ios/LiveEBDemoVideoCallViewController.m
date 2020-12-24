@@ -54,6 +54,7 @@
     
     
     [_controlDelegate start];
+    //[_controlDelegate start];
 
 }
 
@@ -65,7 +66,7 @@
 
 - (void)videoCallViewDidHangup:(LiveEBDemoVideoCallView *)view {
   [_controlDelegate stop];
-  
+
   [self hangup];
 }
 

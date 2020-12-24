@@ -76,6 +76,8 @@ typedef enum {
 @end
 
 
+static const int64_t  kDefaultMaxFileSize = 10 * 1024 * 1024; // 10MB.
+
 @interface LiveEBManager : NSObject
 
 ///【字段含义】播放器遭遇网络连接断开时 SDK 默认重试的次数，取值范围1 - 10，默认值：3。
@@ -85,12 +87,20 @@ typedef enum {
 @property(nonatomic, assign) int connectRetryInterval;
 
 
-
-
 + (instancetype)sharedManager;
 
 @property (nonatomic, copy) NSString *clientInfo;
 
+/**
+ * dirPath  日志保存目录
+ * maxFileSize  最大日志文件
+ * minDebugLogLevel  日志等级
+ */
+-(void)initSDK:(NSString*)dirPath maxFileSize:(uint32_t)maxFileSize minDebugLogLevel:(LiveEBLogLevel)minDebugLogLevel;
+
+/***
+ * deprecated
+ */
 -(void)initSDK:(id<LiveEBLogDelegate>) logDelegate minDebugLogLevel:(LiveEBLogLevel)minDebugLogLevel;
 
 -(void)finitSDK;
