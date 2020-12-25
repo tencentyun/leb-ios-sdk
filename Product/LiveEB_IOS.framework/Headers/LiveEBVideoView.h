@@ -31,6 +31,13 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 
+typedef NS_ENUM(NSInteger, LEBVideoRotation) {
+  LEBVideoRotation_0 = 0,
+  LEBVideoRotation_90 = 90,
+  LEBVideoRotation_180 = 180,
+  LEBVideoRotation_270 = 270,
+};
+
 @protocol LiveEBVideoViewControllerDelegate <NSObject>
 @required
     -(void)start;
@@ -57,6 +64,9 @@ NS_ASSUME_NONNULL_BEGIN
     
     /*获取截图*/
     -(UIImage*)captureVideoFrame;
+    
+    /*旋转*/
+    - (void)setRenderRotation:(LEBVideoRotation)rotation;
 @end
 
 @protocol LiveEBVideoViewDelegate <NSObject>

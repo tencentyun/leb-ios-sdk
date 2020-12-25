@@ -23,6 +23,8 @@ static CGFloat const kStatusBarHeight = 20;
   UIButton *_pauseResumeButton;
   UIButton *_restartButton;
   UIButton *_captureButton;
+  UIButton *_rotationBtn;
+  
   CGSize _remoteVideoSize;
 }
 
@@ -33,7 +35,7 @@ static CGFloat const kStatusBarHeight = 20;
   if (self = [super initWithFrame:frame]) {
       
       self.backgroundColor = [UIColor blackColor];
-      _remoteVideoView2 = [LiveEBVideoView new];
+      _remoteVideoView2 = [[LiveEBVideoView alloc] init];
       _remoteVideoView2.delegate = self;
       
       [self addSubview:_remoteVideoView2];
@@ -87,7 +89,6 @@ static CGFloat const kStatusBarHeight = 20;
         
     }
     
-    if (true) {
       _captureButton = [UIButton buttonWithType:UIButtonTypeCustom];
       _captureButton.backgroundColor = [UIColor grayColor];
       [_captureButton setTitle:@"Cap" forState:UIControlStateNormal];
@@ -98,7 +99,16 @@ static CGFloat const kStatusBarHeight = 20;
               forControlEvents:UIControlEventTouchUpInside];
             [self addSubview:_captureButton];
         
-    }
+    
+    
+    _rotationBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    _rotationBtn.backgroundColor = [UIColor grayColor];
+    _rotationBtn.layer.cornerRadius = kButtonSize / 2;
+    _rotationBtn.layer.masksToBounds = YES;
+    [_rotationBtn setTitle:@"RA" forState:UIControlStateNormal];
+    [_rotationBtn addTarget:self action:@selector(onRotation:) forControlEvents:UIControlEventTouchUpInside];
+    [self addSubview:_rotationBtn];
+    
 
     _statusLabel = [[UILabel alloc] initWithFrame:CGRectZero];
     _statusLabel.font = [UIFont fontWithName:@"Roboto" size:16];
@@ -132,6 +142,9 @@ static CGFloat const kStatusBarHeight = 20;
 
 - (void)layoutSubviews {
   CGRect bounds = self.bounds;
+  NSLog(@"LiveEB view layoutSubviews x%f %f : w:%f h:%f %f %f",
+        bounds.origin.x, bounds.origin.y, bounds.size.width, bounds.size.height, _remoteVideoSize.width, _remoteVideoSize.height);
+        
   if (_remoteVideoSize.width > 0 && _remoteVideoSize.height > 0) {
     // Aspect fill remote video into bounds.
     CGRect remoteVideoFrame =
@@ -180,6 +193,12 @@ static CGFloat const kStatusBarHeight = 20;
       CGRectGetMaxX(capFrame) + kButtonPadding;
   
   _captureButton.frame = capFrame;
+  
+  
+  CGRect rotationFrame = _captureButton.frame;
+  rotationFrame.origin.x =
+      CGRectGetMaxX(rotationFrame) + kButtonPadding;
+  _rotationBtn.frame = rotationFrame;
   
   [_statusLabel sizeToFit];
   _statusLabel.center =
@@ -241,6 +260,21 @@ static CGFloat const kStatusBarHeight = 20;
 }
 
 #pragma mark - Private
+
+-(void)onRotation:(id)sender {
+  static BOOL rotate = false;
+  if (!rotate) {
+    rotate = true;
+    
+    
+    [_remoteVideoView2 setRenderRotation:LEBVideoRotation_90];
+  } else {
+    rotate = false;
+    
+    [_remoteVideoView2 setRenderRotation:LEBVideoRotation_0];
+  }
+  
+}
 
 - (void)onRouteChange:(id)sender {
   [_delegate videoCallViewDidChangeRoute:self];
