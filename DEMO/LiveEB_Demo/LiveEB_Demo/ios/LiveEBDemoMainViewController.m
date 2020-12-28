@@ -66,6 +66,7 @@ static NSString *const loopbackLaunchProcessArgument = @"loopback";
 //     liveUrl = @"webrtc://140.249.28.162/flv265.3954.01.liveplay.myqcloud.com/live/9999";
     liveUrl=@"webrtc://play.feiying24.com/live/17226_027b0978d13911e9b04e6c92bf487b62";
     liveUrl=@"webrtc://play.feiying24.com/live/17226_a42d4a843d0211ebb04e6c92bf487b62";
+//    liveUrl=@"webrtc://test-play.gamematrix.qq.com/game/bvprj4vsktvsuf68shenzhen0011-7yujup5une3x2j8r_SET-SZ-200206190604718981_1609122860?txSecret=2a6b4b0623c51c9cef6707f330bec481&txTime=5FEA8EA4";
      useLiveEventBroadcasting = YES;
   }
     

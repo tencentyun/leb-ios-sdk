@@ -53,24 +53,9 @@ typedef enum {
  日志打印接口
  
  @param logLevel 日志打印级别
- @param tag 日志tag
- @param file 文件名称
- @param function 函数名称
- @param line 代码行
- @param format format
- @param args args
+ @param log log
  */
-- (void)logWithLevel:(LiveEBLogLevel)logLevel
-                 tag:(NSString *)tag
-                file:(const char *)file
-            function:(const char *)function
-                line:(NSUInteger)line
-              format:(NSString *)format
-                args:(va_list)args;
-
-/**
-内部日志打印模块还未完善
- */
+- (void)logWithLevel:(LiveEBLogLevel)logLevel log:(NSString *)log;
 
 
 @end
@@ -86,6 +71,12 @@ static const int64_t  kDefaultMaxFileSize = 10 * 1024 * 1024; // 10MB.
 ///【字段含义】网络重连的时间间隔，单位秒，取值范围3 - 30，默认值：1。
 @property(nonatomic, assign) int connectRetryInterval;
 
+///audio jitter buffer max size. default 20
+@property(nonatomic, assign) int audioJitterBufferMaxPackets;
+
+///audio acceerate default true
+@property(nonatomic, assign) BOOL audioJitterBufferFastAccelerate;
+
 
 + (instancetype)sharedManager;
 
@@ -98,10 +89,15 @@ static const int64_t  kDefaultMaxFileSize = 10 * 1024 * 1024; // 10MB.
  */
 -(void)initSDK:(NSString*)dirPath maxFileSize:(uint32_t)maxFileSize minDebugLogLevel:(LiveEBLogLevel)minDebugLogLevel;
 
+-(void)initSDK:(NSString*)dirPath maxFileSize:(uint32_t)maxFileSize minDebugLogLevel:(LiveEBLogLevel)minDebugLogLevel
+   fieldTrials:( NSDictionary<NSString *, NSString *> * __nullable)fieldTrials ;
 /***
- * deprecated
+ *  logDelegate 日志回调
  */
 -(void)initSDK:(id<LiveEBLogDelegate>) logDelegate minDebugLogLevel:(LiveEBLogLevel)minDebugLogLevel;
+
+-(void)initSDK:(id<LiveEBLogDelegate>) logDelegate minDebugLogLevel:(LiveEBLogLevel)minDebugLogLevel
+      fieldTrials:(NSDictionary<NSString *, NSString *> * __nullable)fieldTrials;
 
 -(void)finitSDK;
 
