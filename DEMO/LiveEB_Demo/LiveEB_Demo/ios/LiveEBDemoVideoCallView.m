@@ -267,7 +267,7 @@ static CGFloat const kStatusBarHeight = 20;
     rotate = true;
     
     
-    [_remoteVideoView2 setRenderRotation:LEBVideoRotation_90];
+    [_remoteVideoView2 setRenderRotation:LEBVideoRotation_270];
   } else {
     rotate = false;
     
