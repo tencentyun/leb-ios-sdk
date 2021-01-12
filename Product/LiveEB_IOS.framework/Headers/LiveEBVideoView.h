@@ -51,10 +51,12 @@ typedef NS_ENUM(NSInteger, LEBVideoRotation) {
     -(CGFloat)setVolume:(CGFloat)volume;
 
     -(void)setAudioMute:(BOOL)mute;
+
+    -(void)setVideoPaused:(BOOL)paused;
     
     - (void)restart;
 
-    /*开启调试信息*/
+    /*开启统计回*/
     -(void)setStatState:(BOOL)stat;
 
     -(void)setWebRTCConfiguration:(LiveEBAudioSessionConfiguration *)configuration;
