@@ -3,6 +3,8 @@
 #import "UIImage+LiveEBUtilities.h"
 #import "LiveEBDemoDropDownTextView.h"
 
+#import <WebRTC/WebRTC.h>
+
 static CGFloat const kRoomTextFieldHeight = 40;
 static CGFloat const kRoomTextFieldMargin = 8;
 static CGFloat const kCallControlMargin = 18;

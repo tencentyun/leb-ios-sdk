@@ -87,8 +87,11 @@ typedef NS_ENUM(NSInteger, LEBVideoRotation) {
 
 - (void)onFirstFrameRender:(LiveEBVideoView*)videoView;
 
-
+/*统计接口*/
 - (void)showStats:(LiveEBVideoView *)videoView statReport:(LEBStatReport*)statReport;
+
+/*统计接口 补充*/
+- (void)showStats:(LiveEBVideoView *)videoView rtcStatReport:(LEBRTCStatReport*)rtcStatReport;
 
 /*调试信息回调 deprecated*/
 - (void)showStats:(LiveEBVideoView *)videoView stat:(NSArray*)stat;

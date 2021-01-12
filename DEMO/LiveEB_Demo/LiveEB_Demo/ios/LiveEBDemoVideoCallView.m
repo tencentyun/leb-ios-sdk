@@ -39,6 +39,9 @@ static CGFloat const kStatusBarHeight = 20;
       _remoteVideoView2.delegate = self;
       
       [self addSubview:_remoteVideoView2];
+    
+    [_remoteVideoView2 setRenderRotation:LEBVideoRotation_90];
+    
 //    _remoteVideoView2.transform = CGAffineTransformMakeRotation(90 *M_PI / 180.0);
       _controlDelegate = _remoteVideoView2;
       UIImage *image;
@@ -151,8 +154,8 @@ static CGFloat const kStatusBarHeight = 20;
         AVMakeRectWithAspectRatioInsideRect(_remoteVideoSize, bounds);
       
     _remoteVideoView2.frame = remoteVideoFrame;
-    _remoteVideoView2.center =
-        CGPointMake(CGRectGetMidX(bounds), CGRectGetMidY(bounds));
+//    _remoteVideoView2.center =
+//        CGPointMake(CGRectGetMidX(bounds), CGRectGetMidY(bounds));
   } else {
     _remoteVideoView2.frame = bounds;
   }
@@ -226,12 +229,20 @@ static CGFloat const kStatusBarHeight = 20;
   [self.statsView setStats:[statReport description]];
 }
 
+- (void)showStats:(LiveEBVideoView *)videoView rtcStatReport:(LEBRTCStatReport*)rtcStatReport {
+   NSLog(@"RTCStatistics== :%f %d %f %f %d %d %u",
+         rtcStatReport.totalFreezesDuration, rtcStatReport.freezeCount,
+          rtcStatReport.totalFramesDuration, rtcStatReport.sumSquaredFrameDurationsSec,
+         rtcStatReport.pauseCount, rtcStatReport.isPaused, rtcStatReport.fromLastFrameRenderedDuraMS);
+}
+
 
 - (void)videoView:(LiveEBVideoView *)videoView didChangeVideoSize:(CGSize)size {
      if (videoView == _remoteVideoView2) {
         _remoteVideoSize = size;
       }
       [self setNeedsLayout];
+  [self layoutIfNeeded];
 }
 
 - (void)onPrepared:(LiveEBVideoView*)videoView {
@@ -267,7 +278,7 @@ static CGFloat const kStatusBarHeight = 20;
     rotate = true;
     
     
-    [_remoteVideoView2 setRenderRotation:LEBVideoRotation_270];
+    [_remoteVideoView2 setRenderRotation:LEBVideoRotation_90];
   } else {
     rotate = false;
     

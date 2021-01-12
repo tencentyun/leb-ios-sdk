@@ -67,9 +67,10 @@ static NSString *const loopbackLaunchProcessArgument = @"loopback";
 //     liveUrl = @"webrtc://140.249.28.162/flv265.3954.01.liveplay.myqcloud.com/live/9999";
 //    liveUrl=@"webrtc://play.feiying24.com/live/17226_027b0978d13911e9b04e6c92bf487b62";
 //    liveUrl=@"webrtc://play.feiying24.com/live/17226_a42d4a843d0211ebb04e6c92bf487b62";
-    liveUrl=@"webrtc://3954.liveplay.myqcloud.com/live/9999?txSecret=1d33eb2ac32e91a6a4a4f69f5d7c1d5a&txTime=5ff28375";
+//    liveUrl=@"webrtc://3954.liveplay.myqcloud.com/live/9999?txSecret=1d33eb2ac32e91a6a4a4f69f5d7c1d5a&txTime=5ff28375";
      
 //    liveUrl=@"webrtc://test-play.gamematrix.qq.com/game/bvprj4vsktvsuf68shenzhen0013-mf2vkkf7qhfd2xzw_SET-SZ-200206190604718981_1609329526?txSecret=05d2a6cf8c0bbddbd01cec85805fcbc1&txTime=5FEDB5EE";
+    liveUrl = @"webrtc://5664.liveplay.myqcloud.com/live/5664_harchar3";
     useLiveEventBroadcasting = YES;
   }
     
