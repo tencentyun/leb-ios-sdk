@@ -8,18 +8,22 @@
 #import "LiveEBDemoMainView.h"
 #import "LiveEBDemoVideoCallViewController.h"
 #import <map>
+#import "LiveEBDebugView.h"
 
 static NSString *const barButtonImageString = @"ic_settings_black_24dp.png";
 
 // Launch argument to be passed to indicate that the app should start loopback immediatly
 static NSString *const loopbackLaunchProcessArgument = @"loopback";
 
-@interface LiveEBDemoMainViewController () <
+@interface LiveEBDemoMainViewController ()
+<
     LiveEBDemoMainViewDelegate,
     LiveEBDemoVideoCallViewControllerDelegate
 >
 
 @property(nonatomic, strong) LiveEBDemoMainView *mainView;
+
+@property(nonatomic, strong) LiveEBDebugView *mainView2;
 
 @end
 
@@ -32,17 +36,36 @@ static NSString *const loopbackLaunchProcessArgument = @"loopback";
 
 - (void)viewDidLoad {
   [super viewDidLoad];
-  if ([[[NSProcessInfo processInfo] arguments] containsObject:loopbackLaunchProcessArgument]) {
-    [self mainView:nil didInputRoom:@"" didInputHost:@"" isLoopback:YES];
-  }
+  
+  self.title = @"腾讯云快直播Demo";
+//
+  CGFloat width = CGRectGetWidth(self.view.bounds);
+  CGFloat height = CGRectGetHeight(self.view.bounds);
+  LiveEBDebugView *view = [[LiveEBDebugView alloc] initWithFrame:CGRectMake(0, 0, width, height)];
+  view.delegate = self;
+  
+//    LiveEBDemoMainView *view = [[LiveEBDemoMainView alloc] initWithFrame:CGRectMake(0, 0, width, height)];
+//    view.delegate = self;
+  
+  [self.view addSubview:view];
+  
+//  if ([[[NSProcessInfo processInfo] arguments] containsObject:loopbackLaunchProcessArgument]) {
+//    [self mainView:nil didInputRoom:@"" didInputHost:@"" isLoopback:YES];
+//  }
+//
+  NSLog(@"layoutSubviews loadView");
+  
 }
 
-- (void)loadView {
-  self.title = @"xbright Live Event Broadcasting";
-  _mainView = [[LiveEBDemoMainView alloc] initWithFrame:CGRectZero];
-  _mainView.delegate = self;
-  self.view = _mainView;
-}
+//- (void)loadView {
+//
+////  _mainView = [[LiveEBDemoMainView alloc] initWithFrame:CGRectZero];
+////  _mainView.delegate = self;
+//
+//
+//
+////  self.view = _mainView;
+//}
 
 + (NSString *)loopbackRoomString {
   NSString *loopbackRoomString =
@@ -71,6 +94,7 @@ static NSString *const loopbackLaunchProcessArgument = @"loopback";
      
 //    liveUrl=@"webrtc://test-play.gamematrix.qq.com/game/bvprj4vsktvsuf68shenzhen0013-mf2vkkf7qhfd2xzw_SET-SZ-200206190604718981_1609329526?txSecret=05d2a6cf8c0bbddbd01cec85805fcbc1&txTime=5FEDB5EE";
     liveUrl = @"webrtc://5664.liveplay.myqcloud.com/live/5664_harchar3";
+//    liveUrl =@"webrtc://play.xroom.net/live/B18767-5-main-304374";
     useLiveEventBroadcasting = YES;
   }
     

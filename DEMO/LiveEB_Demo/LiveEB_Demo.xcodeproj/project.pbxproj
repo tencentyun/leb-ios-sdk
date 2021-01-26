@@ -38,6 +38,7 @@
 		51A25F37244018B6008DD31C /* LiveEBDemoMainView.m in Sources */ = {isa = PBXBuildFile; fileRef = 51A25F29244018B5008DD31C /* LiveEBDemoMainView.m */; };
 		51A25F39244018B6008DD31C /* LiveEBDemoVideoCallViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51A25F2E244018B6008DD31C /* LiveEBDemoVideoCallViewController.m */; };
 		51A2A0852473E02A007EB9A7 /* LiveEBDemoStatView.m in Sources */ = {isa = PBXBuildFile; fileRef = 51A2A0842473E02A007EB9A7 /* LiveEBDemoStatView.m */; };
+		51D8A6DA25BFF62C00DA4634 /* LiveEBDebugView.m in Sources */ = {isa = PBXBuildFile; fileRef = 51D8A6D925BFF62C00DA4634 /* LiveEBDebugView.m */; };
 		A5B8C14D708BFDE5A706C943 /* libPods-LiveEB_Demo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B747334FBF8D3D5E77000B4B /* libPods-LiveEB_Demo.a */; settings = {ATTRIBUTES = (Required, ); }; };
 /* End PBXBuildFile section */
 
@@ -97,6 +98,8 @@
 		51A25F2E244018B6008DD31C /* LiveEBDemoVideoCallViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LiveEBDemoVideoCallViewController.m; sourceTree = "<group>"; };
 		51A2A0832473E02A007EB9A7 /* LiveEBDemoStatView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LiveEBDemoStatView.h; sourceTree = "<group>"; };
 		51A2A0842473E02A007EB9A7 /* LiveEBDemoStatView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LiveEBDemoStatView.m; sourceTree = "<group>"; };
+		51D8A6D825BFF62C00DA4634 /* LiveEBDebugView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LiveEBDebugView.h; sourceTree = "<group>"; };
+		51D8A6D925BFF62C00DA4634 /* LiveEBDebugView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LiveEBDebugView.m; sourceTree = "<group>"; };
 		B2BD63F89B7A70F68628D140 /* Pods-LiveEB_Demo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LiveEB_Demo.release.xcconfig"; path = "Target Support Files/Pods-LiveEB_Demo/Pods-LiveEB_Demo.release.xcconfig"; sourceTree = "<group>"; };
 		B747334FBF8D3D5E77000B4B /* libPods-LiveEB_Demo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LiveEB_Demo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B94DA6B1EF14A22F380BF853 /* Pods-LiveEB_Demo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LiveEB_Demo.debug.xcconfig"; path = "Target Support Files/Pods-LiveEB_Demo/Pods-LiveEB_Demo.debug.xcconfig"; sourceTree = "<group>"; };
@@ -187,6 +190,8 @@
 		51A25EF72440189D008DD31C /* ios */ = {
 			isa = PBXGroup;
 			children = (
+				51D8A6D825BFF62C00DA4634 /* LiveEBDebugView.h */,
+				51D8A6D925BFF62C00DA4634 /* LiveEBDebugView.m */,
 				51A25F1F244018B5008DD31C /* LiveEBDemoMainView.h */,
 				51A25F29244018B5008DD31C /* LiveEBDemoMainView.m */,
 				51A25F25244018B5008DD31C /* LiveEBDemoMainViewController.h */,
@@ -350,6 +355,7 @@
 				51801B10243D820100B6D7A5 /* ViewController.m in Sources */,
 				51A25F34244018B6008DD31C /* LiveEBDemoVideoCallView.m in Sources */,
 				51A25F37244018B6008DD31C /* LiveEBDemoMainView.m in Sources */,
+				51D8A6DA25BFF62C00DA4634 /* LiveEBDebugView.m in Sources */,
 				51801B0A243D820100B6D7A5 /* AppDelegate.m in Sources */,
 				51A25F32244018B6008DD31C /* LiveEBDemoDropDownTextView.m in Sources */,
 				51801B1B243D820200B6D7A5 /* main.m in Sources */,

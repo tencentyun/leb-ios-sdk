@@ -126,6 +126,10 @@ if (self = [super initWithFrame:frame]) {
 
            [self addSubview:_textField];
 }
+  
+  
+  NSLog(@"initWithFrame %f", self.frame.size.height);
+  
     return self;
 
 }
@@ -152,24 +156,27 @@ if (self = [super initWithFrame:frame]) {
 }
 
 - (void)layoutSubviews  {
-    NSLog(@"layoutSubviews");
+  NSLog(@"layoutSubviews %f", self.frame.size.height);
     
-    if (self.frame.size.height<100) {
-        
-        tabCellHeight = 50;
-        frameHeight = 100;
+  tabCellHeight = 50;
+  frameHeight = 100;
+  
+//    if (self.frame.size.height<100) {
+//
+//        tabCellHeight = 50;
+//        frameHeight = 100;
+//
+//    }else{
+//
+//        frameHeight = self.frame.size.height;
 
-    }else{
-
-        frameHeight = self.frame.size.height;
-
-    }
+//    }
 
     tabheight = frameHeight-tabCellHeight;
 
     _tv.frame = CGRectMake(0, tabCellHeight, self.frame.size.width, tabheight);
     _textField.frame = CGRectMake(0, 0, self.frame.size.width, tabCellHeight);
-    //self.frame.size.height = tabCellHeight;
+//    self.frame.size.height = tabCellHeight;
 
     //self.frame.size.height = 200;
 
@@ -192,6 +199,8 @@ if (self = [super initWithFrame:frame]) {
         CGRect frame = self.frame;
        frame.size.height = frameHeight;
         self.frame = frame;
+      
+      
         return;
 
     }else {//如果下拉框尚未显示，则进行显示
@@ -308,7 +317,7 @@ if (self = [super initWithFrame:frame]) {
 
     _tv.hidden = YES;
 
-    
+    [self.textField resignFirstResponder];
 
     CGRect sf = self.frame;
     sf.size.height = tabCellHeight;
