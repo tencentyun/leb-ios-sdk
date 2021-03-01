@@ -11,9 +11,9 @@
 #import <UIKit/UIKit.h>
 #endif
 
-#import <WebRTC/RTCEAGLVideoView.h>
+#import <TWEBRTC/TWEBRTC.h>
 #if defined(RTC_SUPPORTS_METAL)
-#import <WebRTC/RTCMTLVideoView.h>
+#import <TWEBRTC/RTCMTLVideoView.h>
 #endif
 
 #import "LEBStatReport.h"
