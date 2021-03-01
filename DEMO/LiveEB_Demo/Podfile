@@ -9,9 +9,9 @@ target 'LiveEB_Demo' do
  
  pod 'TWebRTC', :git=>'https://github.com/tencentyun/TWebRTC-IOS-SDK.git' , :tag => '2.1.9'
 #
-# pod 'LiveEB_IOS', :git=>'https://github.com/tencentyun/leb-ios-sdk.git' , :tag => '2.1.8'
+ pod 'LiveEB_IOS', :git=>'https://github.com/tencentyun/leb-ios-sdk.git' , :tag => '2.1.9'
 
 # pod 'TWebRTC', :path=>'./../../../leb-ios-src/SRC'
-pod 'LiveEB_IOS', :path=>'./../../../leb-ios-src/SRC/LiveEB_IOS'
+#pod 'LiveEB_IOS', :path=>'./../../../leb-ios-src/SRC/LiveEB_IOS'
   
 end
