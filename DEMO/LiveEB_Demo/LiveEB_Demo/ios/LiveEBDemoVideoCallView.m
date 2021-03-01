@@ -24,6 +24,7 @@ static CGFloat const kStatusBarHeight = 20;
   UIButton *_restartButton;
   UIButton *_captureButton;
   UIButton *_rotationBtn;
+  UIButton *_renderBtn;
   
   CGSize _remoteVideoSize;
 }
@@ -38,9 +39,10 @@ static CGFloat const kStatusBarHeight = 20;
       _remoteVideoView2 = [[LiveEBVideoView alloc] init];
       _remoteVideoView2.delegate = self;
       
+      
       [self addSubview:_remoteVideoView2];
-    
-    [_remoteVideoView2 setRenderRotation:LEBVideoRotation_90];
+      [_remoteVideoView2 setRenderMode:LEBVideoRenderMode_ScaleAspect_FIT];
+//    [_remoteVideoView2 setRenderRotation:LEBVideoRotation_90];
     
 //    _remoteVideoView2.transform = CGAffineTransformMakeRotation(90 *M_PI / 180.0);
       _controlDelegate = _remoteVideoView2;
@@ -82,7 +84,7 @@ static CGFloat const kStatusBarHeight = 20;
     if (true) {
       _restartButton = [UIButton buttonWithType:UIButtonTypeCustom];
       _restartButton.backgroundColor = [UIColor grayColor];
-      [_restartButton setTitle:@"RE" forState:UIControlStateNormal];
+      [_restartButton setTitle:@"RS" forState:UIControlStateNormal];
       _restartButton.layer.cornerRadius = kButtonSize / 2;
       _restartButton.layer.masksToBounds = YES;
            [_restartButton addTarget:self
@@ -111,6 +113,16 @@ static CGFloat const kStatusBarHeight = 20;
     [_rotationBtn setTitle:@"RA" forState:UIControlStateNormal];
     [_rotationBtn addTarget:self action:@selector(onRotation:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_rotationBtn];
+    
+    
+    _renderBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    _renderBtn.backgroundColor = [UIColor grayColor];
+    _renderBtn.layer.cornerRadius = kButtonSize / 2;
+    _renderBtn.layer.masksToBounds = YES;
+    [_renderBtn setTitle:@"RE" forState:UIControlStateNormal];
+    [_renderBtn addTarget:self action:@selector(onRotation:) forControlEvents:UIControlEventTouchUpInside];
+    [self addSubview:_renderBtn];
+       
     
 
     _statusLabel = [[UILabel alloc] initWithFrame:CGRectZero];
@@ -145,7 +157,7 @@ static CGFloat const kStatusBarHeight = 20;
 
 - (void)layoutSubviews {
   CGRect bounds = self.bounds;
-  NSLog(@"LiveEB view layoutSubviews x%f %f : w:%f h:%f %f %f",
+  LiveEBLogInfo("LiveEB view layoutSubviews x%f %f : w:%f h:%f %f %f",
         bounds.origin.x, bounds.origin.y, bounds.size.width, bounds.size.height, _remoteVideoSize.width, _remoteVideoSize.height);
         
   if (_remoteVideoSize.width > 0 && _remoteVideoSize.height > 0) {
@@ -160,7 +172,7 @@ static CGFloat const kStatusBarHeight = 20;
     _remoteVideoView2.frame = bounds;
   }
 
-  NSLog(@"LiveEB view [ %f %f] x=%f y=%f width=%f height=%f _remoteVideoSize:%f %f ",
+  LiveEBLogInfo("LiveEB view [ %f %f] x=%f y=%f width=%f height=%f _remoteVideoSize:%f %f ",
         _remoteVideoView2.center.x, _remoteVideoView2.center.y, _remoteVideoView2.frame.origin.x,
         _remoteVideoView2.frame.origin.y, _remoteVideoView2.frame.size.width, _remoteVideoView2.frame.size.height
         ,_remoteVideoSize.width, _remoteVideoSize.height);

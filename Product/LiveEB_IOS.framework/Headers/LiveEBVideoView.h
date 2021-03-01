@@ -38,6 +38,11 @@ typedef NS_ENUM(NSInteger, LEBVideoRotation) {
   LEBVideoRotation_270 = 270,
 };
 
+typedef NS_ENUM(NSInteger, LEBVideoRenderMode) {
+    LEBVideoRenderMode_ScaleAspect_FILL  = 0,
+    LEBVideoRenderMode_ScaleAspect_FIT
+};
+
 @protocol LiveEBVideoViewControllerDelegate <NSObject>
 @required
     -(void)start;
@@ -69,6 +74,8 @@ typedef NS_ENUM(NSInteger, LEBVideoRotation) {
     
     /*旋转*/
     - (void)setRenderRotation:(LEBVideoRotation)rotation;
+
+    - (void)setRenderMode:(LEBVideoRenderMode)renderMode;
 @end
 
 @protocol LiveEBVideoViewDelegate <NSObject>

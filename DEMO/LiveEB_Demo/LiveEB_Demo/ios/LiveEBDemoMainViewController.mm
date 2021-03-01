@@ -93,25 +93,13 @@ static NSString *const loopbackLaunchProcessArgument = @"loopback";
 //    liveUrl=@"webrtc://3954.liveplay.myqcloud.com/live/9999?txSecret=1d33eb2ac32e91a6a4a4f69f5d7c1d5a&txTime=5ff28375";
      
 //    liveUrl=@"webrtc://test-play.gamematrix.qq.com/game/bvprj4vsktvsuf68shenzhen0013-mf2vkkf7qhfd2xzw_SET-SZ-200206190604718981_1609329526?txSecret=05d2a6cf8c0bbddbd01cec85805fcbc1&txTime=5FEDB5EE";
-    liveUrl = @"webrtc://5664.liveplay.myqcloud.com/live/5664_harchar3";
+    liveUrl = @"webrtc://5664.liveplay.myqcloud.com/live/5664_harchar1";
 //    liveUrl =@"webrtc://play.xroom.net/live/B18767-5-main-304374";
     useLiveEventBroadcasting = YES;
   }
     
   
-   std::map<uint32_t, uint32_t> timestampDataMap_;
-      timestampDataMap_[0] = 0;
-      timestampDataMap_[3] = 3;
-      timestampDataMap_[4] = 4;
-      timestampDataMap_[2] = 2;
-      timestampDataMap_[1] = 1;
-      
-  //    auto it = TimestampDataMap_.begin();
-      
-      for (std::map<uint32_t, uint32_t>::iterator it = timestampDataMap_.begin(); it != timestampDataMap_.end(); it++) {
-        NSLog(@"layoutSubviews TimestampDataMap_ %d %d", it->first, it->second);
-        
-      }
+  
   
   if (!rtcHost.length) {
     rtcHost = @"https://webrtc.liveplay.myqcloud.com";

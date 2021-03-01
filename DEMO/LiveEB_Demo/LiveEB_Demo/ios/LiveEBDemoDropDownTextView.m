@@ -115,7 +115,7 @@ if (self = [super initWithFrame:frame]) {
             _textField.placeholder = self.hintText;
             //[_textField setValue:[UIColor greenColor] forKeyPath:@"_placeholderLabel.textColor"];
     
-            _textField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:self.hintText attributes:@{NSForegroundColorAttributeName: [UIColor greenColor]}];
+            _textField.attributedPlaceholder = [[NSAttributedString alloc] initWithString:self.hintText attributes:@{NSForegroundColorAttributeName: [UIColor blackColor]}];
     
            _textField.autocorrectionType = UITextAutocorrectionTypeNo;
            _textField.autocapitalizationType = UITextAutocapitalizationTypeNone;

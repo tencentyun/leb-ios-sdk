@@ -20,6 +20,9 @@ typedef enum {
     LiveEBLogLevelNone,
 } LiveEBLogLevel;
 
+void LiveEBLogEx(LiveEBLogLevel severity, NSString* log_string);
+NSString* LiveEBLogFileName(const char* file_path);
+
 #define LiveEBLogString(format, ...)                                              \
   [NSString stringWithFormat:@"(%@:%d %s): " format, LiveEBLogFileName(__FILE__), \
                              __LINE__, __FUNCTION__, ##__VA_ARGS__]
@@ -34,10 +37,10 @@ typedef enum {
   LiveEBLogFormat(LiveEBLogLevelDebug, format, ##__VA_ARGS__)
 
 #define LiveEBLogInfo(format, ...) \
-  RTCLogFormat(LiveEBLogLevelInfo, format, ##__VA_ARGS__)
+  LiveEBLogFormat(LiveEBLogLevelInfo, format, ##__VA_ARGS__)
 
 #define LiveEBLogWarning(format, ...) \
-  RTCLogFormat(LiveEBLogLevelWarning, format, ##__VA_ARGS__)
+  LiveEBLogFormat(LiveEBLogLevelWarning, format, ##__VA_ARGS__)
 
 #define LiveEBLogError(format, ...) \
   LiveEBLogFormat(LiveEBLogLevelError, format, ##__VA_ARGS__)

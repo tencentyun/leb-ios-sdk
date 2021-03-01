@@ -10,42 +10,24 @@
 #import "UIImage+LiveEBUtilities.h"
 #import "LiveEBDemoDropDownTextView.h"
 
+#define SCREEN_WIDTH [UIScreen mainScreen].bounds.size.width
+
 static CGFloat const kRoomTextFieldHeight = 40;
 static CGFloat const kRoomTextFieldMargin = 8;
 static CGFloat const kCallControlMargin = 18;
 
 @interface LiveEBDebugView ()
 
+@property (nonatomic, strong) UIScrollView *scrollView;
 @property (nonatomic, strong) UIStackView *containerStackView;
 @property (nonatomic, strong) DropDownTextView *codeStreamTF;
-@property (nonatomic, strong) UITextField *signalTF;
+@property (nonatomic, strong) DropDownTextView *signalTF;
+@property (nonatomic, strong) UILabel *placeholderLabel;
+@property (nonatomic, assign) CGFloat maxY;
 
 @end
 
 @implementation LiveEBDebugView
-
-- (void)layoutSubviews {
-    [super layoutSubviews];
-    self.containerStackView.frame = self.bounds;
-  
-//  CGRect bounds = self.bounds;
-//  if (self.codeStreamTF.frame.size.width < 10 || self.codeStreamTF.frame.size.height <  10) {
-//        CGFloat roomTextWidth = bounds.size.width - 2 * kRoomTextFieldMargin;
-//        CGFloat roomTextHeight = kRoomTextFieldHeight;
-//        self.codeStreamTF.frame =
-//            CGRectMake(kRoomTextFieldMargin, kRoomTextFieldMargin, roomTextWidth,
-//                       roomTextHeight);
-//    }
-//
-//  if (self.signalTF.frame.size.width < 10 || self.signalTF.frame.size.height <  10) {
-//      CGFloat roomTextWidth = bounds.size.width - 2 * kRoomTextFieldMargin;
-//      CGFloat roomTextHeight = kRoomTextFieldHeight;
-//      self.signalTF.frame =
-//    CGRectMake(kRoomTextFieldMargin, kRoomTextFieldMargin + CGRectGetMaxY(self.codeStreamTF.frame), roomTextWidth,
-//                     roomTextHeight);
-//  }
-  
-}
 
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
@@ -70,11 +52,7 @@ static CGFloat const kCallControlMargin = 18;
     UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:self.bounds];
     scrollView.alwaysBounceVertical = YES;
     [self addSubview:scrollView];
-    self.containerStackView = [[UIStackView alloc] initWithFrame:self.bounds];
-    self.containerStackView.axis = UILayoutConstraintAxisVertical;
-//    self.containerStackView.alignment = UIStackViewAlignmentFill;
-    self.containerStackView.spacing = 20;
-    [scrollView addSubview:self.containerStackView];
+    self.scrollView = scrollView;
     [self setupSignalView];
     [self setupCodeStreamInputView];
     [self setupSignalInputView];
@@ -83,7 +61,7 @@ static CGFloat const kCallControlMargin = 18;
     [self setupEncryptView];
     [self setupSEIView];
     [self setupButtonView];
-    [self setupPlaceholderView];
+    self.scrollView.contentSize = CGSizeMake(SCREEN_WIDTH, self.maxY + kRoomTextFieldMargin);
 }
 
 - (void)setupSignalView {
@@ -92,7 +70,9 @@ static CGFloat const kCallControlMargin = 18;
     UIStackView *stackView = [self stackViewWithAxis:UILayoutConstraintAxisVertical
                                            alignment:UIStackViewAlignmentFill
                                             subviews:@[label, control]];
-    [self.containerStackView addArrangedSubview:stackView];
+    stackView.frame = CGRectMake(0, self.maxY + kRoomTextFieldMargin, SCREEN_WIDTH, 80);
+    [self.scrollView addSubview:stackView];
+    self.maxY = CGRectGetMaxY(stackView.frame);
 }
 
 - (void)setupCodeStreamInputView {
@@ -101,47 +81,55 @@ static CGFloat const kCallControlMargin = 18;
 //    DropDownTextView *textField = [self textFieldWithPlaceholder:nil text:@"码流地址"];
   
   CGFloat width = CGRectGetWidth(self.frame);
-  DropDownTextView  *textField = [[DropDownTextView alloc] initWithFrame:CGRectMake(0, 0, width, kRoomTextFieldHeight + kRoomTextFieldMargin) hintText:@"input LiveBroadcasting url ："];
-  
+    DropDownTextView  *textField = [[DropDownTextView alloc] initWithFrame:CGRectMake(0, self.maxY + kRoomTextFieldMargin, width, kRoomTextFieldHeight + kRoomTextFieldMargin) hintText:@"码流URL："];
 //  DropDownTextView  *textField = [[DropDownTextView alloc] initWithFrame:CGRectZero hintText:@"码流地址："];
 
   NSArray* arr=[[NSArray alloc]initWithObjects:@"webrtc://6721.liveplay.myqcloud.com/live/6721_d71956d9cc93e4a467b11e06fdaf039a", nil];
 
      textField.tableArray = arr;
   
-//    UIStackView *stackView = [self stackViewWithAxis:UILayoutConstraintAxisVertical
-//                                           alignment:UIStackViewAlignmentFill
-//                                            subviews:@[label, textField]];
-    [self.containerStackView addArrangedSubview:textField];
+    UIStackView *stackView = [self stackViewWithAxis:UILayoutConstraintAxisVertical
+                                           alignment:UIStackViewAlignmentFill
+                                            subviews:@[textField]];
+    
+    stackView.frame = CGRectMake(0, self.maxY + kRoomTextFieldMargin, SCREEN_WIDTH, 80);
+  
+    [self.scrollView addSubview:stackView];
+    self.maxY = CGRectGetMaxY(stackView.frame);
     self.codeStreamTF = textField;
 }
 
 - (void)setupSignalInputView {
     UILabel *label = [self labelWithTitle:@"信令URL"];
     label.textAlignment = NSTextAlignmentCenter;
-    UITextField *textField = [self textFieldWithPlaceholder:nil text:@"信令地址"];
+//    UITextField *textField = [self textFieldWithPlaceholder:nil text:@"信令地址"];
   
-//    DropDownTextView *textField = [[DropDownTextView alloc] initWithFrame:CGRectZero hintText:@"信令地址:"];
-//
-//      NSArray* arr2=[[NSArray alloc]initWithObjects:@"https://webrtc.liveplay.myqcloud.com", nil];
-//
-//      textField.tableArray = arr2;
+    DropDownTextView *textField = [[DropDownTextView alloc] initWithFrame:CGRectZero hintText:@"信令地址:"];
+
+      NSArray* arr2=[[NSArray alloc]initWithObjects:@"https://webrtc.liveplay.myqcloud.com", nil];
+
+      textField.tableArray = arr2;
   
   
     UIStackView *stackView = [self stackViewWithAxis:UILayoutConstraintAxisVertical
                                            alignment:UIStackViewAlignmentFill
-                                            subviews:@[label, textField]];
-    [self.containerStackView addArrangedSubview:stackView];
+                                            subviews:@[ textField]];
+    stackView.frame = CGRectMake(0, self.maxY + kRoomTextFieldMargin, SCREEN_WIDTH, 80);
+    [self.scrollView addSubview:stackView];
+    self.maxY = CGRectGetMaxY(stackView.frame);
     self.signalTF = textField;
 }
 
 - (void)setupVideoDecodeView {
     UILabel *label = [self labelWithTitle:@"Video解码器(H264和H265)"];
-    UISegmentedControl *control = [self segmentedControlWithTitles:@[@"硬解", @"软解"] action:@selector(videoDecodeChanged:)];
+    label.textAlignment = NSTextAlignmentCenter;
+    UISegmentedControl *control = [self segmentedControlWithTitles:@[@"h264", @"hevc"] action:@selector(videoDecodeChanged:)];
     UIStackView *stackView = [self stackViewWithAxis:UILayoutConstraintAxisVertical
                                            alignment:UIStackViewAlignmentFill
                                             subviews:@[label, control]];
-    [self.containerStackView addArrangedSubview:stackView];
+    stackView.frame = CGRectMake(0, self.maxY, SCREEN_WIDTH, 80);
+    [self.scrollView addSubview:stackView];
+    self.maxY = CGRectGetMaxY(stackView.frame);
 }
 
 - (void)setupAudioFormatView {
@@ -151,7 +139,9 @@ static CGFloat const kCallControlMargin = 18;
     UIStackView *stackView = [self stackViewWithAxis:UILayoutConstraintAxisVertical
                                            alignment:UIStackViewAlignmentFill
                                             subviews:@[label, control]];
-    [self.containerStackView addArrangedSubview:stackView];
+    stackView.frame = CGRectMake(0, self.maxY + kRoomTextFieldMargin, SCREEN_WIDTH, 80);
+    [self.scrollView addSubview:stackView];
+    self.maxY = CGRectGetMaxY(stackView.frame);
 }
 
 - (void)setupEncryptView {
@@ -160,7 +150,9 @@ static CGFloat const kCallControlMargin = 18;
     UIStackView *stackView = [self stackViewWithAxis:UILayoutConstraintAxisVertical
                                            alignment:UIStackViewAlignmentFill
                                             subviews:@[label, control]];
-    [self.containerStackView addArrangedSubview:stackView];
+    stackView.frame = CGRectMake(0, self.maxY + kRoomTextFieldMargin, SCREEN_WIDTH, 80);
+    [self.scrollView addSubview:stackView];
+    self.maxY = CGRectGetMaxY(stackView.frame);
 }
 
 - (void)setupSEIView {
@@ -169,34 +161,33 @@ static CGFloat const kCallControlMargin = 18;
     UIStackView *stackView = [self stackViewWithAxis:UILayoutConstraintAxisVertical
                                            alignment:UIStackViewAlignmentFill
                                             subviews:@[label, control]];
-    [self.containerStackView addArrangedSubview:stackView];
+    stackView.frame = CGRectMake(0, self.maxY + kRoomTextFieldMargin, SCREEN_WIDTH, 80);
+    [self.scrollView addSubview:stackView];
+    self.maxY = CGRectGetMaxY(stackView.frame);
 }
 
 - (void)setupButtonView {
     UILabel *leftLabel = [self labelWithTitle:nil];
     UIButton *button = [self buttonWithTitle:@"开始拉流"
                                       action:@selector(startPullStream)];
-    button.frame = CGRectMake(0, 0, 150, 80);
+    button.frame = CGRectMake(0, 0, 150, 60);
     button.backgroundColor = [UIColor lightGrayColor];
     [button addTarget:self
             action:@selector(onStartRegularCall:)
      forControlEvents:UIControlEventTouchUpInside];
   
+    UIButton *pushButton = [self buttonWithTitle:@"开始推流"
+                                          action:@selector(startPushStream)];
+    pushButton.frame = CGRectMake(0, 0, 150, 60);
+    pushButton.backgroundColor = [UIColor lightGrayColor];
     UILabel *rightLabel = [self labelWithTitle:nil];
     UIStackView *stackView = [self stackViewWithAxis:UILayoutConstraintAxisHorizontal
-                                           alignment:UIStackViewAlignmentFill
+                                           alignment:UIStackViewAlignmentCenter
                                             subviews:@[leftLabel, button, rightLabel]];
     stackView.distribution = UIStackViewDistributionFillEqually;
-    [self.containerStackView addArrangedSubview:stackView];
-}
-
-- (void)setupPlaceholderView {
-    UILabel *label = [self labelWithTitle:nil];
-    [label setContentHuggingPriority:240
-                             forAxis:UILayoutConstraintAxisVertical];
-    [label setContentCompressionResistancePriority:240
-                                           forAxis:UILayoutConstraintAxisVertical];
-    [self.containerStackView addArrangedSubview:label];
+    stackView.frame = CGRectMake(0, self.maxY + 20, SCREEN_WIDTH, 60);
+    [self.scrollView addSubview:stackView];
+    self.maxY = CGRectGetMaxY(stackView.frame);
 }
 
 - (UIStackView *)stackViewWithAxis:(UILayoutConstraintAxis)axis alignment:(UIStackViewAlignment)alignment subviews:(NSArray *)subviews {
@@ -266,9 +257,13 @@ static CGFloat const kCallControlMargin = 18;
     NSLog(@"%s=====", __FUNCTION__);
 }
 
+- (void)startPushStream {
+    NSLog(@"%s=====", __FUNCTION__);
+}
 
 - (void)onStartRegularCall:(id)sender {
-  [_delegate mainView:self didInputRoom:self.codeStreamTF.textField.text didInputHost:self.signalTF.text isLoopback:NO];
+  [_delegate mainView:self didInputRoom:self.codeStreamTF.textField.text didInputHost:self.signalTF.textField.text isLoopback:NO];
 }
 
 @end
+
