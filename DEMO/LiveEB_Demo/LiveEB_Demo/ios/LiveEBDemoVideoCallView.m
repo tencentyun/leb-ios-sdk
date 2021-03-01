@@ -41,7 +41,7 @@ static CGFloat const kStatusBarHeight = 20;
       
       
       [self addSubview:_remoteVideoView2];
-      [_remoteVideoView2 setRenderMode:LEBVideoRenderMode_ScaleAspect_FIT];
+      
 //    [_remoteVideoView2 setRenderRotation:LEBVideoRotation_90];
     
 //    _remoteVideoView2.transform = CGAffineTransformMakeRotation(90 *M_PI / 180.0);
@@ -120,7 +120,7 @@ static CGFloat const kStatusBarHeight = 20;
     _renderBtn.layer.cornerRadius = kButtonSize / 2;
     _renderBtn.layer.masksToBounds = YES;
     [_renderBtn setTitle:@"RE" forState:UIControlStateNormal];
-    [_renderBtn addTarget:self action:@selector(onRotation:) forControlEvents:UIControlEventTouchUpInside];
+    [_renderBtn addTarget:self action:@selector(onRenderMode:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_renderBtn];
        
     
@@ -215,6 +215,14 @@ static CGFloat const kStatusBarHeight = 20;
       CGRectGetMaxX(rotationFrame) + kButtonPadding;
   _rotationBtn.frame = rotationFrame;
   
+  
+  CGRect renderFrame = _rotationBtn.frame;
+  renderFrame.origin.x =
+      CGRectGetMaxX(renderFrame) + kButtonPadding;
+  _renderBtn.frame = renderFrame;
+  
+  
+  
   [_statusLabel sizeToFit];
   _statusLabel.center =
       CGPointMake(CGRectGetMidX(bounds), CGRectGetMidY(bounds));
@@ -296,6 +304,18 @@ static CGFloat const kStatusBarHeight = 20;
     
     [_remoteVideoView2 setRenderRotation:LEBVideoRotation_0];
   }
+  
+}
+
+-(void)onRenderMode:(id)sender {
+  static LEBVideoRenderMode mode = LEBVideoRenderMode_ScaleAspect_FIT;
+  if (mode == LEBVideoRenderMode_ScaleAspect_FIT) {
+    mode = LEBVideoRenderMode_ScaleAspect_FILL;
+  } else {
+    mode = LEBVideoRenderMode_ScaleAspect_FIT;
+  }
+  
+  [_remoteVideoView2 setRenderMode:mode];
   
 }
 
