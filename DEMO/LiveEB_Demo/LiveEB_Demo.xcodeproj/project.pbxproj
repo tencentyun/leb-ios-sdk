@@ -513,7 +513,6 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
 					"COCOAPODS=1",
-					"RTC_IOS_BUILD_SYSBOL_RENAME=1",
 				);
 				INFOPLIST_FILE = LiveEB_Demo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -544,7 +543,6 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
 					"COCOAPODS=1",
-					"RTC_IOS_BUILD_SYSBOL_RENAME=1",
 				);
 				INFOPLIST_FILE = LiveEB_Demo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
