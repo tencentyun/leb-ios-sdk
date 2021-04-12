@@ -27,24 +27,28 @@ static CGFloat const kStatusBarHeight = 20;
   UIButton *_renderBtn;
   
   CGSize _remoteVideoSize;
+  BOOL _isPushView;
 }
 
 @synthesize statusLabel = _statusLabel;
 @synthesize delegate = _delegate;
 
-- (instancetype)initWithFrame:(CGRect)frame {
+- (instancetype)initWithFrame:(CGRect)frame isPush:(BOOL)isPush {
   if (self = [super initWithFrame:frame]) {
       
       self.backgroundColor = [UIColor blackColor];
-      _remoteVideoView2 = [[LiveEBVideoView alloc] init];
+      // _remoteVideoView2 = [[LiveEBVideoView alloc] init];
+      _isPushView  = isPush;
+      _remoteVideoView2 = [[LiveEBVideoView alloc] initWithFrame:CGRectZero PushPreview:_isPushView];
+
       _remoteVideoView2.delegate = self;
       
       
       [self addSubview:_remoteVideoView2];
       
-//    [_remoteVideoView2 setRenderRotation:LEBVideoRotation_90];
+      //[_remoteVideoView2 setRenderRotation:LEBVideoRotation_90];
     
-//    _remoteVideoView2.transform = CGAffineTransformMakeRotation(90 *M_PI / 180.0);
+      //_remoteVideoView2.transform = CGAffineTransformMakeRotation(90 *M_PI / 180.0);
       _controlDelegate = _remoteVideoView2;
       UIImage *image;
 
@@ -145,14 +149,31 @@ static CGFloat const kStatusBarHeight = 20;
     _remoteVideoView2.rtcHost = rtcHost;
 }
 
+-(void)setStreamURL:(NSString*)streamURL isPush:(BOOL)isPush {
+  if (isPush) {
+    [_remoteVideoView2 setStreamURL:streamURL
+                 pullSignalStream:@"https://overseas-webrtc.liveplay.myqcloud.com/webrtc/v1/pullstream"
+                 stopSignalStream:@"https://overseas-webrtc.liveplay.myqcloud.com/webrtc/v1/stopstream"];
+  } else {
+    [_remoteVideoView2 setLiveURL:streamURL
+                       pullStream:@"https://overseas-webrtc.liveplay.myqcloud.com/webrtc/v1/pullstream"
+                       stopStream:@"https://overseas-webrtc.liveplay.myqcloud.com/webrtc/v1/stopstream"];
+  }
+}
 
 - (void)setLiveEBURL:(NSString *)liveEBURL {
 //    _remoteVideoView2.liveEBURL = liveEBURL;
     //_remoteVideoView2.sessionid = @"";
   
-  [_remoteVideoView2 setLiveURL:liveEBURL
-                     pullStream:@"https://overseas-webrtc.liveplay.myqcloud.com/webrtc/v1/pullstream"
-                     stopStream:@"https://overseas-webrtc.liveplay.myqcloud.com/webrtc/v1/stopstream"];
+ 
+    [_remoteVideoView2 setLiveURL:liveEBURL
+                       pullStream:@"https://overseas-webrtc.liveplay.myqcloud.com/webrtc/v1/pullstream"
+                       stopStream:@"https://overseas-webrtc.liveplay.myqcloud.com/webrtc/v1/stopstream"];
+
+  
+  
+  
+  
 }
 
 - (void)layoutSubviews {
@@ -160,29 +181,53 @@ static CGFloat const kStatusBarHeight = 20;
   LiveEBLogInfo("LiveEB view layoutSubviews x%f %f : w:%f h:%f %f %f",
         bounds.origin.x, bounds.origin.y, bounds.size.width, bounds.size.height, _remoteVideoSize.width, _remoteVideoSize.height);
         
-  if (_remoteVideoSize.width > 0 && _remoteVideoSize.height > 0) {
-    // Aspect fill remote video into bounds.
-    CGRect remoteVideoFrame =
-        AVMakeRectWithAspectRatioInsideRect(_remoteVideoSize, bounds);
-      
-    _remoteVideoView2.frame = remoteVideoFrame;
-//    _remoteVideoView2.center =
-//        CGPointMake(CGRectGetMidX(bounds), CGRectGetMidY(bounds));
+  if (!_isPushView) {
+    if (_remoteVideoSize.width > 0 && _remoteVideoSize.height > 0) {
+      // Aspect fill remote video into bounds.
+      CGRect remoteVideoFrame =
+          AVMakeRectWithAspectRatioInsideRect(_remoteVideoSize, bounds);
+        
+      _remoteVideoView2.frame = remoteVideoFrame;
+  //    _remoteVideoView2.center =
+  //        CGPointMake(CGRectGetMidX(bounds), CGRectGetMidY(bounds));
+    } else {
+      _remoteVideoView2.frame = bounds;
+    }
+
+    LiveEBLogInfo("LiveEB view [ %f %f] x=%f y=%f width=%f height=%f _remoteVideoSize:%f %f ",
+          _remoteVideoView2.center.x, _remoteVideoView2.center.y, _remoteVideoView2.frame.origin.x,
+          _remoteVideoView2.frame.origin.y, _remoteVideoView2.frame.size.width, _remoteVideoView2.frame.size.height
+          ,_remoteVideoSize.width, _remoteVideoSize.height);
+    
   } else {
-    _remoteVideoView2.frame = bounds;
+    
+    // Aspect fit local video view into a square box.
+    CGRect localVideoFrame = bounds;
+//        CGRectMake(0, 0, kLocalVideoViewSize, kLocalVideoViewSize);
+    // Place the view in the bottom right.
+//    localVideoFrame.origin.x = CGRectGetMaxX(bounds)
+//        - localVideoFrame.size.width - kLocalVideoViewPadding;
+//    localVideoFrame.origin.y = CGRectGetMaxY(bounds)
+//        - localVideoFrame.size.height - kLocalVideoViewPadding;
+    _remoteVideoView2.frame = localVideoFrame;
   }
+  
 
-  LiveEBLogInfo("LiveEB view [ %f %f] x=%f y=%f width=%f height=%f _remoteVideoSize:%f %f ",
-        _remoteVideoView2.center.x, _remoteVideoView2.center.y, _remoteVideoView2.frame.origin.x,
-        _remoteVideoView2.frame.origin.y, _remoteVideoView2.frame.size.width, _remoteVideoView2.frame.size.height
-        ,_remoteVideoSize.width, _remoteVideoSize.height);
-
+  
+  
+  
+  
   // Place stats at the top.
   CGSize statsSize = [_statsView sizeThatFits:bounds.size];
   _statsView.frame = CGRectMake(CGRectGetMinX(bounds),
                                 CGRectGetMinY(bounds) + kStatusBarHeight,
                                 _remoteVideoView2.frame.size.width, CGRectGetMinY(_remoteVideoView2.frame));
     
+  
+  
+  
+  
+  
   // Place hangup button in the bottom left.
   _hangupButton.frame =
     CGRectMake(CGRectGetMinX(bounds) + kButtonPadding,
@@ -244,7 +289,7 @@ static CGFloat const kStatusBarHeight = 20;
 }
 
 - (void)showStats:(LiveEBVideoView *)videoView statReport:(LEBStatReport *)statReport {
-  NSLog(@"LiveEB view statReport %@", [statReport description]);
+  //NSLog(@"LiveEB view statReport %@", [statReport description]);
   
   [self.statsView setStats:[statReport description]];
 }
@@ -307,6 +352,27 @@ static CGFloat const kStatusBarHeight = 20;
   
 }
 
+-(UIImage *)imageWithCaputureView:(UIView *)view {
+  CGSize size = CGSizeMake(view.bounds.size.width, view.bounds.size.height);
+
+  // 开启位图上下文
+  UIGraphicsBeginImageContextWithOptions(size, NO, 0);
+
+  // 获取上下文
+  CGContextRef ctx = UIGraphicsGetCurrentContext();
+
+  // 把控件上的图层渲染到上下文,layer只能渲染
+  [view.layer renderInContext:ctx];
+
+  // 生成新图片
+  UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+
+  // 关闭上下文
+  UIGraphicsEndImageContext();
+
+  return image;
+}
+
 -(void)onRenderMode:(id)sender {
   static LEBVideoRenderMode mode = LEBVideoRenderMode_ScaleAspect_FIT;
   if (mode == LEBVideoRenderMode_ScaleAspect_FIT) {
@@ -335,8 +401,55 @@ static CGFloat const kStatusBarHeight = 20;
   [_delegate videoCallViewDidRestart:self];
 }
 
+
+-(NSString*)getSavePath {
+  NSArray *path = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+  NSString *documentPath = [path firstObject];
+  NSString *defaultPath = [documentPath stringByAppendingPathComponent:@"IMG"];
+  
+  NSFileManager *fileManager = [NSFileManager defaultManager];
+  [fileManager createDirectoryAtPath:defaultPath withIntermediateDirectories:NO attributes:nil error:nil];
+  
+  return defaultPath;
+}
+
+
+-(UIImage *)imageWithCaputureView2:(UIView *)view {
+    UIGraphicsBeginImageContextWithOptions(view.bounds.size, NO, [UIScreen mainScreen].scale);
+    [self drawViewHierarchyInRect:view.bounds afterScreenUpdates:YES];
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return image;
+}
+
+
+-(UIImage *)imageWithCaputureView3:(UIView *)view {
+    UIGraphicsBeginImageContextWithOptions(view.bounds.size, NO, [UIScreen mainScreen].scale);
+    [view drawViewHierarchyInRect:view.bounds afterScreenUpdates:YES];
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return image;
+}
+
 -(void)onCapture:(id)sender {
-  [_delegate onCapture];
+//  imageWithCaputureView(_remoteVideoView2);
+  //[_delegate onCapture];
+  
+  UIImage* image = [self imageWithCaputureView3:_remoteVideoView2];
+  
+  
+  static int index = 0;
+  if (image != NULL) {
+    NSString *filePath = [[self getSavePath] stringByAppendingPathComponent:[NSString stringWithFormat:@"/img_%d.png", index++]];
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+      BOOL wy = [UIImagePNGRepresentation(image) writeToFile:filePath atomically:YES];
+      
+      NSLog(@"write file wy %d", wy);
+    });
+    
+  }
+  
 }
 
 - (void)didTripleTap:(UITapGestureRecognizer *)recognizer {

@@ -20,4 +20,10 @@
                  isLoopback:(BOOL)isLoopback
                  useLiveEventBroadcasting:(BOOL)useLiveEventBroadcasting
                    delegate:(id<LiveEBDemoVideoCallViewControllerDelegate>)delegate;
+
+
+- (instancetype)initForPushRoom:(NSString *)pushUrl
+                rtcHost:(NSString *)rtcHost
+                   delegate:(id<LiveEBDemoVideoCallViewControllerDelegate>)delegate;
+
 @end

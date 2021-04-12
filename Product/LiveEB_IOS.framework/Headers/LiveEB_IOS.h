@@ -10,6 +10,7 @@
 #import <LiveEB_IOS/LiveEBManager.h>
 #import <LiveEB_IOS/LiveEBVideoView.h>
 #import <LiveEB_IOS/LEBStatReport.h>
+#import <LiveEB_IOS/LiveEBCaptureSource.h>
 
 //! Project version number for LiveEB_IOS.
 FOUNDATION_EXPORT double LiveEB_IOSVersionNumber;

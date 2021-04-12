@@ -57,6 +57,10 @@
     didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
     
+//  char *buffer = malloc(10);
+//      buffer[10] = 'A';
+//      free(buffer);
+  
     __weak typeof(self) weakSelf = self;
 //    [[LiveEBManager sharedManager] initSDK:weakSelf minDebugLogLevel:LiveEBLogLevelInfo];
   
