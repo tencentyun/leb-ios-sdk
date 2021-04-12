@@ -7,11 +7,59 @@ target 'LiveEB_Demo' do
  ####LiveEB_IOS 封装了webrtc接口
  #####LiveEB_IOS内部使用定制版webrtc TWebRTC 参考 https://github.com/tencentyun/TCWebRTC编译
  
+ ###推流需另外提供SDK
  pod 'TWebRTC', :git=>'https://github.com/tencentyun/TWebRTC-IOS-SDK.git' , :tag => '2.1.11'
 #
- pod 'LiveEB_IOS', :git=>'https://github.com/tencentyun/leb-ios-sdk.git' , :tag => '2.1.10'
+ pod 'LiveEB_IOS', :git=>'https://github.com/tencentyun/leb-ios-sdk.git' , :tag => '2.2.1'
 
 # pod 'TWebRTC', :path=>'./../../../leb-ios-src/SRC'
 #pod 'LiveEB_IOS', :path=>'./../../../leb-ios-src/SRC/LiveEB_IOS'
-  
+
 end
+
+post_install do |installer|
+  installer.pods_project.targets.each do |target|
+
+    puts "===================>target name #{target.name}"
+
+
+       if target.name == 'LiveEB_IOS'
+         puts "========= target name #{target.name} ========= "
+         
+           target.build_configurations.each do |config|
+             puts "========= target name #{config.name} ========= "
+             
+               if config.name == 'Release'
+                   config.build_settings['GCC_PREPROCESSOR_DEFINITIONS'] ||= ['$(inherited)','RTC_IOS_BUILD_SYSBOL_RENAME=1 WEBRTC_BUILD_SENDSTREAM=1']
+               end
+               if config.name == 'Debug'
+                   config.build_settings['GCC_PREPROCESSOR_DEFINITIONS'] ||= ['$(inherited)','RTC_IOS_BUILD_SYSBOL_RENAME=1 WEBRTC_BUILD_SENDSTREAM=1']
+               end
+               
+           end
+       end
+   end
+end
+
+
+#post_install do |installer|
+#    # puts 为在终端打印方法
+#    puts "##### post_install start #####"
+#
+#    # 为了打印的日志方便查看，使用╟符号修饰
+#    puts "╟ installer"
+#    # 获取属性名称列表，并遍历
+#    installer.instance_variables.each do |variableName|
+#        # 打印属性名称
+#        puts "  ╟ #{variableName}"
+#    end
+#
+#    puts "  ╟ installer.public_methods"
+#    # 获取方法名称列表，并遍历
+#    installer.public_methods.each do |method|
+#        # 打印方法名称
+#        puts "    ┣ #{method}"
+#    end
+#    puts "##### post_install end #####"
+#end
+

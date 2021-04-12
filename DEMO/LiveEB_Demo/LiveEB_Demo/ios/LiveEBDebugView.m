@@ -183,7 +183,7 @@ static CGFloat const kCallControlMargin = 18;
     UILabel *rightLabel = [self labelWithTitle:nil];
     UIStackView *stackView = [self stackViewWithAxis:UILayoutConstraintAxisHorizontal
                                            alignment:UIStackViewAlignmentCenter
-                                            subviews:@[leftLabel, button, rightLabel]];
+                                            subviews:@[leftLabel, button, pushButton, rightLabel]];
     stackView.distribution = UIStackViewDistributionFillEqually;
     stackView.frame = CGRectMake(0, self.maxY + 20, SCREEN_WIDTH, 60);
     [self.scrollView addSubview:stackView];
@@ -258,11 +258,11 @@ static CGFloat const kCallControlMargin = 18;
 }
 
 - (void)startPushStream {
-    NSLog(@"%s=====", __FUNCTION__);
+  [_delegate mainView:self didInputRoom:self.codeStreamTF.textField.text didInputHost:self.signalTF.textField.text isLoopback:NO isPush:YES];
 }
 
 - (void)onStartRegularCall:(id)sender {
-  [_delegate mainView:self didInputRoom:self.codeStreamTF.textField.text didInputHost:self.signalTF.textField.text isLoopback:NO];
+  [_delegate mainView:self didInputRoom:self.codeStreamTF.textField.text didInputHost:self.signalTF.textField.text isLoopback:NO isPush:NO];
 }
 
 @end

@@ -4,7 +4,7 @@
 
 @protocol LiveEBDemoMainViewDelegate <NSObject>
 
-- (void)mainView:(LiveEBMainView *)mainView didInputRoom:(NSString *)url didInputHost:(NSString *)didInputHost isLoopback:(BOOL)isLoopback;
+- (void)mainView:(LiveEBMainView *)mainView didInputRoom:(NSString *)url didInputHost:(NSString *)didInputHost isLoopback:(BOOL)isLoopback isPush:(BOOL)isPush;
 - (void)mainViewDidToggleAudioLoop:(LiveEBMainView *)mainView;
 
 @end

@@ -75,7 +75,22 @@ static NSString *const loopbackLaunchProcessArgument = @"loopback";
 
 #pragma mark - ARDMainViewDelegate
 
-- (void)mainView:(LiveEBDemoMainView *)mainView didInputRoom:(NSString *)liveUrl didInputHost:(NSString *)rtcHost isLoopback:(BOOL)isLoopback {
+- (void)mainView:(LiveEBDemoMainView *)mainView didInputRoom:(NSString *)liveUrl didInputHost:(NSString *)rtcHost isLoopback:(BOOL)isLoopback isPush:(BOOL)isPush {
+  if (isPush) {
+    liveUrl =@"webrtc://5000.livepush.myqcloud.com/live/test_1613895047?txSecret=e3292ee5ed8d68345a26c3be68b4c6d3&txTime=61EAD87F&ServerVip=42.194.233.87&ServerPort=30004";
+    LiveEBDemoVideoCallViewController *videoController =
+      [[LiveEBDemoVideoCallViewController alloc] initForPushRoom:liveUrl rtcHost:rtcHost delegate:self];
+      videoController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+    
+    [self presentViewController:videoController
+                       animated:YES
+                     completion:nil];
+    
+    return;
+  }
+  
+  
+  
     BOOL useLiveEventBroadcasting = YES;
 //    NSString *rtcHost = NULL;
   if (!liveUrl.length) {

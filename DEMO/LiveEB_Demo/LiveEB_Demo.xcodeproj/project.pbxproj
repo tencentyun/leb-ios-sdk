@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5167D867261D616F00D2D879 /* LiveEBFileVideoCapturer.m in Sources */ = {isa = PBXBuildFile; fileRef = 5167D866261D616F00D2D879 /* LiveEBFileVideoCapturer.m */; };
 		51801B0A243D820100B6D7A5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 51801B09243D820100B6D7A5 /* AppDelegate.m */; };
 		51801B0D243D820100B6D7A5 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 51801B0C243D820100B6D7A5 /* SceneDelegate.m */; };
 		51801B10243D820100B6D7A5 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51801B0F243D820100B6D7A5 /* ViewController.m */; };
@@ -56,6 +57,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		5167D865261D616F00D2D879 /* LiveEBFileVideoCapturer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LiveEBFileVideoCapturer.h; sourceTree = "<group>"; };
+		5167D866261D616F00D2D879 /* LiveEBFileVideoCapturer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LiveEBFileVideoCapturer.m; sourceTree = "<group>"; };
 		51801B05243D820100B6D7A5 /* LiveEB_Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LiveEB_Demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		51801B08243D820100B6D7A5 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		51801B09243D820100B6D7A5 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -126,6 +129,31 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		51656AE4262475A100AE4918 /* tesing */ = {
+			isa = PBXGroup;
+			children = (
+				51656AE52624775F00AE4918 /* render */,
+				5167D855261C631700D2D879 /* capture */,
+			);
+			path = tesing;
+			sourceTree = "<group>";
+		};
+		51656AE52624775F00AE4918 /* render */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = render;
+			sourceTree = "<group>";
+		};
+		5167D855261C631700D2D879 /* capture */ = {
+			isa = PBXGroup;
+			children = (
+				5167D865261D616F00D2D879 /* LiveEBFileVideoCapturer.h */,
+				5167D866261D616F00D2D879 /* LiveEBFileVideoCapturer.m */,
+			);
+			path = capture;
+			sourceTree = "<group>";
+		};
 		51801AFC243D820000B6D7A5 = {
 			isa = PBXGroup;
 			children = (
@@ -190,6 +218,7 @@
 		51A25EF72440189D008DD31C /* ios */ = {
 			isa = PBXGroup;
 			children = (
+				51656AE4262475A100AE4918 /* tesing */,
 				51D8A6D825BFF62C00DA4634 /* LiveEBDebugView.h */,
 				51D8A6D925BFF62C00DA4634 /* LiveEBDebugView.m */,
 				51A25F1F244018B5008DD31C /* LiveEBDemoMainView.h */,
@@ -350,6 +379,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5167D867261D616F00D2D879 /* LiveEBFileVideoCapturer.m in Sources */,
 				51A25F36244018B6008DD31C /* LiveEBDemoMainViewController.mm in Sources */,
 				51A25F39244018B6008DD31C /* LiveEBDemoVideoCallViewController.m in Sources */,
 				51801B10243D820100B6D7A5 /* ViewController.m in Sources */,
@@ -504,7 +534,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = KH7Z57669D;
+				DEVELOPMENT_TEAM = LD82A66XF7;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -513,6 +543,8 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
 					"COCOAPODS=1",
+					"RTC_IOS_BUILD_SYSBOL_RENAME=1",
+					"WEBRTC_BUILD_SENDSTREAM=1",
 				);
 				INFOPLIST_FILE = LiveEB_Demo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -534,7 +566,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = KH7Z57669D;
+				DEVELOPMENT_TEAM = LD82A66XF7;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -543,6 +575,8 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
 					"COCOAPODS=1",
+					"RTC_IOS_BUILD_SYSBOL_RENAME=1",
+					"WEBRTC_BUILD_SENDSTREAM=1",
 				);
 				INFOPLIST_FILE = LiveEB_Demo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;

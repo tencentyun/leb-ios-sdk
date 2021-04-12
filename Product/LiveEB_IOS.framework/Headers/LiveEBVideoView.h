@@ -17,31 +17,14 @@
 #endif
 
 #import "LEBStatReport.h"
+#import "LiveEBManager.h"
+#import "LiveEBMediaEngine.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @class LiveEBVideoView;
 
-@interface LiveEBAudioSessionConfiguration : NSObject
 
-@property(nonatomic, strong) NSString *category;
-@property(nonatomic, assign) AVAudioSessionCategoryOptions categoryOptions;
-@property(nonatomic, strong) NSString *mode;
-
-@end
-
-
-typedef NS_ENUM(NSInteger, LEBVideoRotation) {
-  LEBVideoRotation_0 = 0,
-  LEBVideoRotation_90 = 90,
-  LEBVideoRotation_180 = 180,
-  LEBVideoRotation_270 = 270,
-};
-
-typedef NS_ENUM(NSInteger, LEBVideoRenderMode) {
-    LEBVideoRenderMode_ScaleAspect_FILL  = 0,
-    LEBVideoRenderMode_ScaleAspect_FIT
-};
 
 @protocol LiveEBVideoViewControllerDelegate <NSObject>
 @required
@@ -110,11 +93,22 @@ typedef NS_ENUM(NSInteger, LEBVideoRenderMode) {
 @end
 
 
-@interface LiveEBVideoView : UIView <LiveEBVideoViewControllerDelegate>
+@interface LiveEBVideoView : UIView <LiveEBVideoViewControllerDelegate,
+                                LiveEBPullStreamDelegate,
+                                LiveEBMediaEnginDelegate>
+
+/*外面设置*/
+@property(nonatomic, strong) LiveEBMediaEngine *mediaEngine;
+
 
 @property (nonatomic, copy) NSString *rtcHost;
 
 @property (nonatomic, copy) NSString *sessionid;      //业务生成的唯一key，标识本次播放会话
+
+/*
+ 
+ */
+-(void)setStreamURL:(NSString *)pushEBURL pullSignalStream:(NSString *)pullSignalStream stopSignalStream:(NSString *)stopSignalStream;
 
 /*V1*/
 -(void)setLiveURL:(NSString *)liveEBURL pullStream:(NSString *)pullStream stopStream:(NSString *)stopStream;
@@ -125,6 +119,12 @@ typedef NS_ENUM(NSInteger, LEBVideoRenderMode) {
 @property (nonatomic, copy) NSString *liveEBURL;  //播放流地址
 @property(nonatomic, weak) id<LiveEBVideoViewDelegate> delegate;
 @property(nonatomic, readonly) __kindof UIView<RTCVideoRenderer> *remoteVideoView;
+
+
+
+- (instancetype)initWithFrame:(CGRect)frame PushPreview:(BOOL)PushPreview;
+- (instancetype)initWithFrame:(CGRect)frame;
+
 @end
 
 NS_ASSUME_NONNULL_END

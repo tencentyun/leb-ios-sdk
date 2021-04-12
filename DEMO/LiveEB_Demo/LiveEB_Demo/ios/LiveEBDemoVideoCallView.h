@@ -29,6 +29,8 @@
 // display status, and also a hangup button.
 @interface LiveEBDemoVideoCallView : UIView
 
+- (instancetype)initWithFrame:(CGRect)frame isPush:(BOOL)isPush;
+
 @property(nonatomic, readonly) UILabel *statusLabel;
 @property(nonatomic, weak) id<LiveEBDemoVideoCallViewDelegate> delegate;
 
@@ -38,5 +40,9 @@
 @property(nonatomic, weak) id<LiveEBVideoViewControllerDelegate> controlDelegate;
 @property (nonatomic, copy) NSString *liveEBURL;
 @property (nonatomic, copy) NSString *rtcHost;
+
+
+
+-(void)setStreamURL:(NSString*)streamURL isPush:(BOOL)isPush;
 
 @end

@@ -17,6 +17,9 @@
     
     BOOL _isSetStatState;
   BOOL _isPaused;
+  
+  BOOL _isPush;
+  NSString *_pushURL;
 }
 
 @synthesize videoCallView = _videoCallView;
@@ -30,10 +33,10 @@
   if (self = [super init]) {
    
     _delegate = delegate;
-      _liveUrl = liveUrl;
-      _rtcHost = rtcHost;
+    _liveUrl = liveUrl;
+    _rtcHost = rtcHost;
       
-      _isSetStatState = FALSE;
+    _isSetStatState = FALSE;
     
     _isPaused = false;
 
@@ -41,21 +44,39 @@
   return self;
 }
 
-- (void)loadView {
-  _videoCallView = [[LiveEBDemoVideoCallView alloc] initWithFrame:CGRectZero];
-  _videoCallView.delegate = self;
-    _videoCallView.liveEBURL =_liveUrl;
-    _videoCallView.rtcHost = _rtcHost;
-    _controlDelegate = _videoCallView.controlDelegate;
-    
-    [_controlDelegate setStatState:true];
-//    [_controlDelegate setAudioMute:YES];
-      self.view = _videoCallView;
-    
-    
-    [_controlDelegate start];
-    //[_controlDelegate start];
 
+- (instancetype)initForPushRoom:(NSString *)pushUrl
+                     rtcHost:(NSString *)rtcHost
+                    delegate:(id<LiveEBDemoVideoCallViewControllerDelegate>)delegate {
+  if (self = [self init]) {
+    _isPush = TRUE;
+    _pushURL = pushUrl;
+    _rtcHost = rtcHost;
+    _delegate = delegate;
+  }
+  
+  return self;
+}
+
+- (void)loadView {
+  _videoCallView = [[LiveEBDemoVideoCallView alloc] initWithFrame:CGRectZero isPush:_isPush];
+  _videoCallView.delegate = self;
+  if (!_isPush) {
+    _videoCallView.liveEBURL = _liveUrl;
+  } else {
+    [_videoCallView setStreamURL:_pushURL isPush:YES];
+  }
+    
+  _videoCallView.rtcHost = _rtcHost;
+  _controlDelegate = _videoCallView.controlDelegate;
+    
+  [_controlDelegate setStatState:true];
+  // [_controlDelegate setAudioMute:YES];
+  self.view = _videoCallView;
+    
+    
+  [_controlDelegate start];
+  //[_controlDelegate start];
 }
 
 - (UIInterfaceOrientationMask)supportedInterfaceOrientations {

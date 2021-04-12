@@ -6,11 +6,30 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <AVFoundation/AVFoundation.h>
+
+#if TARGET_OS_IPHONE
+#import <UIKit/UIKit.h>
+#endif
+
+#import "LiveEBVideoFrame.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
+@interface LiveEBAudioSessionConfiguration : NSObject
+
+@property(nonatomic, strong) NSString *category;
+@property(nonatomic, assign) AVAudioSessionCategoryOptions categoryOptions;
+@property(nonatomic, strong) NSString *mode;
+
+@end
 
 
+
+typedef NS_ENUM(NSInteger, LEBVideoRenderMode) {
+    LEBVideoRenderMode_ScaleAspect_FILL  = 0,
+    LEBVideoRenderMode_ScaleAspect_FIT
+};
 
 typedef enum {
     LiveEBLogLevelDebug,
