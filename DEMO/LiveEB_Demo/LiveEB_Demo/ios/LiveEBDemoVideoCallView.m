@@ -46,7 +46,7 @@ static CGFloat const kStatusBarHeight = 20;
       
       [self addSubview:_remoteVideoView2];
       
-      //[_remoteVideoView2 setRenderRotation:LEBVideoRotation_90];
+      [_remoteVideoView2 setRenderRotation:LEBVideoRotation_270];
     
       //_remoteVideoView2.transform = CGAffineTransformMakeRotation(90 *M_PI / 180.0);
       _controlDelegate = _remoteVideoView2;

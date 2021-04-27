@@ -102,7 +102,7 @@ NS_ASSUME_NONNULL_BEGIN
                                 LiveEBPullStreamDelegate,
                                 LiveEBMediaEnginDelegate>
 
-/*外面设置*/
+/*外面设置 假如不设置就用内容默认的*/
 @property(nonatomic, strong) LiveEBMediaEngine *mediaEngine;
 
 
