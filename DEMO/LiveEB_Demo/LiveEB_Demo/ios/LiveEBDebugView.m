@@ -175,15 +175,26 @@ static CGFloat const kCallControlMargin = 18;
     [button addTarget:self
             action:@selector(onStartRegularCall:)
      forControlEvents:UIControlEventTouchUpInside];
+    
   
+#if 0
+    /*
     UIButton *pushButton = [self buttonWithTitle:@"开始推流"
                                           action:@selector(startPushStream)];
     pushButton.frame = CGRectMake(0, 0, 150, 60);
     pushButton.backgroundColor = [UIColor lightGrayColor];
-    UILabel *rightLabel = [self labelWithTitle:nil];
+    
     UIStackView *stackView = [self stackViewWithAxis:UILayoutConstraintAxisHorizontal
                                            alignment:UIStackViewAlignmentCenter
                                             subviews:@[leftLabel, button, pushButton, rightLabel]];
+     */
+#else
+  UILabel *rightLabel = [self labelWithTitle:nil];
+    UIStackView *stackView = [self stackViewWithAxis:UILayoutConstraintAxisHorizontal
+                                         alignment:UIStackViewAlignmentCenter
+                                          subviews:@[leftLabel, button, rightLabel]];
+#endif
+  
     stackView.distribution = UIStackViewDistributionFillEqually;
     stackView.frame = CGRectMake(0, self.maxY + 20, SCREEN_WIDTH, 60);
     [self.scrollView addSubview:stackView];

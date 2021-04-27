@@ -101,6 +101,7 @@
     [_controlDelegate resume];
   } else {
     [_controlDelegate pause];
+    //[_controlDelegate background];
   }
   
   

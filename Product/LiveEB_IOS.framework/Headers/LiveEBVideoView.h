@@ -29,10 +29,15 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol LiveEBVideoViewControllerDelegate <NSObject>
 @required
     -(void)start;
+
     -(void)stop;
+
     -(void)pause;
+
     -(void)resume;
     
+    -(void)background;
+
     -(BOOL)isPlaying;
 
     /* 0 ~ 1 返回上次的设置值*/

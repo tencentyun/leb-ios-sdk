@@ -105,6 +105,8 @@ didCreateLocalSource:(LiveEBCaptureSource *)localSource;
 
 - (void)pause;
 
+- (void)background;
+
 - (void)setAudioMute:(BOOL)mute;
 
 - (void)setVideoPaused:(BOOL)paused;
