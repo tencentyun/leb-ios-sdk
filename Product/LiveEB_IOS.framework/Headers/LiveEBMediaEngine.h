@@ -49,21 +49,21 @@ typedef NS_ENUM(NSInteger, LiveEBStreamState) {
 @class LiveEBMediaEngine;
 @protocol LiveEBMediaEnginDelegate <NSObject>
 
+//流状态
 - (void)mediaEngin:(LiveEBMediaEngine *)mediaEngin
        didChangeState:(LiveEBStreamState)state;
 
-
+//数据源
 - (void)mediaEngin:(LiveEBMediaEngine *)mediaEngin
 didCreateLocalSource:(LiveEBCaptureSource *)localSource;
 
+//统计
 - (void)mediaEngin:(LiveEBMediaEngine *)mediaEngin
-      didGetStats:(NSArray *)stats;
+      didGetStats:(LEBStatReport*)stats;
 
+//错误状态
 - (void)mediaEngin:(LiveEBMediaEngine *)mediaEngin
          didError:(NSError *)error;
-
-- (void)mediaEngin:(LiveEBMediaEngine *)mediaEngin
-       statReport:(LEBRTCStatReport *)statReport;
 @end
 
 //拉流相关数据结构
@@ -83,6 +83,7 @@ didCreateLocalSource:(LiveEBCaptureSource *)localSource;
 /*拉流 包括主动结束和被动结束(断流等)*/
 - (void)onCompletion;
 
+/*首帧渲染*/
 - (void)onFirstFrameRender;
 
 @end
@@ -95,6 +96,7 @@ didCreateLocalSource:(LiveEBCaptureSource *)localSource;
 
 @property(weak, nonatomic) id<LiveEBPullStreamDelegate> streamDelegate;
 
+@property(nonatomic, copy) NSString* remoteSDP;
 - (BOOL)isPlaying;
 
 - (void)start;
@@ -148,13 +150,24 @@ didCreateLocalSource:(LiveEBCaptureSource *)localSource;
 
 @interface LiveEBMediaEngine : NSObject
 
+@property(readonly, nonatomic) LiveEBStreamState connState;
+
+/*
+ * pullStreamCtx 拉流模块上下文
+ */
 @property(readonly, nonatomic) LiveEBPullStreamContext *pullStreamCtx;
+
+/*
+ * pullStreamCtx 推流模块上下文
+ */
+@property(readonly, nonatomic) LiveEBPushStreamContext *pushStreamCtx;
+
 /*
  创建针对拉流的mediaengin pullConfig为拉流配置
  */
 + (instancetype)createPullEngine:(LiveEBPullStreamConfigure*) pullConfig;
 
-@property(readonly, nonatomic) LiveEBPushStreamContext *pushStreamCtx;
+
 /*
  创建针对推流的mediaengin pushConfig推流配置
  */

@@ -87,13 +87,14 @@ NS_ASSUME_NONNULL_BEGIN
 /*统计接口*/
 - (void)showStats:(LiveEBVideoView *)videoView statReport:(LEBStatReport*)statReport;
 
-/*统计接口 补充*/
-- (void)showStats:(LiveEBVideoView *)videoView rtcStatReport:(LEBRTCStatReport*)rtcStatReport;
+- (void)showStats:(LiveEBVideoView *)videoView rtcStatReport:(LEBRTCStatReport*)rtcStatReport
+  __attribute__((deprecated("function rtcStatReport deprecated, use statReport function instead.")));
 
-/*调试信息回调 deprecated*/
-- (void)showStats:(LiveEBVideoView *)videoView stat:(NSArray*)stat;
 
 - (void)showStats:(LiveEBVideoView *)videoView strStat:(NSString*)strStat;
+
+- (void)showStats:(LiveEBVideoView *)videoView stat:(NSArray*)stat
+  __attribute__((deprecated("function stat deprecated, use strStat function instead.")));
 
 @end
 
@@ -103,7 +104,7 @@ NS_ASSUME_NONNULL_BEGIN
                                 LiveEBMediaEnginDelegate>
 
 /*外面设置 假如不设置就用内容默认的*/
-@property(nonatomic, strong) LiveEBMediaEngine *mediaEngine;
+@property(nonatomic, readonly, strong) LiveEBMediaEngine *mediaEngine;
 
 
 @property (nonatomic, copy) NSString *rtcHost;

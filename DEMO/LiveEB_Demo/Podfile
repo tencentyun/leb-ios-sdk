@@ -10,7 +10,7 @@ target 'LiveEB_Demo' do
  ###推流需另外提供SDK
  pod 'TWebRTC', :git=>'https://github.com/tencentyun/TWebRTC-IOS-SDK.git' , :tag => '2.1.12'
 #
- pod 'LiveEB_IOS', :git=>'https://github.com/tencentyun/leb-ios-sdk.git' , :tag => '2.2.3'
+ pod 'LiveEB_IOS', :git=>'https://github.com/tencentyun/leb-ios-sdk.git' , :tag => '2.2.4'
 
 # pod 'TWebRTC', :path=>'./../../../leb-ios-src/SRC'
 #pod 'LiveEB_IOS', :path=>'./../../../leb-ios-src/SRC/LiveEB_IOS'

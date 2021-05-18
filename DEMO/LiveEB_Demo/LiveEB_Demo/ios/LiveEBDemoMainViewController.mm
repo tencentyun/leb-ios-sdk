@@ -111,6 +111,7 @@ static NSString *const loopbackLaunchProcessArgument = @"loopback";
     liveUrl = @"webrtc://5664.liveplay.myqcloud.com/live/5664_harchar1";
 //    liveUrl = @"webrtc://play.gamematrix.qq.com/game/tzew93wigtiqr4rkshenzhen0002-2atufe4qsqupz4y9_tenc-u6yt2kg6_1619512627?txSecret=a2cfc11d739bdda1cbdbee651c80ffff&txTime=608917AB";
 //    liveUrl =@"webrtc://play.xroom.net/live/B18767-5-main-304374";
+    //liveUrl = @"webrtc://5000.liveplay.myqcloud.com/live/test_1622166964";
     useLiveEventBroadcasting = YES;
   }
     
