@@ -167,11 +167,14 @@ didCreateLocalSource:(LiveEBCaptureSource *)localSource;
  */
 + (instancetype)createPullEngine:(LiveEBPullStreamConfigure*) pullConfig;
 
+- (void)setLiveEBPullStreamDelegate:(id<LiveEBPullStreamDelegate>)delegate;
 
 /*
  创建针对推流的mediaengin pushConfig推流配置
  */
 + (instancetype)createPushEngine:(LiveEBPushStreamConfigure*) pushConfig;
+
+
 
 /*
  设置media engin 的配置
