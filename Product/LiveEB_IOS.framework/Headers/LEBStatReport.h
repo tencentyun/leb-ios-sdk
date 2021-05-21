@@ -41,16 +41,15 @@ __attribute__((deprecated("interface LEBRTCStatReport is deprecated, use interfa
  */
 @interface LEBAudioTrackReceiverStatReport : NSObject
 
-@property (nonatomic, assign) uint32_t  audioSampleRate;
+@property (nonatomic, assign) uint32_t  sampleRate;
 
-@property (nonatomic, assign) NSUInteger audioNack;
-@property (nonatomic, assign) NSUInteger audioDelayMs;
-@property (nonatomic, assign) NSUInteger audioPacketsLost;
-@property (nonatomic, assign) NSUInteger audioPacketsReceived;
-@property (nonatomic, assign) NSUInteger audioJitterBuffer;
-@property (nonatomic, assign) int64_t    audioBytesReceived;
+@property (nonatomic, assign) NSUInteger nackCount;
+@property (nonatomic, assign) NSUInteger delayMs;
+@property (nonatomic, assign) NSUInteger packetsLost;
+@property (nonatomic, assign) NSUInteger packetsReceived;
+@property (nonatomic, assign) NSUInteger jitterBuffer;
+@property (nonatomic, assign) int64_t    bytesReceived;
 @property (nonatomic, assign) NSUInteger rtt;
-
 @end
 
 
@@ -59,39 +58,45 @@ __attribute__((deprecated("interface LEBRTCStatReport is deprecated, use interfa
  */
 @interface LEBVideoTrackReceiverStatReport : NSObject
 
-@property (nonatomic, assign) NSUInteger videoDelayMs;
-@property (nonatomic, assign) NSUInteger videoPacketsLost;
-@property (nonatomic, assign) NSUInteger videoJitterBuffer;
+@property (nonatomic, assign) NSUInteger delayMs;
+@property (nonatomic, assign) NSUInteger packetsLost;
+@property (nonatomic, assign) NSUInteger jitterBuffer;
 
-@property (nonatomic, assign) NSUInteger videoNack;
-@property (nonatomic, assign) NSUInteger videoPacketsReceived;
+@property (nonatomic, assign) NSUInteger nackCount;
+@property (nonatomic, assign) NSUInteger packetsReceived;
 
-@property (nonatomic, assign) int64_t videoBytesReceived;
+@property (nonatomic, assign) int64_t bytesReceived;
 
-@property (nonatomic, assign) float fps;
+@property (nonatomic, assign) NSUInteger googFrameRateReceived;
+@property (nonatomic, assign) NSUInteger googFrameRateDecoded;
+@property (nonatomic, assign) NSUInteger googFrameRateOutput;
+@property (nonatomic, assign) NSUInteger googFrameRendered;
 
+@property (nonatomic, assign) NSUInteger framesReceived;
+@property (nonatomic, assign) NSUInteger framesDecoded;
+@property (nonatomic, assign) NSUInteger framesDropped;
 //VideoQualityObserver
 /*卡顿统计标准：max(150ms+平均渲染延迟, 3*平均渲染延迟)*/
 /*卡顿总时长 s*/
-@property (nonatomic, assign) double videoTotalFreezesDuration;
+@property (nonatomic, assign) double totalFreezesDuration;
 /*卡顿次数*/
-@property (nonatomic, assign) int videoFreezeCount;
+@property (nonatomic, assign) int freezeCount;
 
 /*上一个接收包超过5s 为paused s*/
-@property (nonatomic, assign) double videoTotalPausesDuration;
-@property (nonatomic, assign) int videoPauseCount;
+@property (nonatomic, assign) double totalPausesDuration;
+@property (nonatomic, assign) int pauseCount;
 
 /*流是否paused*/
-@property (nonatomic, assign) BOOL videoIsPaused;
+@property (nonatomic, assign) BOOL isPaused;
 
 /*距离上一次渲染帧的时长 ms*/
-@property (nonatomic, assign) uint32_t videoFromLastFrameRenderedDuraMS;
+@property (nonatomic, assign) uint32_t fromLastFrameRenderedDuraMS;
 
 /*总渲染时长 s*/
-@property (nonatomic, assign) double videoTotalFramesDuration;
+@property (nonatomic, assign) double totalFramesDuration;
 
 /*inter frame delay squared s*/
-@property (nonatomic, assign) double videoSumSquaredFrameDurationsSec;
+@property (nonatomic, assign) double sumSquaredFrameDurationsSec;
 
 @property (nonatomic, assign) NSUInteger rtt;
 @end
