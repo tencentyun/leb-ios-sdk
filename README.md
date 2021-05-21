@@ -191,6 +191,7 @@ didCreateLocalSource:(LiveEBCaptureSource *)localSource;
 
 @property(weak, nonatomic) id<LiveEBPullStreamDelegate> streamDelegate;
 
+ /*流sdp 协议 ，可以获取详细的ice信息和流信息*/
 @property(nonatomic, copy) NSString* remoteSDP;
 - (BOOL)isPlaying;
 
