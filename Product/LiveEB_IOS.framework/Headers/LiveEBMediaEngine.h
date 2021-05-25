@@ -97,6 +97,7 @@ didCreateLocalSource:(LiveEBCaptureSource *)localSource;
 @property(weak, nonatomic) id<LiveEBPullStreamDelegate> streamDelegate;
 
 @property(nonatomic, copy) NSString* remoteSDP;
+
 - (BOOL)isPlaying;
 
 - (void)start;

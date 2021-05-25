@@ -90,7 +90,7 @@ static const int64_t  kDefaultMaxFileSize = 10 * 1024 * 1024; // 10MB.
 ///【字段含义】播放器遭遇网络连接断开时 SDK 默认重试的次数，取值范围0 - 10，默认值：0。
 @property(nonatomic, assign) int connectRetryCount;
 
-///【字段含义】网络重连的时间间隔，单位秒，取值范围3 - 30，默认值：1。
+///【字段含义】网络重连的时间间隔，单位秒，取值范围3 - 30，默认值：0。
 @property(nonatomic, assign) int connectRetryInterval;
 
 ///audio jitter buffer max size. default 20
@@ -99,6 +99,8 @@ static const int64_t  kDefaultMaxFileSize = 10 * 1024 * 1024; // 10MB.
 ///audio acceerate default true
 @property(nonatomic, assign) BOOL audioJitterBufferFastAccelerate;
 
+///audio aac support default  false
+@property(nonatomic, assign) BOOL supportAAC;
 
 + (instancetype)sharedManager;
 

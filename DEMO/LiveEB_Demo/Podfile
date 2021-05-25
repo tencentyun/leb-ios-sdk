@@ -8,9 +8,9 @@ target 'LiveEB_Demo' do
  #####LiveEB_IOS内部使用定制版webrtc TWebRTC 参考 https://github.com/tencentyun/TCWebRTC编译
  
  ###推流需另外提供SDK
- pod 'TWebRTC', :git=>'https://github.com/tencentyun/TWebRTC-IOS-SDK.git' , :tag => '2.1.13'
+ pod 'TWebRTC', :git=>'https://github.com/tencentyun/TWebRTC-IOS-SDK.git' , :tag => '2.1.15'
 #
- pod 'LiveEB_IOS', :git=>'https://github.com/tencentyun/leb-ios-sdk.git' , :tag => '2.2.6'
+ pod 'LiveEB_IOS', :git=>'https://github.com/tencentyun/leb-ios-sdk.git' , :tag => '2.2.7'
 
 # pod 'TWebRTC', :path=>'./../../../leb-ios-src/SRC'
 #pod 'LiveEB_IOS', :path=>'./../../../leb-ios-src/SRC/LiveEB_IOS'
