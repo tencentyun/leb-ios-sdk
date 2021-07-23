@@ -72,6 +72,10 @@ __attribute__((deprecated("interface LEBRTCStatReport is deprecated, use interfa
 @property (nonatomic, assign) NSUInteger googFrameRateOutput;
 @property (nonatomic, assign) NSUInteger googFrameRendered;
 
+
+//video BWE
+@property (nonatomic, assign) NSUInteger googAvailableReceiveBandwidth;
+
 @property (nonatomic, assign) NSUInteger framesReceived;
 @property (nonatomic, assign) NSUInteger framesDecoded;
 @property (nonatomic, assign) NSUInteger framesDropped;

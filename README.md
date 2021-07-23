@@ -78,25 +78,25 @@ _controlDelegate = _remoteVideoView;
 
 @required
 
-//错误信息回调
+#### 错误信息回调
  - (void)videoView:(LiveEBVideoView *)videoView didError:(NSError *)error;
 
-//视频大小回调
+#### 视频大小回调
 - (void)videoView:(LiveEBVideoView *)videoView didChangeVideoSize:(CGSize)size;
 
 
 @optional
 
-//播放准备
+#### 播放准备
 - (void)onPrepared:(LiveEBVideoView*)videoView;
 
-//播放结束 包括主动结束和被动结束(断流等)
+#### 播放结束 包括主动结束和被动结束(断流等)
 - (void)onCompletion:(LiveEBVideoView*)videoView;
 
-//首帧渲染回调
+#### 首帧渲染回调
 - (void)onFirstFrameRender:(LiveEBVideoView*)videoView;
 
-//统计回调
+#### 统计回调
 - (void)showStats:(LiveEBVideoView *)videoView statReport:(LEBStatReport*)statReport;
 
 @end
@@ -108,7 +108,7 @@ _controlDelegate = _remoteVideoView;
 
 ## 五> LiveEBMediaEngine接口和引擎接口说明
 
-//stream media engine 相关数据结构
+#### stream media engine 相关数据结构
 typedef NS_ENUM(NSInteger, LiveEBStreamState) {
   kLiveEBStreamStateConnecting,
 
@@ -121,22 +121,22 @@ typedef NS_ENUM(NSInteger, LiveEBStreamState) {
 
 @interface LiveEBConfiguration : NSObject
 
-//业务生成的唯一key，标识本次会话
+#### 业务生成的唯一key，标识本次会话
 @property (nonatomic, copy) NSString *sessionid;
 
-//指定信令服务器
+#### 指定信令服务器
 @property (nonatomic, copy) NSString *rtcHost;
 
-//信令开始
+#### 信令开始
 @property (nonatomic, copy) NSString *startStream;
 
-//通讯结束
+#### 通讯结束
 @property (nonatomic, copy) NSString *stopStream;
 
-//启动统计
+#### 启动统计
 @property (nonatomic, assign) BOOL switchStatOn;
 
-//拉流
+#### 拉流
 @property (nonatomic, assign) BOOL isPullStream;
 
 @end
@@ -144,24 +144,24 @@ typedef NS_ENUM(NSInteger, LiveEBStreamState) {
 @class LiveEBMediaEngine;
 @protocol LiveEBMediaEnginDelegate <NSObject>
 
-//流状态
+#### 流状态
 - (void)mediaEngin:(LiveEBMediaEngine *)mediaEngin
        didChangeState:(LiveEBStreamState)state;
 
-//数据源
+#### 数据源
 - (void)mediaEngin:(LiveEBMediaEngine *)mediaEngin
 didCreateLocalSource:(LiveEBCaptureSource *)localSource;
 
-//统计
+#### 统计
 - (void)mediaEngin:(LiveEBMediaEngine *)mediaEngin
       didGetStats:(LEBStatReport*)stats;
 
-//错误状态
+#### 错误状态
 - (void)mediaEngin:(LiveEBMediaEngine *)mediaEngin
          didError:(NSError *)error;
 @end
 
-//拉流相关数据结构
+#### 拉流相关数据结构
 
 @interface LiveEBPullStreamConfigure : NSObject
 
@@ -175,10 +175,10 @@ didCreateLocalSource:(LiveEBCaptureSource *)localSource;
 
 - (void)onPrepared;
 
-/*拉流 包括主动结束和被动结束(断流等)*/
+#### /*拉流 包括主动结束和被动结束(断流等)*/
 - (void)onCompletion;
 
-/*首帧渲染*/
+#### /*首帧渲染*/
 - (void)onFirstFrameRender;
 
 @end
@@ -214,7 +214,7 @@ didCreateLocalSource:(LiveEBCaptureSource *)localSource;
 @end
 
 
-//推流相关数据结构
+#### 推流相关数据结构
 @interface LiveEBPushStreamConfigure : NSObject
 
 @property (nonatomic, copy) NSString *pushURL;

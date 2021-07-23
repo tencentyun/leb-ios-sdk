@@ -86,6 +86,8 @@ didCreateLocalSource:(LiveEBCaptureSource *)localSource;
 /*首帧渲染*/
 - (void)onFirstFrameRender;
 
+
+- (void)onSeiMetadata:(NSDate *)bitstream;
 @end
 
 @interface LiveEBPullStreamContext : NSObject
@@ -174,8 +176,6 @@ didCreateLocalSource:(LiveEBCaptureSource *)localSource;
  创建针对推流的mediaengin pushConfig推流配置
  */
 + (instancetype)createPushEngine:(LiveEBPushStreamConfigure*) pushConfig;
-
-
 
 /*
  设置media engin 的配置

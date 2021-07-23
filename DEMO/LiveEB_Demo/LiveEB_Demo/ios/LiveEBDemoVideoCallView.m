@@ -3,6 +3,7 @@
 #import <AVFoundation/AVFoundation.h>
 
 #import "UIImage+LiveEBUtilities.h"
+#import "ConvertWAV.h"
 
 static CGFloat const kButtonPadding = 16;
 static CGFloat const kButtonSize = 48;
@@ -316,7 +317,7 @@ static CGFloat const kStatusBarHeight = 20;
 
 
 //onCompletion里重试。
-- (void)onCompletion:(LiveEBVideoView*)videoView { 
+- (void)onCompletion:(LiveEBVideoView*)videoView {
     NSLog(@"LiveEB view _remoteVideoView onCompletion ");
   
   //重试
@@ -333,6 +334,12 @@ static CGFloat const kStatusBarHeight = 20;
 
 -(void)onFirstFrameRender:(LiveEBVideoView *)videoView {
   NSLog(@"LiveEB view _remoteVideoView onFirstFrameRender ");
+}
+
+- (void)onSeiMetadata:(NSData *)bitstream {
+  NSLog(@"LiveEB view onSeiMetadata ");
+  NSLog(@"onSEIData %ld", [bitstream length]);
+  
 }
 
 #pragma mark - Private
@@ -434,6 +441,10 @@ static CGFloat const kStatusBarHeight = 20;
 -(void)onCapture:(id)sender {
 //  imageWithCaputureView(_remoteVideoView2);
   //[_delegate onCapture];
+  //NSString *filepath = [self getSavePath];
+  
+  [ConvertWAV testOutputFile];
+  
   
   UIImage* image = [self imageWithCaputureView3:_remoteVideoView2];
   

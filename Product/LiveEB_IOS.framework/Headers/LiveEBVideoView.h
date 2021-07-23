@@ -84,6 +84,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)onFirstFrameRender:(LiveEBVideoView*)videoView;
 
+- (void)onSeiMetadata:(NSData *)bitstream;
+
 /*统计接口*/
 - (void)showStats:(LiveEBVideoView *)videoView statReport:(LEBStatReport*)statReport;
 
