@@ -108,15 +108,16 @@ NS_ASSUME_NONNULL_BEGIN
 /*默认内部设置，可以提供给view层接口查询信息*/
 @property(nonatomic, readonly, strong) LiveEBMediaEngine *mediaEngine;
 
-
 @property (nonatomic, copy) NSString *rtcHost;
 
 @property (nonatomic, copy) NSString *sessionid;      //业务生成的唯一key，标识本次播放会话
 
-/*
- 
- */
--(void)setStreamURL:(NSString *)pushEBURL pullSignalStream:(NSString *)pullSignalStream stopSignalStream:(NSString *)stopSignalStream;
+@property (nonatomic, copy) NSString *liveEBURL;  //播放流地址
+@property(nonatomic, weak) id<LiveEBVideoViewDelegate> delegate;
+@property(nonatomic, readonly) __kindof UIView<RTCVideoRenderer> *remoteVideoView;
+
+//拉流
+- (instancetype)initWithFrame:(CGRect)frame;
 
 /*V1*/
 -(void)setLiveURL:(NSString *)liveEBURL pullStream:(NSString *)pullStream stopStream:(NSString *)stopStream;
@@ -124,15 +125,15 @@ NS_ASSUME_NONNULL_BEGIN
 /*V2*/
 @property (nonatomic, copy) NSString *streamIDSDPStream; //live/streamID.sdp?route=mcd0&token=tencent_video
 
-@property (nonatomic, copy) NSString *liveEBURL;  //播放流地址
-@property(nonatomic, weak) id<LiveEBVideoViewDelegate> delegate;
-@property(nonatomic, readonly) __kindof UIView<RTCVideoRenderer> *remoteVideoView;
+//推流 TO-DO
+- (instancetype)initWithFrame:(CGRect)frame isPushPreview:(BOOL)isPushPreview;
+/*
+ 推流信息配置
+ */
+-(void)setPushStreamURL:(NSString *)pushEBURL pullSignalStream:(NSString *)pullSignalStream stopSignalStream:(NSString *)stopSignalStream;
 
-
-
-- (instancetype)initWithFrame:(CGRect)frame PushPreview:(BOOL)PushPreview;
-- (instancetype)initWithFrame:(CGRect)frame;
-
+//testing TO-DO
+- (instancetype)initWithFrame:(CGRect)frame room:(NSString*)room;
 @end
 
 NS_ASSUME_NONNULL_END

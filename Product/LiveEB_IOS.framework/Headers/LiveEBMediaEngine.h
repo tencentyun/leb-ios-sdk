@@ -140,6 +140,8 @@ didCreateLocalSource:(LiveEBCaptureSource *)localSource;
 *  定制的capture可以使用这个delegate输出数据
 *  implemention by LiveEBCaptureSource
 */
+
+@property(weak, nonatomic) id<LiveEBVideoRender> videoRender;
 @property(weak, nonatomic) id<LiveEBCaptureSinkDelegate> captureSinkDelegate;
 
 
@@ -149,6 +151,52 @@ didCreateLocalSource:(LiveEBCaptureSource *)localSource;
 
 @end
 
+@interface LiveEBRoomStreamConfigure : NSObject
+
+@property (nonatomic, copy) NSString *roomId;
+
+@property (nonatomic, copy) NSString *streamIDSDPStream;
+
+@end
+
+///room TO-DO
+@interface LiveEBRoomStreamContext : NSObject
+
+@property(nonatomic, strong) LiveEBRoomStreamConfigure *roomConfig;
+
+/*
+*  capture作为source, mediaengine作为sink，
+*  定制的capture可以使用这个delegate输出数据
+*  implemention by LiveEBCaptureSource
+*/
+@property(weak, nonatomic) id<LiveEBCaptureSinkDelegate> captureSinkDelegate;
+
+@property(weak, nonatomic) id<LiveEBVideoRender> videoRender;
+
+@property(weak, nonatomic) id<LiveEBPullStreamDelegate> streamDelegate;
+
+@property(nonatomic, copy) NSString* remoteSDP;
+
+- (BOOL)isPlaying;
+
+- (void)start;
+
+- (void)stop;
+
+- (void)resume;
+
+- (void)pause;
+
+- (void)background;
+
+- (void)setAudioMute:(BOOL)mute;
+
+- (void)setVideoPaused:(BOOL)paused;
+
+- (CGFloat)setVolume:(CGFloat)volume;
+
+- (CGFloat)getVolume;
+@end
 
 
 @interface LiveEBMediaEngine : NSObject
@@ -161,9 +209,14 @@ didCreateLocalSource:(LiveEBCaptureSource *)localSource;
 @property(readonly, nonatomic) LiveEBPullStreamContext *pullStreamCtx;
 
 /*
- * pullStreamCtx 推流模块上下文
+ * pushStreamCtx 推流模块上下文
  */
 @property(readonly, nonatomic) LiveEBPushStreamContext *pushStreamCtx;
+
+/*
+ * roomStreamCtx 模块上下文
+ */
+@property(readonly, nonatomic) LiveEBRoomStreamContext *roomStreamCtx;
 
 /*
  创建针对拉流的mediaengin pullConfig为拉流配置
@@ -176,6 +229,7 @@ didCreateLocalSource:(LiveEBCaptureSource *)localSource;
  创建针对推流的mediaengin pushConfig推流配置
  */
 + (instancetype)createPushEngine:(LiveEBPushStreamConfigure*) pushConfig;
+
 
 /*
  设置media engin 的配置
@@ -201,6 +255,12 @@ didCreateLocalSource:(LiveEBCaptureSource *)localSource;
  * 是stream media engin 配置生效
  */
 - (void)configure;
+
+
+/**
+ *  测试
+ */
++ (instancetype)createRoomEngine:(LiveEBRoomStreamConfigure*) roomConfig;
 @end
 
 NS_ASSUME_NONNULL_END
