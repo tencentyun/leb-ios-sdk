@@ -16,6 +16,9 @@
 @property(nonatomic, weak) id<LiveEBVideoViewControllerDelegate> controlDelegate;
 
 - (instancetype)initForRoom:(NSString *)liveUrl
+                   delegate:(id<LiveEBDemoVideoCallViewControllerDelegate>)delegate;
+
+- (instancetype)initForRoom:(NSString *)liveUrl
                 rtcHost:(NSString *)rtcHost
                  isLoopback:(BOOL)isLoopback
                  useLiveEventBroadcasting:(BOOL)useLiveEventBroadcasting

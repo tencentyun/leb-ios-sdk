@@ -29,7 +29,7 @@
 // display status, and also a hangup button.
 @interface LiveEBDemoVideoCallView : UIView
 
-- (instancetype)initWithFrame:(CGRect)frame isPush:(BOOL)isPush;
+- (instancetype)initWithFrame:(CGRect)frame isPush:(BOOL)isPush isRoom:(BOOL)isRoom roomId:(NSString*)roomId;
 
 @property(nonatomic, readonly) UILabel *statusLabel;
 @property(nonatomic, weak) id<LiveEBDemoVideoCallViewDelegate> delegate;

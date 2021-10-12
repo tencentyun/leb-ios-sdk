@@ -67,6 +67,25 @@ static NSString *const loopbackLaunchProcessArgument = @"loopback";
 ////  self.view = _mainView;
 //}
 
+-(NSString *)getRandomStr
+{
+    char data[10];
+    
+    for (int x=0;x < 10;data[x++] = (char)('A' + (arc4random_uniform(26))));
+    
+    NSString *randomStr = [[NSString alloc] initWithBytes:data length:10 encoding:NSUTF8StringEncoding];
+
+
+    NSString *string = [NSString stringWithFormat:@"%@",randomStr];
+
+
+    NSLog(@"ROOM获取随机字符串 %@",string);
+
+
+    return string;
+    
+}
+
 + (NSString *)loopbackRoomString {
   NSString *loopbackRoomString =
       [[NSUUID UUID].UUIDString stringByReplacingOccurrencesOfString:@"-" withString:@""];
@@ -75,9 +94,21 @@ static NSString *const loopbackLaunchProcessArgument = @"loopback";
 
 #pragma mark - ARDMainViewDelegate
 
+- (void)mainView:(LiveEBDemoMainView *)mainView isOffical:(BOOL)isOffical {
+  LiveEBDemoVideoCallViewController *videoController =
+    [[LiveEBDemoVideoCallViewController alloc] initForRoom:[self getRandomStr] delegate:self];
+    videoController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+  
+  [self presentViewController:videoController
+                     animated:YES
+                   completion:nil];
+  
+  return;
+}
+
 - (void)mainView:(LiveEBDemoMainView *)mainView didInputRoom:(NSString *)liveUrl didInputHost:(NSString *)rtcHost isLoopback:(BOOL)isLoopback isPush:(BOOL)isPush {
   if (isPush) {
-    liveUrl =@"webrtc://5000.livepush.myqcloud.com/live/test_1613895047?txSecret=e3292ee5ed8d68345a26c3be68b4c6d3&txTime=61EAD87F&ServerVip=42.194.233.87&ServerPort=30004";
+    liveUrl =@"webrtc://68789.livepush.myqcloud.com/live/tstan_test_20210602?txSecret=98c18987135261f17a53c79cbe5ddf48&txTime=62971BE6";
     LiveEBDemoVideoCallViewController *videoController =
       [[LiveEBDemoVideoCallViewController alloc] initForPushRoom:liveUrl rtcHost:rtcHost delegate:self];
       videoController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
@@ -109,6 +140,15 @@ static NSString *const loopbackLaunchProcessArgument = @"loopback";
      
 //    liveUrl=@"webrtc://test-play.gamematrix.qq.com/game/bvprj4vsktvsuf68shenzhen0013-mf2vkkf7qhfd2xzw_SET-SZ-200206190604718981_1609329526?txSecret=05d2a6cf8c0bbddbd01cec85805fcbc1&txTime=5FEDB5EE";
     liveUrl = @"webrtc://5664.liveplay.myqcloud.com/live/5664_harchar1";
+//    liveUrl=@"webrtc://5000.liveplay.myqcloud.com/live/9999";
+//    liveUrl=@"webrtc://liveplay.xiaoeknow.com/live/5060_2ief8crXA4CNWCyb";
+//    
+//    liveUrl=@"webrtc://3891.liveplay.myqcloud.com/live/3891_user_8e69d4de_90be";
+//    liveUrl=@"webrtc://pull.cloveronly.com/live/test";
+//    liveUrl=@"webrtc://68789.liveplay.myqcloud.com/live/tstan_test_20210602";
+//    liveUrl=@"webrtc://pull-rtc-test.douyincdn.com/live/5664_harchar4_h265";
+//    liveUrl=@"webrtc://txs.wangxiao.eaydu.com/live_ali/x_3_test?token=tencent_video";
+//    liveUrl=@"webrtc://tx.pull.yximgs.com/live/6000_NekpVdx5StE.flv?txSecret=7ce9cfbb8e63f33802790b68d736597a&txTime=60f8edc9&stat=UvSUGNN048RXFOQdPmg4SvL4pggS8cTicu74kQo%2FZZwFXmrTOAUS6DLcsR0mYayY";
 //    liveUrl = @"webrtc://play.gamematrix.qq.com/game/tzew93wigtiqr4rkshenzhen0002-etgcv9c7y9hdrhh4_tenc-u6yt2kg6_1621415361?txSecret=fb45d1fb2ce06b7e80fd403bae792c8e&txTime=60A62039";
 //    liveUrl = @"webrtc://play.gamematrix.qq.com/game/tzew93wigtiqr4rkshenzhen0002-2atufe4qsqupz4y9_tenc-u6yt2kg6_1619512627?txSecret=a2cfc11d739bdda1cbdbee651c80ffff&txTime=608917AB";
 //    liveUrl =@"webrtc://play.xroom.net/live/B18767-5-main-304374";

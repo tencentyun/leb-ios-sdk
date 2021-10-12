@@ -29,18 +29,27 @@ static CGFloat const kStatusBarHeight = 20;
   
   CGSize _remoteVideoSize;
   BOOL _isPushView;
+  
+  BOOL _isRoom;
 }
 
 @synthesize statusLabel = _statusLabel;
 @synthesize delegate = _delegate;
 
-- (instancetype)initWithFrame:(CGRect)frame isPush:(BOOL)isPush {
+- (instancetype)initWithFrame:(CGRect)frame isPush:(BOOL)isPush isRoom:(BOOL)isRoom roomId:(NSString*)roomId {
   if (self = [super initWithFrame:frame]) {
       
       self.backgroundColor = [UIColor blackColor];
       // _remoteVideoView2 = [[LiveEBVideoView alloc] init];
       _isPushView  = isPush;
-      _remoteVideoView2 = [[LiveEBVideoView alloc] initWithFrame:CGRectZero PushPreview:_isPushView];
+      _isRoom = isRoom;
+      
+    if (_isRoom) {
+      _remoteVideoView2 = [[LiveEBVideoView alloc] initWithFrame:CGRectZero room:roomId];
+    } else {
+      _remoteVideoView2 = [[LiveEBVideoView alloc] initWithFrame:CGRectZero isPushPreview:_isPushView];
+    }
+      
 
       _remoteVideoView2.delegate = self;
       
@@ -152,7 +161,7 @@ static CGFloat const kStatusBarHeight = 20;
 
 -(void)setStreamURL:(NSString*)streamURL isPush:(BOOL)isPush {
   if (isPush) {
-    [_remoteVideoView2 setStreamURL:streamURL
+    [_remoteVideoView2 setPushStreamURL:streamURL
                  pullSignalStream:@"https://overseas-webrtc.liveplay.myqcloud.com/webrtc/v1/pullstream"
                  stopSignalStream:@"https://overseas-webrtc.liveplay.myqcloud.com/webrtc/v1/stopstream"];
   } else {

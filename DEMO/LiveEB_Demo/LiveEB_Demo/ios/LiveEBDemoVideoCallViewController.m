@@ -20,6 +20,9 @@
   
   BOOL _isPush;
   NSString *_pushURL;
+  
+  BOOL _isRoom;
+  NSString *_roomId;
 }
 
 @synthesize videoCallView = _videoCallView;
@@ -44,6 +47,16 @@
   return self;
 }
 
+- (instancetype)initForRoom:(NSString *)room
+                   delegate:(id<LiveEBDemoVideoCallViewControllerDelegate>)delegate {
+  if (self = [self init]) {
+    _isRoom = TRUE;
+    _roomId = room;
+    _delegate = delegate;
+  }
+  
+  return self;
+}
 
 - (instancetype)initForPushRoom:(NSString *)pushUrl
                      rtcHost:(NSString *)rtcHost
@@ -59,7 +72,8 @@
 }
 
 - (void)loadView {
-  _videoCallView = [[LiveEBDemoVideoCallView alloc] initWithFrame:CGRectZero isPush:_isPush];
+  _videoCallView = [[LiveEBDemoVideoCallView alloc] initWithFrame:CGRectZero isPush:_isPush isRoom:_isRoom roomId:_roomId];
+ 
   _videoCallView.delegate = self;
   if (!_isPush) {
     _videoCallView.liveEBURL = _liveUrl;
@@ -71,10 +85,12 @@
   _controlDelegate = _videoCallView.controlDelegate;
     
   [_controlDelegate setStatState:true];
+  [_controlDelegate setConnectRetryCount:3 retryInterval:3];
   // [_controlDelegate setAudioMute:YES];
   self.view = _videoCallView;
     
-    
+  
+//  [_controlDelegate stop];
   [_controlDelegate start];
   //[_controlDelegate start];
 }

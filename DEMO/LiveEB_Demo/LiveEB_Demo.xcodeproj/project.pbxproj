@@ -39,6 +39,7 @@
 		51A25F37244018B6008DD31C /* LiveEBDemoMainView.m in Sources */ = {isa = PBXBuildFile; fileRef = 51A25F29244018B5008DD31C /* LiveEBDemoMainView.m */; };
 		51A25F39244018B6008DD31C /* LiveEBDemoVideoCallViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51A25F2E244018B6008DD31C /* LiveEBDemoVideoCallViewController.m */; };
 		51A2A0852473E02A007EB9A7 /* LiveEBDemoStatView.m in Sources */ = {isa = PBXBuildFile; fileRef = 51A2A0842473E02A007EB9A7 /* LiveEBDemoStatView.m */; };
+		51A69C632669D03800561610 /* ConvertWAV.m in Sources */ = {isa = PBXBuildFile; fileRef = 51A69C622669D03800561610 /* ConvertWAV.m */; };
 		51D8A6DA25BFF62C00DA4634 /* LiveEBDebugView.m in Sources */ = {isa = PBXBuildFile; fileRef = 51D8A6D925BFF62C00DA4634 /* LiveEBDebugView.m */; };
 		A5B8C14D708BFDE5A706C943 /* libPods-LiveEB_Demo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B747334FBF8D3D5E77000B4B /* libPods-LiveEB_Demo.a */; settings = {ATTRIBUTES = (Required, ); }; };
 /* End PBXBuildFile section */
@@ -57,6 +58,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		510ACC322715931C00367877 /* ConvertWAV.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConvertWAV.h; sourceTree = "<group>"; };
 		5167D865261D616F00D2D879 /* LiveEBFileVideoCapturer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LiveEBFileVideoCapturer.h; sourceTree = "<group>"; };
 		5167D866261D616F00D2D879 /* LiveEBFileVideoCapturer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LiveEBFileVideoCapturer.m; sourceTree = "<group>"; };
 		51801B05243D820100B6D7A5 /* LiveEB_Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LiveEB_Demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -101,6 +103,7 @@
 		51A25F2E244018B6008DD31C /* LiveEBDemoVideoCallViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LiveEBDemoVideoCallViewController.m; sourceTree = "<group>"; };
 		51A2A0832473E02A007EB9A7 /* LiveEBDemoStatView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LiveEBDemoStatView.h; sourceTree = "<group>"; };
 		51A2A0842473E02A007EB9A7 /* LiveEBDemoStatView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LiveEBDemoStatView.m; sourceTree = "<group>"; };
+		51A69C622669D03800561610 /* ConvertWAV.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ConvertWAV.m; sourceTree = "<group>"; };
 		51D8A6D825BFF62C00DA4634 /* LiveEBDebugView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LiveEBDebugView.h; sourceTree = "<group>"; };
 		51D8A6D925BFF62C00DA4634 /* LiveEBDebugView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LiveEBDebugView.m; sourceTree = "<group>"; };
 		B2BD63F89B7A70F68628D140 /* Pods-LiveEB_Demo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LiveEB_Demo.release.xcconfig"; path = "Target Support Files/Pods-LiveEB_Demo/Pods-LiveEB_Demo.release.xcconfig"; sourceTree = "<group>"; };
@@ -218,6 +221,7 @@
 		51A25EF72440189D008DD31C /* ios */ = {
 			isa = PBXGroup;
 			children = (
+				51A69C602669D01600561610 /* utils */,
 				51656AE4262475A100AE4918 /* tesing */,
 				51D8A6D825BFF62C00DA4634 /* LiveEBDebugView.h */,
 				51D8A6D925BFF62C00DA4634 /* LiveEBDebugView.m */,
@@ -237,6 +241,15 @@
 				51A2A0842473E02A007EB9A7 /* LiveEBDemoStatView.m */,
 			);
 			path = ios;
+			sourceTree = "<group>";
+		};
+		51A69C602669D01600561610 /* utils */ = {
+			isa = PBXGroup;
+			children = (
+				510ACC322715931C00367877 /* ConvertWAV.h */,
+				51A69C622669D03800561610 /* ConvertWAV.m */,
+			);
+			path = utils;
 			sourceTree = "<group>";
 		};
 		DA7178CF2DE7984DA7AE4FEA /* Frameworks */ = {
@@ -391,6 +404,7 @@
 				51801B1B243D820200B6D7A5 /* main.m in Sources */,
 				51A25F35244018B6008DD31C /* UIImage+LiveEBUtilities.m in Sources */,
 				51A2A0852473E02A007EB9A7 /* LiveEBDemoStatView.m in Sources */,
+				51A69C632669D03800561610 /* ConvertWAV.m in Sources */,
 				51801B0D243D820100B6D7A5 /* SceneDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -532,9 +546,9 @@
 			baseConfigurationReference = B94DA6B1EF14A22F380BF853 /* Pods-LiveEB_Demo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = KH7Z57669D;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = 88L2Q4487U;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -547,14 +561,14 @@
 					"WEBRTC_BUILD_SENDSTREAM=1",
 				);
 				INFOPLIST_FILE = LiveEB_Demo/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = tstan.tstan.tstan.tstan;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tencent.xbrightplayer.demo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = com.tencent.xbrightplayer.demo_Development_SignProvision;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -564,9 +578,9 @@
 			baseConfigurationReference = B2BD63F89B7A70F68628D140 /* Pods-LiveEB_Demo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = KH7Z57669D;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = 88L2Q4487U;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -579,14 +593,14 @@
 					"WEBRTC_BUILD_SENDSTREAM=1",
 				);
 				INFOPLIST_FILE = LiveEB_Demo/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = tstan.tstan.tstan.tstan;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tencent.xbrightplayer.demo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = com.tencent.xbrightplayer.demo_Development_SignProvision;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

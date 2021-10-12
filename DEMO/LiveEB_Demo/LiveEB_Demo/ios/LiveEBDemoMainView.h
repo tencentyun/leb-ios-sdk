@@ -3,7 +3,7 @@
 @class LiveEBMainView;
 
 @protocol LiveEBDemoMainViewDelegate <NSObject>
-
+- (void)mainView:(LiveEBMainView *)mainView isOffical:(BOOL)isOffical;
 - (void)mainView:(LiveEBMainView *)mainView didInputRoom:(NSString *)url didInputHost:(NSString *)didInputHost isLoopback:(BOOL)isLoopback isPush:(BOOL)isPush;
 - (void)mainViewDidToggleAudioLoop:(LiveEBMainView *)mainView;
 

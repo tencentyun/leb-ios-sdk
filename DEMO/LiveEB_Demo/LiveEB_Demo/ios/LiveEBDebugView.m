@@ -178,16 +178,24 @@ static CGFloat const kCallControlMargin = 18;
     
   
 #if 0
-    /*
+    
     UIButton *pushButton = [self buttonWithTitle:@"开始推流"
                                           action:@selector(startPushStream)];
     pushButton.frame = CGRectMake(0, 0, 150, 60);
     pushButton.backgroundColor = [UIColor lightGrayColor];
+  
+    UIButton *pushButton2 = [self buttonWithTitle:@"官方例子"
+                                           action:@selector(officalPushStream:)];
+    pushButton2.frame = CGRectMake(0, 0, 150, 60);
+    pushButton2.backgroundColor = [UIColor lightGrayColor];
     
+    UILabel *rightLabel = [self labelWithTitle:nil];
+
+  
     UIStackView *stackView = [self stackViewWithAxis:UILayoutConstraintAxisHorizontal
                                            alignment:UIStackViewAlignmentCenter
-                                            subviews:@[leftLabel, button, pushButton, rightLabel]];
-     */
+                                            subviews:@[leftLabel, button, pushButton, pushButton2, rightLabel]];
+     
 #else
   UILabel *rightLabel = [self labelWithTitle:nil];
     UIStackView *stackView = [self stackViewWithAxis:UILayoutConstraintAxisHorizontal
@@ -274,6 +282,10 @@ static CGFloat const kCallControlMargin = 18;
 
 - (void)onStartRegularCall:(id)sender {
   [_delegate mainView:self didInputRoom:self.codeStreamTF.textField.text didInputHost:self.signalTF.textField.text isLoopback:NO isPush:NO];
+}
+
+- (void)officalPushStream:(id)sender {
+  [_delegate mainView:self isOffical:YES];
 }
 
 @end

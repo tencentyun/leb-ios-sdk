@@ -8,6 +8,7 @@
 #import <LiveEB_IOS/LiveEB_IOS.h>
 #import "LiveEBDemoMainViewController.h"
 #import "AppDelegate.h"
+#include <arpa/inet.h>
 
 @interface AppDelegate () <LiveEBLogDelegate>
 
@@ -53,6 +54,31 @@
 
 #pragma mark - UIApplicationDelegate methods
 
+const char* getIPAddress(const char* hostname) {
+  Boolean result = FALSE;
+  CFHostRef hostRef;
+  CFArrayRef addresses;
+  char *ip_address = "";
+  hostRef = CFHostCreateWithName(kCFAllocatorDefault, CFStringCreateWithCString(NULL, hostname, kCFStringEncodingUTF8));
+    if (hostRef) {
+        result = CFHostStartInfoResolution(hostRef, kCFHostAddresses, NULL); // pass an error instead of NULL here to find out why it failed
+        if (result == TRUE) {
+            addresses = CFHostGetAddressing(hostRef, &result);
+        }
+    }
+    if (result == TRUE) {
+        CFIndex index = 0;
+        CFDataRef ref = (CFDataRef) CFArrayGetValueAtIndex(addresses, index);
+        struct sockaddr_in* remoteAddr;
+        
+        remoteAddr = (struct sockaddr_in*) CFDataGetBytePtr(ref);
+        if (remoteAddr != NULL) {
+            ip_address = inet_ntoa(remoteAddr->sin_addr);
+        }
+    }
+    return ip_address;
+}
+
 - (BOOL)application:(UIApplication *)application
     didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
@@ -69,7 +95,8 @@
   NSString *defaultDirPath = [documentDirPath stringByAppendingPathComponent:@"lebsdk_logs"];
   [[LiveEBManager sharedManager] initSDK:defaultDirPath maxFileSize:kDefaultMaxFileSize minDebugLogLevel:LiveEBLogLevelInfo];
   [LiveEBManager sharedManager].clientInfo = @"clientinfo_test";
-    
+  [LiveEBManager sharedManager].supportAAC = TRUE;
+  
   _window =  [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
   [_window makeKeyAndVisible];
   LiveEBDemoMainViewController *viewController = [[LiveEBDemoMainViewController alloc] init];
