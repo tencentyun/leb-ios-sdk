@@ -104,6 +104,8 @@ didCreateLocalSource:(LiveEBCaptureSource *)localSource;
 
 @property(nonatomic, copy) NSString* remoteSDP;
 
+- (BOOL)isStarted;
+
 - (BOOL)isPlaying;
 
 - (BOOL)isRuning;
