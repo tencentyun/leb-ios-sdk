@@ -24,7 +24,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class LiveEBVideoView;
 
-
+typedef NS_ENUM(NSInteger, LiveEBViewConnectionState) {
+    LiveEBView_Connection_State_CONNECTED,
+    LiveEBView_Connection_State_DISCONN,
+    LiveEBView_Connection_State_FAILED,
+    LiveEBView_Connection_State_TIMEOUT,
+};
 
 @protocol LiveEBVideoViewControllerDelegate <NSObject>
 @required
@@ -32,13 +37,23 @@ NS_ASSUME_NONNULL_BEGIN
 
     -(void)stop;
 
+    -(void)stopByJoin;
+
     -(void)pause;
 
     -(void)resume;
     
     -(void)background;
-
+    
+    /*
+     * 表示流建联后正在播放
+     */
     -(BOOL)isPlaying;
+    
+    /*
+     * 表示流建联有效
+     */
+    -(BOOL)isRuning;
 
     /* 0 ~ 1 返回上次的设置值*/
     -(CGFloat)setVolume:(CGFloat)volume;
@@ -69,17 +84,32 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol LiveEBVideoViewDelegate <NSObject>
 
 @required
-
+/*
+ * 信令
+ * 或者播放器初始化过程中出现的错误
+*/
 - (void)videoView:(LiveEBVideoView *)videoView didError:(NSError *)error;
 
 - (void)videoView:(LiveEBVideoView *)videoView didChangeVideoSize:(CGSize)size;
 
-
 @optional
+/*
+ * 播放器成功初始化，准备播放
+ */
+- (void)videoView:(LiveEBVideoView *)videoView didFrozenUpdated:(BOOL)freeze;
+
+/*
+ * ICE建联过程出现的错误
+ * 网络通讯相关错误
+*/
+- (void)videoView:(LiveEBVideoView *)videoView LiveEBViewConnectionState:(LiveEBViewConnectionState)state didError:(nullable NSError *)error;
 
 - (void)onPrepared:(LiveEBVideoView*)videoView;
 
-/*播放结束 包括主动结束和被动结束(断流等)*/
+/*
+ * 播放结束
+ * 包括主动结束和被动结束(断流等)
+ */
 - (void)onCompletion:(LiveEBVideoView*)videoView;
 
 - (void)onFirstFrameRender:(LiveEBVideoView*)videoView;

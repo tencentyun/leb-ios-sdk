@@ -102,6 +102,9 @@ static const int64_t  kDefaultMaxFileSize = 10 * 1024 * 1024; // 10MB.
 ///audio aac support default  false
 @property(nonatomic, assign) BOOL supportAAC;
 
+///video frozen delay default 500 ms
+@property(nonatomic, assign) int frozenDelayMs;
+
 + (instancetype)sharedManager;
 
 @property (nonatomic, copy) NSString *clientInfo;

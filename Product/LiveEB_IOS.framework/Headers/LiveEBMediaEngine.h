@@ -53,6 +53,10 @@ typedef NS_ENUM(NSInteger, LiveEBStreamState) {
 - (void)mediaEngin:(LiveEBMediaEngine *)mediaEngin
        didChangeState:(LiveEBStreamState)state;
 
+//流出现链接错误
+- (void)mediaEngin:(LiveEBMediaEngine *)mediaEngin
+       connFailed:(NSError *)error;
+
 //数据源
 - (void)mediaEngin:(LiveEBMediaEngine *)mediaEngin
 didCreateLocalSource:(LiveEBCaptureSource *)localSource;
@@ -101,6 +105,8 @@ didCreateLocalSource:(LiveEBCaptureSource *)localSource;
 @property(nonatomic, copy) NSString* remoteSDP;
 
 - (BOOL)isPlaying;
+
+- (BOOL)isRuning;
 
 - (void)start;
 
