@@ -111,6 +111,7 @@ __attribute__((deprecated("interface LEBRTCStatReport is deprecated, use interfa
 - (instancetype)initWithTrackCount:(int)count;
 
 @property (nonatomic, readonly) NSUInteger trackCount;
+@property (nonatomic, assign) NSUInteger rtt;
 @property (nonatomic) NSArray<LEBAudioTrackReceiverStatReport *> *audioTracks;
 @property (nonatomic) NSArray<LEBVideoTrackReceiverStatReport *> *videoTracks;
 
