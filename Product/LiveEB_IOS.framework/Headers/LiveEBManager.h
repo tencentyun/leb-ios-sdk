@@ -28,7 +28,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 typedef NS_ENUM(NSInteger, LEBVideoRenderMode) {
     LEBVideoRenderMode_ScaleAspect_FILL  = 0,
-    LEBVideoRenderMode_ScaleAspect_FIT
+    LEBVideoRenderMode_ScaleAspect_FIT,
+    LEBVideoRenderMode_ScaleTo_Fill,
 };
 
 typedef enum {
