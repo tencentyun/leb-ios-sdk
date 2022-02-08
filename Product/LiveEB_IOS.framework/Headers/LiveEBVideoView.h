@@ -138,7 +138,7 @@ typedef NS_ENUM(NSInteger, LiveEBViewConnectionState) {
 /*默认内部设置，可以提供给view层接口查询信息*/
 @property(nonatomic, readonly, strong) LiveEBMediaEngine *mediaEngine;
 
-@property (nonatomic, copy) NSString *rtcHost;
+@property (nonatomic, copy) NSString *rtcHost;      //如果设置，需要在live url之前设置
 
 @property (nonatomic, copy) NSString *sessionid;      //业务生成的唯一key，标识本次播放会话
 
