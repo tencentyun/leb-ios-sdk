@@ -6,7 +6,7 @@
 	<dict>
 		<key>Headers/LEBStatReport.h</key>
 		<data>
-		8o2xTvO70LkSbyt8aBRbkINfiOE=
+		djAAvMFGU+A9205hWkg6pL+JJFo=
 		</data>
 		<key>Headers/LiveEBCaptureSource.h</key>
 		<data>
@@ -14,11 +14,11 @@
 		</data>
 		<key>Headers/LiveEBManager.h</key>
 		<data>
-		8DFHP8vzBB16kWN7MYnr94soyLY=
+		95MeXFpx5KKh7R3hNPFzoO8KUSc=
 		</data>
 		<key>Headers/LiveEBMediaEngine.h</key>
 		<data>
-		hk4e7if+JP+X4ksSwZXZmorm3pY=
+		VOI7lFNd+7JRLCGlJBPpoFOzcsc=
 		</data>
 		<key>Headers/LiveEBVideoFrame.h</key>
 		<data>
@@ -30,7 +30,7 @@
 		</data>
 		<key>Headers/LiveEBVideoView.h</key>
 		<data>
-		3DnMCMxX7uVvnKYzamsK1bVxurQ=
+		3MdYoKp+uKE/ejTSngLDhUdEfXY=
 		</data>
 		<key>Headers/LiveEB_IOS.h</key>
 		<data>
@@ -38,7 +38,7 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		maY0oUJJjuoq181TrYGtcIyIFzk=
+		hOqqZMK2BqGrYivO3S994h1QZ0s=
 		</data>
 		<key>LICENSE</key>
 		<data>
@@ -55,11 +55,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			8o2xTvO70LkSbyt8aBRbkINfiOE=
+			djAAvMFGU+A9205hWkg6pL+JJFo=
 			</data>
 			<key>hash2</key>
 			<data>
-			hzM+0Z7iiTkiIFOhn1f8i3rZ/vTiGWZOXhqkCzLy8JQ=
+			P8Wp8YeVLUCvi/4SB1KA+mipDwWSm0ZGjhM52D0LJPk=
 			</data>
 		</dict>
 		<key>Headers/LiveEBCaptureSource.h</key>
@@ -77,22 +77,22 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			8DFHP8vzBB16kWN7MYnr94soyLY=
+			95MeXFpx5KKh7R3hNPFzoO8KUSc=
 			</data>
 			<key>hash2</key>
 			<data>
-			tX3BC3fx/L/N4F88DY1XfRIlBfE4rR8scfLYyTp+Q+c=
+			XYp85nRZ/bpdASbO1TigHuQjkz7P4/nrgn0TvEzuB3U=
 			</data>
 		</dict>
 		<key>Headers/LiveEBMediaEngine.h</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			hk4e7if+JP+X4ksSwZXZmorm3pY=
+			VOI7lFNd+7JRLCGlJBPpoFOzcsc=
 			</data>
 			<key>hash2</key>
 			<data>
-			b4M9LLzuYR77dwQpjt3/mWp8bE3acD7L70UtH5Ceuq4=
+			UBm9Un0SuBWWG4VJKrg1znN4pgDKHNqM4ZfEXdmFOmY=
 			</data>
 		</dict>
 		<key>Headers/LiveEBVideoFrame.h</key>
@@ -121,11 +121,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			3DnMCMxX7uVvnKYzamsK1bVxurQ=
+			3MdYoKp+uKE/ejTSngLDhUdEfXY=
 			</data>
 			<key>hash2</key>
 			<data>
-			u/Bx/v042KvpNQ8TSQhzQPNOVcH+H0+uNeL+eJDYQYo=
+			0YTUNP1G3z5gBxpTZkxYamVLD81GV6nsVwNlxZVxlQw=
 			</data>
 		</dict>
 		<key>Headers/LiveEB_IOS.h</key>
